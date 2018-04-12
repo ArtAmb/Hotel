@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:include src="#{componentController.getHead()}" />
+
+<h:body bgcolor="white">
+	<ui:include src="#{componentController.getMainMenu()}" />
+	
+	<h:form>
+		<h3>Using Managed Bean</h3>
+		<h:commandButton action="#{navigationController.moveToRooms}"
+			value="Page1"></h:commandButton>
+	</h:form>
+
+</h:body>
+</html>

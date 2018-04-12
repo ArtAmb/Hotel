@@ -1,0 +1,13 @@
+.required {
+
+	display: block;
+	background-color: red;
+	border-width: 2px;
+	border-color: green;
+	
+}
+
+.navbar-nav-select {
+	margin-top: 15px;
+	
+}
