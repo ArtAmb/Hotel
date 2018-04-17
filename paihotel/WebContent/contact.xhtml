@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+<ui:include src="#{componentController.getHead()}" />
+
+<h:body bgcolor="white">
+	<ui:include src="#{componentController.getMainMenu()}" />
+	<div class="content">
+
+
+		<div class="form">
+			<h:form>
+				<h1>Formularz kontaktowy</h1>
+
+				<h:inputText id="topic" value="#{form.topic}" pt:placeholder="Temat"
+					styleClass="input-text"></h:inputText>
+
+				<h:inputText id="email" value="#{form.email}" pt:placeholder="Email"
+					styleClass="input-text"></h:inputText>
+				<h:inputTextarea id="message" value="#{form.message}"
+					pt:placeholder="Treść wiadomości..." styleClass="textarea"></h:inputTextarea>
+
+				<h:commandButton action="#{navigationController.moveToRooms}"
+					value="Wyślij wiadomość" styleClass="button"></h:commandButton>
+			</h:form>
+		</div>
+	</div>
+</h:body>
+</html>

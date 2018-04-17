@@ -9,12 +9,12 @@
 
 <h:body bgcolor="white">
 	<ui:include src="#{componentController.getMainMenu()}" />
-	
-	<h:form>
-		<h3>Using Managed Bean</h3>
-		<h:commandButton action="#{navigationController.moveToRooms}"
-			value="Page1"></h:commandButton>
-	</h:form>
-
+	<div class="content">
+		<h:form>
+			<h3>Using Managed Bean</h3>
+			<h:commandButton action="#{navigationController.moveToRooms}"
+				value="Page1"></h:commandButton>
+		</h:form>
+	</div>
 </h:body>
 </html>
