@@ -17,15 +17,15 @@
 			<h:form>
 				<h1>Formularz kontaktowy</h1>
 
-				<h:inputText id="topic" value="#{form.topic}" pt:placeholder="Temat"
+				<h:inputText id="topic" value="#{emailController.topic}" pt:placeholder="Temat"
 					styleClass="input-text"></h:inputText>
 
-				<h:inputText id="email" value="#{form.email}" pt:placeholder="Email"
+				<h:inputText id="email" value="#{emailController.email}" pt:placeholder="Email"
 					styleClass="input-text"></h:inputText>
-				<h:inputTextarea id="message" value="#{form.message}"
+				<h:inputTextarea id="message" value="#{emailController.message}"
 					pt:placeholder="Treść wiadomości..." styleClass="textarea"></h:inputTextarea>
 
-				<h:commandButton action="#{navigationController.moveToRooms}"
+				<h:commandButton action="#{emailController.sendEmail()}"
 					value="Wyślij wiadomość" styleClass="button"></h:commandButton>
 			</h:form>
 		</div>

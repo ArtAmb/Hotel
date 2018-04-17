@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:include src="#{componentController.getHead()}" />
+
+<h:body bgcolor="white">
+	<ui:include src="#{componentController.getMainMenu()}" />
+	<h2>Wyszukaj</h2>
+
+	<h:form>
+
+		<table>
+			<tr>
+				<td>Ilosc osob</td>
+				<td><input type='text' /></td>
+			</tr>
+			<tr>
+				<td>Ilosc pokoi</td>
+				<td><input type='text' /></td>
+			</tr>
+			<tr>
+				<td>Cena max</td>
+				<td><input type='text' /></td>
+			</tr>
+			<tr>
+				<td>Wypozazenie: </td>
+			</tr>
+			<tr>
+				<td>Telewizor</td>
+				<td><input type='checkbox' /></td>
+			</tr>
+			
+			<tr>
+				<td>Komputer</td>
+				<td><input type='checkbox' /></td>
+			</tr>
+			<tr>
+				<td>Mikrofala</td>
+				<td><input type='checkbox' /></td>
+			</tr>
+			<tr>
+				<td>Wanna</td>
+				<td><input type='checkbox' /></td>
+			</tr>
+			<tr>
+				<td>Cechy</td>
+			</tr>
+			<tr>
+				<td>Z widokiem na morze</td>
+				<td><input type='checkbox' /></td>
+			</tr>
+			<tr>
+				<td>Z widokiem na gory</td>
+				<td><input type='checkbox' /></td>
+			</tr>
+		</table>
+
+
+		<h:commandButton value='Szukaj' action="room"/>
+	</h:form>
+</h:body>
+</html>

@@ -7,20 +7,29 @@
 			<div class="navbar-header">
 				<a class="navbar-brand" href="#">Hotel</a>
 			</div>
-			<ul class="nav navbar-nav">
-				<li><a href="hello.xhtml">Start</a></li>
-				<li><a href="/">Rezerwacja</a></li>
-				<li><a href="contact.xhtml">Kontakt</a></li>
-				<li><a href="/">Pracownicy</a></li>
-				<li><a href="/">Konfiguracja</a></li>
-				<li><a href="/">Zaloguj</a></li>
+			
+				<ul class="nav navbar-nav">
+					<ui:repeat var="menuItem"
+						value="#{mainMenuController.defaultItems}">
+						<li><a href="#{menuItem.redirectPath}">#{menuItem.name}</a></li>
+					</ui:repeat>
+					<li><select class="navbar-nav-select" style="margin-top: 15px">
+							<option>Kielce</option>
+							<option>Warszawa</option>
+					</select></li>
+					<!--  				<li><a href="/">Rezerwacja</a></li>
+					<li><a href="contact.xhtml">Kontakt</a></li>
+					<li><a href="/">Pracownicy</a></li>
+					<li><a href="/">Konfiguracja</a></li>
+					<li><a href="/">Zaloguj</a></li>
 
-				<li><select class="navbar-nav-select" style="margin-top: 15px">
-						<option>Kielce</option>
-						<option>Warszawa</option>
-				</select>
-				</li>
-			</ul>
+					 -->
+					 
+					 	<li><a href="#{mainMenuController.getLogInOut().redirectPath}">#{mainMenuController.getLogInOut().name}</a></li>
+					 
+				</ul>
+
+
 		</div>
 	</nav>
 
