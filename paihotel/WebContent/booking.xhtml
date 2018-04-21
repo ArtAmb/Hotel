@@ -9,58 +9,55 @@
 
 <h:body bgcolor="white">
 	<ui:include src="#{componentController.getMainMenu()}" />
-	<h2>Wyszukaj</h2>
+	<div class="content">
+		<h2>Rezerwacja</h2>
 
-	<h:form>
+		<ui:include src="#{componentController.getBookingEtaps()}" />
+		
+		<h:form>			
+			<div class="filters">
+				<div class="booking-general">
+					Przyjazd: <input type="text" name="arrival"/>
+					Wyjazd: <input type="text" name="departure"/>
+					Ilość osób: <input type="text" name="persons" value="1"/>
+					Ilość pokoi: <input type="text" name="rooms" value="1"/>
+					Cena max: <input type="text" name="max-price" value="500"/>
+				</div>
+				<div class="booking-options">
+					<div class="filter">
+					<h4>Wyposażenie:</h4>
+						<label><input type='checkbox'/> Lodówka</label><br/>
+						<label><input type='checkbox'/> Mikrofalówka</label><br/>
+						<label><input type='checkbox'/> Telewizor</label><br/>
+						<label><input type='checkbox'/> Komputer</label><br/>
+						<label><input type='checkbox'/> Wanna</label><br/>
+						<label><input type='checkbox'/> Prysznic</label>						
+					</div>
+					<div class="filter">
+					<h4>Cechy:</h4>
+						<label><input type='checkbox'/> Widok na morze</label><br/>
+						<label><input type='checkbox'/> Widok na góry</label><br/>
+											
+					</div>
+					<div class="filter">
+					<h4>Wyżywienie:</h4>
+						<label><input type='checkbox'/> Brak</label><br/>
+						<label><input type='checkbox'/> Śniadania</label><br/>
+						<label><input type='checkbox'/> Śniadania i obiadokolacje</label><br/>
+											
+					</div>
+					<div style="clear:both"></div>
+					
+				</div>
+				<h:commandButton value='Szukaj' action="room" />
+			</div>
 
-		<table>
-			<tr>
-				<td>Ilosc osob</td>
-				<td><input type='text' /></td>
-			</tr>
-			<tr>
-				<td>Ilosc pokoi</td>
-				<td><input type='text' /></td>
-			</tr>
-			<tr>
-				<td>Cena max</td>
-				<td><input type='text' /></td>
-			</tr>
-			<tr>
-				<td>Wypozazenie: </td>
-			</tr>
-			<tr>
-				<td>Telewizor</td>
-				<td><input type='checkbox' /></td>
-			</tr>
+
 			
-			<tr>
-				<td>Komputer</td>
-				<td><input type='checkbox' /></td>
-			</tr>
-			<tr>
-				<td>Mikrofala</td>
-				<td><input type='checkbox' /></td>
-			</tr>
-			<tr>
-				<td>Wanna</td>
-				<td><input type='checkbox' /></td>
-			</tr>
-			<tr>
-				<td>Cechy</td>
-			</tr>
-			<tr>
-				<td>Z widokiem na morze</td>
-				<td><input type='checkbox' /></td>
-			</tr>
-			<tr>
-				<td>Z widokiem na gory</td>
-				<td><input type='checkbox' /></td>
-			</tr>
-		</table>
+		</h:form>
 
 
-		<h:commandButton value='Szukaj' action="room"/>
-	</h:form>
+	</div>
+
 </h:body>
 </html>

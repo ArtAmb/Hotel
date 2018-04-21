@@ -25,26 +25,25 @@
 	border-radius: 5px;
 }
 
-.form h1
-{
-	text-align:center;
+.form h1 {
+	text-align: center;
 }
-
-.input-text {
-	font-size: 20px;
-	width: 50%;
+.input-text, input[type=text] {
+	
 	margin-top: 20px;
 	background-color: #efefef;
 	color: #666666;
 	border: 2px solid #ddd;
 	border-radius: 5px;
-	padding: 10px;
+	padding: 5px;
 	box-sizing: border-box;
 	outline: none;
+	width: 140px;
 }
 
+
 .textarea {
-	font-size: 20px;
+	
 	width: 100%;
 	height: 200px;
 	margin-top: 20px;
@@ -52,12 +51,12 @@
 	color: #666666;
 	border: 2px solid #ddd;
 	border-radius: 5px;
-	padding: 10px;
+	padding: 5px;
 	box-sizing: border-box;
 	outline: none;
 }
 
-.input-text:focus, .textarea:focus {
+input[type=text]:focus, textarea:focus {
 	background-color: #fdf8ff;
 }
 
@@ -83,4 +82,56 @@
 .form .button:hover {
 	background-color: #8d00d3;
 	cursor: pointer;
+}
+
+.booking-options {
+	background-color: #f8f8f8;
+	padding: 20px;
+	margin-bottom: 20px;
+}
+
+.booking-general {
+	background-color: #f3f3f3;
+	padding: 20px;
+}
+
+.filter {
+	float: left;
+	padding-right: 30px;
+}
+
+.offer {
+	background-color: #f8f8f8;
+	padding: 20px;
+	margin: 20px 0;
+}
+
+.offer img {
+	float: left;
+	width: 28%;
+	margin: 2%;
+}
+
+.description-room {
+	float: left;
+	width: 62%;
+	margin: 2%;
+}
+
+.options-room {
+	float: left;
+	padding: 15px;
+}
+
+
+
+.booking-prices {
+	border-top: 2px solid #000;
+	margin-top: 30px;
+	padding: 10px;
+}
+.booking-person-data-form
+{
+	background-color:#f8f8f8;
+	padding:20px;
 }

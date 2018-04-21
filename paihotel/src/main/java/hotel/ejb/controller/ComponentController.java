@@ -17,4 +17,8 @@ public class ComponentController {
 		return "head.xhtml";
 	}
 	
+	public String getBookingEtaps() {
+		return "booking-etaps.xhtml";
+	}
+	
 }

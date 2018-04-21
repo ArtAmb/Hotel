@@ -9,35 +9,90 @@
 
 <h:body bgcolor="white">
 	<ui:include src="#{componentController.getMainMenu()}" />
-	<h2></h2>
+
+	<div class="content">
+
+		<h2>Rezerwacja</h2>
+		<ui:include src="#{componentController.getBookingEtaps()}" />
+		<div class="offer">
+			<h:form>
+				<h3>Apartament</h3>
+				<img src="img/apartament.jpg" />
+				<div class="description-room">
+					<p>Przestronny apartament, idealny na weekendowy wypad</p>
+					<div class="options-room">
+						Wyposażenie:
+						<ul>
+							<li>Lodówka</li>
+							<li>Telewizor</li>
+							<li>Komputer</li>
+						</ul>
+					</div>
+					<div class="options-room">
+						Cechy:
+						<ul>
+							<li>Widok na morze</li>
+						</ul>
+					</div>
+					<div class="options-room">
+						Wyżywnienie:
+						<ul>
+							<li>Śniadania i obiadokolacje</li>
+						</ul>
+					</div>
+					<div class="options-room">Cena: 300zł</div>
+					<div style="clear: both"></div>
+
+					<h:commandButton value="Rezerwuj" action="booking-person-data" />
+				</div>
+			</h:form>
+
+			<div style="clear: both"></div>
+		</div>
+
+		<div class="offer">
+			<h:form>
+				<h3>Standard</h3>
+				<img src="img/standard.jpg" />
+				<div class="description-room">
+					<p>Przestronny pokój idealny na dłuższy wypad z rodziną</p>
+					<div class="options-room">
+						Wyposażenie:
+						<ul>
+							<li>Lodówka</li>
+							<li>Telewizor</li>
+													</ul>
+					</div>
+					<div class="options-room">
+						Cechy:
+						<ul>
+							<li>Widok na morze</li>
+						</ul>
+					</div>
+					<div class="options-room">
+						Wyżywnienie:
+						<ul>
+							<li>Śniadania </li>
+						</ul>
+					</div>
+					<div class="options-room">Cena: 300zł</div>
+					<div style="clear: both"></div>
+
+					<h:commandButton value="Rezerwuj" action="booking-person-data" />
+				</div>
+			</h:form>
+
+			<div style="clear: both"></div>
+		</div>
+		<h:form>
+		<h:commandButton value='Wstecz' action="booking" />
+		</h:form>
+	</div>
 
 
-	<h:form>
-		<table>
-			<tr>
-				<td>Jakis opis pokoju</td>
-			</tr>
-			<tr>
-				<td>Cena</td>
-			</tr>
-		</table>
-		<h:commandButton value="Rezerwuj" />
-	</h:form>
 
-	<br />
-	<br />
-	<h:form>
-		<table>
-			<tr>
-				<td>Jakis opis pokoju</td>
 
-			</tr>
-			<tr>
-				<td>Cena</td>
-			</tr>
-		</table>
-		<h:commandButton value="Rezerwuj" />
-	</h:form>
+
 
 </h:body>
 </html>
