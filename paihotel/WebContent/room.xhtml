@@ -15,29 +15,26 @@
 	<h:form>
 		<table>
 			<tr>
-				<td>Jakis opis pokoju</td>
-			</tr>
-			<tr>
-				<td>Cena</td>
+				<td><label>Nazwa: </label></td>
+				<td><h:inputText value="#{roomController.roomName}" /></td>
 			</tr>
 		</table>
-		<h:commandButton value="Rezerwuj" />
+		<h:commandButton value="Dodaj" action="#{roomController.saveRoom()}" />
 	</h:form>
 
-	<br />
-	<br />
-	<h:form>
-		<table>
-			<tr>
-				<td>Jakis opis pokoju</td>
+	<table>
+		<ui:repeat var="room" value="#{roomController.findAllRooms()}">
+		
+		<tr>
+			<td>Id</td>
+			<td>#{room.id}</td>
+			<td>Nazwa</td>
+			<td>#{room.name}</td>
+						
+		</tr>
 
-			</tr>
-			<tr>
-				<td>Cena</td>
-			</tr>
-		</table>
-		<h:commandButton value="Rezerwuj" />
-	</h:form>
+		</ui:repeat>
+	</table>
 
 </h:body>
 </html>
