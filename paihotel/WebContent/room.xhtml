@@ -9,6 +9,7 @@
 
 <h:body bgcolor="white">
 	<ui:include src="#{componentController.getMainMenu()}" />
+	
 
 	<div class="content">
 
@@ -92,7 +93,31 @@
 
 
 
+	<h:form>
+		<table>
+			<tr>
+				<td><label>Nazwa: </label></td>
+				<td><h:inputText value="#{roomController.roomName}" /></td>
+			</tr>
+		</table>
+		<h:commandButton value="Dodaj" action="#{roomController.saveRoom()}" />
+	</h:form>
 
+
+	<table>
+		<ui:repeat var="room" value="#{roomController.findAllRooms()}">
+		
+		<tr>
+			<td>Id</td>
+			<td>#{room.id}</td>
+			<td>Nazwa</td>
+			<td>#{room.name}</td>
+						
+		</tr>
+
+
+		</ui:repeat>
+	</table>
 
 </h:body>
 </html>
