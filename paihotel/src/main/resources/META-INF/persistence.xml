@@ -3,7 +3,26 @@
 	<persistence-unit name="paihotel">
 	<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
 	<jta-data-source>jdbc/paihotelDS</jta-data-source>
-		<class>hotel.domain.Hotel</class>
-		<class>hotel.domain.Room</class>
+	<class>hotel.domain.Bill</class>
+	<class>hotel.domain.Booking</class>
+	<class>hotel.domain.Client</class>
+	<class>hotel.domain.Dictionary</class>
+	<class>hotel.domain.DictionaryValue</class>
+	<class>hotel.domain.Employee</class>
+	<class>hotel.domain.Feature</class>
+	<class>hotel.domain.Gallery</class>
+	<class>hotel.domain.GalleryPicture</class>
+	<class>hotel.domain.Hotel</class>
+	<class>hotel.domain.KeyCard</class>
+	<class>hotel.domain.KeyCardUsage</class>
+	<class>hotel.domain.MyTest</class>
+	<class>hotel.domain.Offert</class>
+	<class>hotel.domain.Party</class>
+	<class>hotel.domain.Picture</class>
+	<class>hotel.domain.Room</class>
+	<class>hotel.domain.Stage</class>
+	<class>hotel.domain.Task</class>
+	<class>hotel.domain.User</class>
+
 	</persistence-unit>
 </persistence>

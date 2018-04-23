@@ -1,21 +1,44 @@
 package hotel.domain;
 
+import java.math.BigDecimal;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
+import hotel.dao.Domain;
 import lombok.Data;
 
 @Entity
 @Data
-public class Room {
+public class Room implements Domain {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Integer IdRoom;	 
+	private Long id;	 
 	
-	private String nameRoom;
-	private String descriptionRoom;
-	private Float priceRoom;
+	private String name;
+	private String description;
+	private String state;
+	
+	private Integer number;
+	private Integer floor;
+	
+	private BigDecimal price;
+	
+	@ManyToOne
+	private Gallery gallery;
+	
+	@ManyToOne
+	private Hotel hotel;
+	
+	@OneToMany
+	private List<Feature> features;
+	
+	@OneToMany
+	private List<Offert> offerts;
 }

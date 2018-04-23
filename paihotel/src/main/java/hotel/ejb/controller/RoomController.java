@@ -1,13 +1,12 @@
 package hotel.ejb.controller;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.inject.Named;
-
-
 
 import hotel.dao.RoomDAO;
 import hotel.domain.Room;
@@ -22,17 +21,19 @@ public class RoomController {
 	private Integer id;
 	private String roomName;
 	private String description;
-	private float price;
+	private BigDecimal price;
 
+	private Room query = new Room();
+	
 	@EJB
 	private RoomDAO roomDAO;
 
 	public String saveRoom() {
 
 		Room room = new Room();
-		room.setNameRoom(roomName);
-		room.setPriceRoom(price);
-		room.setDescriptionRoom(description);
+		room.setName(roomName);
+		room.setPrice(price);
+		room.setDescription(description);
 
 		roomDAO.save(room);
 		
@@ -43,9 +44,15 @@ public class RoomController {
 		return roomDAO.findAll();
 	}
 	
-	public Room findOne(Integer id){
+	public Room findOne(Long id){
 		return roomDAO.findOne(id);
 	}
+	
+	public List<Room> findByQuery(){
+		return roomDAO.findByQuery(query);
+	}
+	
+	
 	
 
 }

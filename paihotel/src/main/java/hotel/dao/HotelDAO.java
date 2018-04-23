@@ -9,7 +9,7 @@ import hotel.domain.Hotel;
 @Named
 @Stateless
 @LocalBean
-public class HotelDAO extends CrudDAO<Integer, Hotel> {
+public class HotelDAO extends CrudDAO<Long, Hotel> {
 	
 	
 }

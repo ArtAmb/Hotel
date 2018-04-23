@@ -8,15 +8,14 @@ import javax.persistence.Id;
 import hotel.dao.Domain;
 import lombok.Data;
 
-@Entity
 @Data
-public class Hotel implements Domain {
-	
+@Entity
+public class Picture implements Domain {
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	 
-	private String name;
-	private String address; 
+	private String path;
+	private String pictureNumber;
 }

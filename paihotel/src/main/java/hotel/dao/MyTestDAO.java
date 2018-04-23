@@ -4,12 +4,11 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.inject.Named;
 
-import hotel.domain.Room;
+import hotel.domain.MyTest;
 
 @Named
 @Stateless
 @LocalBean
-public class RoomDAO extends CrudDAO<Long, Room> {
-	
-	
+public class MyTestDAO extends CrudDAO<Long, MyTest>{
+
 }

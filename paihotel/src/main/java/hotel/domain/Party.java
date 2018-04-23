@@ -4,19 +4,21 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 import hotel.dao.Domain;
 import lombok.Data;
 
 @Entity
 @Data
-public class Hotel implements Domain {
-	
+public class Party implements Domain {
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	 
-	private String name;
-	private String address; 
+	@ManyToOne
+	private Room room;
+	
+	private String state;
 }

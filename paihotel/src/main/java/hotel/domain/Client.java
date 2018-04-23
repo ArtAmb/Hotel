@@ -10,13 +10,13 @@ import lombok.Data;
 
 @Entity
 @Data
-public class Hotel implements Domain {
-	
+public class Client implements Domain{
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
-	 
 	private String name;
-	private String address; 
+	private String surname;
+	
 }

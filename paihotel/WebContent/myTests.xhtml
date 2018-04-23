@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:include src="#{componentController.getHead()}" />
+
+<h:body bgcolor="white">
+	<ui:include src="#{componentController.getMainMenu()}" />
+
+	<div class="main-content">
+
+		<h2>My tests</h2>
+	
+		<h3>Wyszukaj:</h3>
+		<h:form>
+			TestInt <h:inputText value="#{testController.query.testInt}" />
+			TestInt2 <h:inputText value="#{testController.query.testInt2}" />
+			TestString <h:inputText value="#{testController.query.testString}" />
+			TestString2 <h:inputText value="#{testController.query.testString2}" />
+
+			<h:commandButton value='szukaj' action='#{testController.findMyTest()}' />
+		</h:form>
+
+
+
+
+		<h3>Dodawanie:</h3>
+		<h:form>
+			TestInt <h:inputText value="#{testController.newMyTest.testInt}" />
+			TestInt2 <h:inputText value="#{testController.newMyTest.testInt2}" />
+			TestString <h:inputText value="#{testController.newMyTest.testString}" />
+			TestString2 <h:inputText value="#{testController.newMyTest.testString2}" />
+
+			<h:commandButton  value='dodaj' action="#{testController.saveMyTest()}" />
+		</h:form>
+
+		<h2>My tests - ALL</h2>
+		<table>
+			<ui:repeat var="test" value="#{testController.findAll()}">
+				<tr>
+					<td>ID: #{test.id}</td>
+					<td>Int1: #{test.testInt}</td>
+					<td>Int2: #{test.testInt2}</td>
+					<td>String: #{test.testString}</td>
+					<td>String2: #{test.testString2}</td>
+				</tr>
+			</ui:repeat>
+		</table>
+
+
+	</div>
+	<div style="clear: both"></div>
+
+</h:body>
+</html>
