@@ -9,12 +9,13 @@ import lombok.Data;
 
 @Entity
 @Data
-public class Hotel {
+public class Room {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Integer hotelId;
+	private Integer IdRoom;	 
 	
-	 
-	private String nameHotel;
+	private String nameRoom;
+	private String descriptionRoom;
+	private Float priceRoom;
 }

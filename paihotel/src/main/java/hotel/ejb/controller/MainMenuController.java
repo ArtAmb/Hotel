@@ -18,8 +18,8 @@ public class MainMenuController {
 			Arrays.asList(new MenuItem("hello.xhtml", "Start"), new MenuItem("booking.xhtml", "Rezerwacja"),
 					new MenuItem("contact.xhtml", "Kontakt")));
 
-	private MenuItem logIn = new MenuItem("room.xhtml", "Zaloguj");
-	private MenuItem logOut = new MenuItem("room.xhtml", "Profil");
+	private MenuItem logIn = new MenuItem("client-account.xhtml", "Zaloguj");
+	private MenuItem logOut = new MenuItem("client-account.xhtml", "Profil");
 
 	public ArrayList<MenuItem> getDefaultItems() {
 		return defaultItems;

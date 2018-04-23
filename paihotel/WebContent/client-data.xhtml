@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:include src="#{componentController.getHead()}" />
+
+<h:body bgcolor="white">
+	<ui:include src="#{componentController.getMainMenu()}" />
+
+	<div class="side-bar">
+		<ui:include src="#{componentController.getClientAccountMenu()}" />
+
+	</div>
+	<div class="main-content">
+
+		<h:form>
+			<h2>Dane osobowe:</h2>
+
+		Imię: Jan <br /> Nazwisko: Kowalski <br /> Email: jan@op.pl<br />
+		Telefon: 500500500<br /> Ulica/nr domu/ nr mieszkania: Długa 15 <br />
+		Kod pocztowy: 25-500<br /> Miasto: Kielce<br />
+
+
+			<h:commandButton value="Edytuj" />
+		</h:form>
+	</div>
+
+
+	<div style="clear: both"></div>
+
+</h:body>
+</html>

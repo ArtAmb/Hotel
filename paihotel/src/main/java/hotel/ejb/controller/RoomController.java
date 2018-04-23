@@ -7,8 +7,10 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.inject.Named;
 
-import hotel.dao.HotelDAO;
-import hotel.domain.Hotel;
+
+
+import hotel.dao.RoomDAO;
+import hotel.domain.Room;
 import lombok.Data;
 
 @Stateless
@@ -17,23 +19,33 @@ import lombok.Data;
 @LocalBean
 public class RoomController {
 
+	private Integer id;
 	private String roomName;
+	private String description;
+	private float price;
 
 	@EJB
-	private HotelDAO hotelDAO;
+	private RoomDAO roomDAO;
 
 	public String saveRoom() {
 
-		Hotel hotel = new Hotel();
-		hotel.setName(roomName);
+		Room room = new Room();
+		room.setNameRoom(roomName);
+		room.setPriceRoom(price);
+		room.setDescriptionRoom(description);
 
-		hotelDAO.save(hotel);
+		roomDAO.save(room);
 		
 		return "room";
 	}
 	
-	public List<Hotel> findAllRooms(){
-		return hotelDAO.findAll();
+	public List<Room> findAllRooms(){
+		return roomDAO.findAll();
 	}
+	
+	public Room findOne(Integer id){
+		return roomDAO.findOne(id);
+	}
+	
 
 }

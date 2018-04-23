@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:include src="#{componentController.getHead()}" />
+
+<h:body bgcolor="white">
+	<ui:include src="#{componentController.getMainMenu()}" />
+
+	<div class="side-bar">
+		<ui:include src="#{componentController.getConfigurationMenu()}" />
+
+	</div>
+	<div class="main-content">
+
+		<h2>Pokój</h2>
+		<h3>Dodawanie:</h3>
+		<h:form>
+			
+					Nazwa: <input type="text"
+				value="#{roomController.roomName}" />
+			<br />
+			Cena: <input type="text" 
+				value="#{roomController.price}" />
+			<br/>
+				Opis:<br/> <h:inputTextarea rows="10" cols="50" value="#{roomController.description}"
+				styleClass="textarea"></h:inputTextarea><br />		
+
+			<h:commandButton value="Dodaj" action="#{roomController.saveRoom()}" />
+		</h:form>
+
+		<h3>Lista pokoi:</h3>
+
+		<table class="tab">
+			<ui:repeat var="room" value="#{roomController.findAllRooms()}">
+				<tr>
+
+					<th>Nazwa</th>
+					<th>Opis</th>
+					<th>Cena</th>
+					<th>Edycja</th>
+					<th>Usuwanie</th>
+
+				</tr>
+
+				<tr>
+					<td>#{room.nameRoom}</td>
+					<td>#{room.descriptionRoom}</td>
+					<td>#{room.priceRoom}</td>
+					<td><h:commandButton value="Edytuj" /></td>
+					<td><h:commandButton value="Usuń" /></td>
+
+				</tr>
+			</ui:repeat>
+		</table>
+
+	</div>
+	<div style="clear: both"></div>
+
+</h:body>
+</html>

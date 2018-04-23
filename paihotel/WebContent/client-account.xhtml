@@ -9,16 +9,21 @@
 
 <h:body bgcolor="white">
 	<ui:include src="#{componentController.getMainMenu()}" />
+	
+		<div class="side-bar">
+			<ui:include src="#{componentController.getClientAccountMenu()}" />
+
+		</div>
+		<div class="main-content">
+		
+
+			<h2>Najbliższa wizyta</h2>
 
 
-	<div class="content">
-
-		<h2>Rezerwacja</h2>
-		<ui:include src="#{componentController.getBookingEtaps()}" />
-		<ui:repeat var="room" value="#{roomController.findAllRooms()}">
-			<div class="offer">
-				<h:form>
-					<h3>#{room.nameRoom}</h3>
+			<ui:repeat var="room" value="#{roomController.findAllRooms()}">
+				<div class="offer">
+					<h:form>
+						<h3>#{room.nameRoom}</h3>
 						<img src="img/apartament.jpg" />
 						<div class="description-room">
 							<p style="margin-bottom: 15px; font-size: 1.3em;">#{room.descriptionRoom}</p>
@@ -29,20 +34,16 @@
 							<p style="margin-top: 10px; font-size: 1.1em;"><b>Cena:</b> #{room.priceRoom} zł</p>
 						
 
-						<h:commandButton value="Rezerwuj" action="booking-person-data" />
-					</div>
+						<h:commandButton value="Anuluj" />
+				</div>
 				</h:form>
 
 				<div style="clear: both"></div>
-			</div>
+		</div>
+		<!-- </h:dataTable> -->
 		</ui:repeat>
-
-		<h:form>
-			<h:commandButton value='Wstecz' action="booking" />
-		</h:form>
 	</div>
-
-
-
+	<div style="clear: both"></div>
+	
 </h:body>
 </html>

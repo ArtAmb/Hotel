@@ -4,5 +4,6 @@
 	<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
 	<jta-data-source>jdbc/paihotelDS</jta-data-source>
 		<class>hotel.domain.Hotel</class>
+		<class>hotel.domain.Room</class>
 	</persistence-unit>
 </persistence>

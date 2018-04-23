@@ -21,4 +21,13 @@ public class ComponentController {
 		return "booking-etaps.xhtml";
 	}
 	
+	public String getClientAccountMenu() {
+		return "client-account-menu.xhtml";
+	}
+	public String getConfigurationMenu() {
+		return "configuration-menu.xhtml";
+	}
+	public String getTasksMenu() {
+		return "tasks-menu.xhtml";
+	}
 }

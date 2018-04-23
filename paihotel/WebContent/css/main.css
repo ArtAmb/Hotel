@@ -28,8 +28,8 @@
 .form h1 {
 	text-align: center;
 }
+
 .input-text, input[type=text] {
-	
 	margin-top: 20px;
 	background-color: #efefef;
 	color: #666666;
@@ -41,11 +41,8 @@
 	width: 140px;
 }
 
-
 .textarea {
 	
-	width: 100%;
-	height: 200px;
 	margin-top: 20px;
 	background-color: #efefef;
 	color: #666666;
@@ -66,7 +63,7 @@ input[type=text]:focus, textarea:focus {
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 30px;
-	background-color: #660099;
+	background-color: #4c99e2;
 	color: white;
 	letter-spacing: 2px;
 	border-radius: 5px;
@@ -76,11 +73,11 @@ input[type=text]:focus, textarea:focus {
 }
 
 .form .button:focus {
-	background-color: #8d00d3;
+	background-color: #67a9ff;
 }
 
 .form .button:hover {
-	background-color: #8d00d3;
+	background-color: #67a9ff;
 	cursor: pointer;
 }
 
@@ -105,6 +102,12 @@ input[type=text]:focus, textarea:focus {
 	padding: 20px;
 	margin: 20px 0;
 }
+.bookig-info
+{
+	background-color: #f8f8f8;
+	padding: 10px;
+	
+}
 
 .offer img {
 	float: left;
@@ -123,15 +126,73 @@ input[type=text]:focus, textarea:focus {
 	padding: 15px;
 }
 
-
-
 .booking-prices {
 	border-top: 2px solid #000;
 	margin-top: 30px;
 	padding: 10px;
 }
-.booking-person-data-form
-{
-	background-color:#f8f8f8;
-	padding:20px;
+
+.booking-person-data-form {
+	background-color: #f8f8f8;
+	padding: 20px;
+}
+
+.side-bar {
+	background: #4c99e2;
+	width: 15%;
+	float: left;
+	
+	
+}
+
+.main-content {
+	width: 85%;
+	float: left;
+	padding: 2%;
+}
+
+.side-nav li {
+	list-style-type: none;
+	padding: 10px 0;
+	color: #fff;
+	font-size:1.2em;
+}
+.side-nav a {
+	
+	color: #fff;
+	
+}
+
+@media only screen and (max-width: 768px) {
+	.side-bar, .main-content {
+		width: auto;
+		float: none;
+	}
+}
+
+.tab {
+	border-collapse: collapse;
+	
+}
+
+.tab td, .tab th {
+	margin:0 20px;
+	border: 1px solid #ddd;
+	padding: 8px;
+}
+
+.tab tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+
+.tab tr:hover {
+	background-color: #ddd;
+}
+
+.tab th {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: left;
+	background-color: #4c99e2;
+	color: white;
 }

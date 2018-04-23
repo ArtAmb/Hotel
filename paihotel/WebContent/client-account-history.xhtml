@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:include src="#{componentController.getHead()}" />
+
+<h:body bgcolor="white">
+	<ui:include src="#{componentController.getMainMenu()}" />
+
+	<div class="side-bar">
+		<ui:include src="#{componentController.getClientAccountMenu()}" />
+
+	</div>
+	<div class="main-content">
+
+		<h2>Historia wizyt:</h2>
+
+		<!-- <h:uirepeat var="visit" value="#{visitController.findClientVisit()}"> -->
+		<table class="tab">
+			<tr>
+
+				<th>Nazwa</th>
+				<th>Opis</th>
+				<th>Data</th>
+				<th>Cena</th>
+
+			</tr>
+			<ui:repeat var="room" value="#{roomController.findAllRooms()}">
+				<tr>
+					<td>#{room.nameRoom}</td>
+					<td>#{room.descriptionRoom}</td>
+					<td>10.01.2015-12.02.2015</td>
+					<td>#{room.priceRoom}</td>
+
+				</tr>
+
+
+			</ui:repeat>
+		</table>
+
+
+		<!-- </ui:repeat> -->
+	</div>
+	<div style="clear: both"></div>
+
+</h:body>
+</html>

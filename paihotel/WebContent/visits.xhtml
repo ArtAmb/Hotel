@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:include src="#{componentController.getHead()}" />
+
+<h:body bgcolor="white">
+	<ui:include src="#{componentController.getMainMenu()}" />
+
+	<div class="content">
+
+
+		<h2>Wizyty</h2>
+		
+		<h3>Dodawanie:</h3>
+		<h:form>
+			
+					Nazwa: <input type="text" value="#{roomController.roomName}" />
+			<br />
+			Termin: <input type="text" />
+			<br />
+			Koszt: <input type="text" />
+			<br />
+			Klient: <input type="text" />
+			<h:commandButton value='Szukaj' />
+			<br/>
+			Pokój: <input type="text" />
+			<h:commandButton value='Szukaj' />	
+			<br/>			
+			Uwagi:<br />
+			<h:inputTextarea rows="10" cols="50"
+				value="#{roomController.description}" styleClass="textarea"></h:inputTextarea>
+
+			<br />
+
+			<h:commandButton value="Dodaj" />
+		</h:form>
+		
+		Wyszukaj: <input type="text" />
+		<h:commandButton value='Szukaj' />
+		
+		<h3>Lista wizyt:</h3>
+
+		<table class="tab">
+			<ui:repeat var="room" value="#{roomController.findAllRooms()}">
+				<tr>
+
+					<th>Nazwa</th>
+					<th>Termin</th>
+					<th>Koszt</th>
+					<th>Klient</th>
+					<th>Pokój</th>
+					<th>Uwagi</th>	
+					
+
+				</tr>
+
+				<tr>
+					<td>#{room.nameRoom}</td>
+					<td>10.02.2017</td>
+					<td>200zł</td>
+					<td> Jan Kowalski <h:commandButton value='Szczegóły' /></td>
+					<td> Pokój 27 <h:commandButton value='Szczegóły' /></td>
+					<td>Jakies tam uwagi</td>
+					
+
+
+				</tr>
+			</ui:repeat>
+		</table>
+		
+
+
+	</div>
+
+
+</h:body>
+</html>
