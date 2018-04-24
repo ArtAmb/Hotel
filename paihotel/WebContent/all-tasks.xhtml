@@ -21,11 +21,12 @@
 		<h:form>
 		
 			Typ: <h:inputText value="#{testController.query.testInt}" />
-			Data: <h:inputText value="#{testController.query.testInt2}" />			
+			Data: <h:inputText value="#{testController.query.testInt2}" />
 
-			<h:commandButton value='szukaj' action='#{testController.findMyTest()}' />
+			<h:commandButton value='szukaj'
+				action='#{testController.findMyTest()}' />
 		</h:form>
-		
+
 		<h3>Lista zadań:</h3>
 
 		<table class="tab">

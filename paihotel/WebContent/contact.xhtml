@@ -18,16 +18,16 @@
 				<h1>Formularz kontaktowy</h1>
 
 				<h:inputText id="topic" value="#{emailController.topic}"
-					pt:placeholder="Temat" styleClass="input-text" style="width:50%;"></h:inputText>
+					pt:placeholder="Temat" styleClass="input-text" style="width:50%;"/>
 
 				<h:inputText id="email" value="#{emailController.email}"
-					pt:placeholder="Email" styleClass="input-text" style="width:50%;"></h:inputText>
+					pt:placeholder="Email" styleClass="input-text" style="width:50%;"/>
 				<h:inputTextarea id="message" value="#{emailController.message}"
 					pt:placeholder="Treść wiadomości..." styleClass="textarea"
-					style="width: 100%;	height: 200px;"></h:inputTextarea>
+					style="width: 100%;	height: 200px;"/>
 
 				<h:commandButton action="#{emailController.sendEmail()}"
-					value="Wyślij wiadomość" styleClass="button"></h:commandButton>
+					value="Wyślij wiadomość" styleClass="button"/>
 			</h:form>
 		</div>
 	</div>

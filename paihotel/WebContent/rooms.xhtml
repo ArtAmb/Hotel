@@ -21,10 +21,10 @@
 				<f:selectItem itemValue="room" itemLabel="Pokój" />
 				<f:selectItem itemValue="hall" itemLabel="Sala" />
 			</h:selectOneRadio>
-			Id: <h:inputText value="#{roomController.query.id}" />
-			Nazwa: <h:inputText value="#{roomController.query.name}" />
-			Numer: <h:inputText value="#{roomController.query.number}" />
-			Piętro: <h:inputText value="#{roomController.query.floor}" />
+			Id: <h:inputText styleClass="input-text" value="#{roomController.query.id}" />
+			Nazwa: <h:inputText styleClass="input-text" value="#{roomController.query.name}" />
+			Numer: <h:inputText styleClass="input-text" value="#{roomController.query.number}" />
+			Piętro: <h:inputText styleClass="input-text" value="#{roomController.query.floor}" />
 
 			<h:commandButton value='szukaj'
 				action='#{roomController.findRoom()}' />

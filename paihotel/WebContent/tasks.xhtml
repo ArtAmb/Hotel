@@ -20,23 +20,25 @@
 		<h3>Wyszukiwarka:</h3>
 		<h:form>
 		
-			Typ: <h:inputText value="#{testController.query.testInt}" />
-			Data: <h:inputText value="#{testController.query.testInt2}" />			
+			Typ: <h:inputText styleClass="input-text"
+				value="#{testController.query.testInt}" />
+			Data: <h:inputText styleClass="input-text"
+				value="#{testController.query.testInt2}" />
 
-			<h:commandButton value='szukaj' action='#{testController.findMyTest()}' />
+			<h:commandButton value='szukaj'
+				action='#{testController.findMyTest()}' />
 		</h:form>
 		<h3>Dodawanie:</h3>
 		<h:form>
 			
-					Typ: <input type="text" value="#{taskController.type}" />
+			Typ: <h:inputText styleClass="input-text"
+				value="#{taskController.type}" />
 			<br />
-			Do kiedy wykonać: <input type="text" />
-			<br />
-			
-				Opis:<br />
+			Do kiedy wykonać: <h:inputText styleClass="input-text" />
+			<br />			
+			Opis:<br />
 			<h:inputTextarea rows="10" cols="50"
 				value="#{taskController.description}" styleClass="textarea"></h:inputTextarea>
-
 			<br />
 
 			<h:commandButton value="Dodaj" />
