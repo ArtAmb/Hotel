@@ -16,42 +16,38 @@
 	</div>
 	<div class="main-content">
 
-		<h2>Pokój</h2>
+		<h2>Oferty</h2>
 		<h3>Dodawanie:</h3>
 		<h:form>
 			
-					Nazwa: <input type="text" value="#{roomController.name}" />
+					Liczba osób: <input type="text"
+				value="#{offertController.pepoleNumber}" />
 			<br />
-			Cena: <input type="text" value="#{roomController.price}" />
-			<br />
-				Opis:<br />
-			<h:inputTextarea rows="10" cols="50"
-				value="#{roomController.description}" styleClass="textarea"></h:inputTextarea>
+			Zniżka: <input type="text" value="#{offertController.priceDiscount}" />
 			<br />
 
-			<h:commandButton value="Dodaj" action="#{roomController.saveRoom()}" />
-
+			<h:commandButton value="Dodaj"
+				action="#{offertController.saveOffert()}" />
+			<br />
 		</h:form>
 
-		<h3>Lista pokoi:</h3>
+		<h3>Lista ofert:</h3>
 
 		<table class="tab">
 
 			<tr>
 
-				<th>Nazwa</th>
-				<th>Opis</th>
-				<th>Cena</th>
-				<th>Edycja</th>
+				<th>Id</th>
+				<th>Liczba osób:</th>
+				<th>Zniżka:</th>
 				<th>Usuwanie</th>
 
 			</tr>
-			<ui:repeat var="room" value="#{roomController.findAllRooms()}">
+			<ui:repeat var="offert" value="#{offertController.findAllOfferts()}">
 				<tr>
-					<td>#{room.name}</td>
-					<td>#{room.description}</td>
-					<td>#{room.price}</td>
-					<td><h:commandButton value="Edytuj" /></td>
+					<td>#{offert.id}</td>
+					<td>#{offert.pepoleNumber}</td>
+					<td>#{offert.priceDiscount}</td>
 					<td><h:commandButton value="Usuń" /></td>
 
 				</tr>

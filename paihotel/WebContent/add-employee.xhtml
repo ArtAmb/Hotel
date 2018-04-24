@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+<ui:include src="#{componentController.getHead()}" />
+
+<h:body bgcolor="white">
+	<ui:include src="#{componentController.getMainMenu()}" />
+	<div class="content">
+
+
+		<h2>Pracownik</h2>
+		<h3>Dodawanie:</h3>
+		<h:form>
+		Imię: <input type="text" value="#{employeeController.name}" />
+			<br /> 
+				Nazwisko: <input type="text" value="#{employeeController.surname}" />
+			<br />
+
+
+			<h:commandButton value="Dodaj"
+				action="#{employeeController.saveEmployee()}" />
+		</h:form>
+
+
+
+	</div>
+</h:body>
+</html>

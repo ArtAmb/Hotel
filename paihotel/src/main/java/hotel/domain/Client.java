@@ -19,4 +19,14 @@ public class Client implements Domain{
 	private String name;
 	private String surname;
 	
+	private String phone;
+	private String email;
+	
+	private String street;
+	private String homeNr;
+	private String flatNr;
+	private String zipCode;
+	private String city;
+	
+	
 }

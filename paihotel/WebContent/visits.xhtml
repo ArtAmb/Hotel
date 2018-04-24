@@ -18,7 +18,7 @@
 		<h3>Dodawanie:</h3>
 		<h:form>
 			
-					Nazwa: <input type="text" value="#{roomController.roomName}" />
+					Nazwa: <input type="text" value="#{roomController.name}" />
 			<br />
 			Termin: <input type="text" />
 			<br />
@@ -59,10 +59,10 @@
 				</tr>
 
 				<tr>
-					<td>#{room.nameRoom}</td>
+					<td>#{room.name}</td>
 					<td>10.02.2017</td>
 					<td>200zł</td>
-					<td> Jan Kowalski <h:commandButton value='Szczegóły' /></td>
+					<td> Jan Kowalski <h:commandButton value='Szczegóły' action="client-data" /></td>
 					<td> Pokój 27 <h:commandButton value='Szczegóły' /></td>
 					<td>Jakies tam uwagi</td>
 					

@@ -18,10 +18,14 @@
 
 		<h:form>
 			<h2>Dane osobowe:</h2>
-
-		Imię: Jan <br /> Nazwisko: Kowalski <br /> Email: jan@op.pl<br />
-		Telefon: 500500500<br /> Ulica/nr domu/ nr mieszkania: Długa 15 <br />
-		Kod pocztowy: 25-500<br /> Miasto: Kielce<br />
+		<h:dataTable var="client" value="#{clientController.findOne(1)}">
+		Imię: #{client.name} <br /> Nazwisko: #{client.surname} <br /> Email: #{client.email}<br />
+		Telefon: #{client.phone}<br /> Ulica/nr domu/ nr mieszkania: #{client.strret} #{client.homeNr} #{client.flatNr} <br />
+		Kod pocztowy: #{client.zipcode}<br /> Miasto: #{client.city}<br />
+		
+		
+		</h:dataTable>
+		
 
 
 			<h:commandButton value="Edytuj" />

@@ -23,15 +23,15 @@
 			<ui:repeat var="room" value="#{roomController.findAllRooms()}">
 				<div class="offer">
 					<h:form>
-						<h3>#{room.nameRoom}</h3>
+						<h3>#{room.name}</h3>
 						<img src="img/apartament.jpg" />
 						<div class="description-room">
-							<p style="margin-bottom: 15px; font-size: 1.3em;">#{room.descriptionRoom}</p>
+							<p style="margin-bottom: 15px; font-size: 1.3em;">#{room.description}</p>
 
 							<p><b>Wyposażenie:</b> Lodówka, Telewizor, Komputer</p>
 							<p><b>Cechy:</b> Widok na morze</p>
 							<p><b>Wyżywnienie:</b> Śniadania i obiadokolacje</p>
-							<p style="margin-top: 10px; font-size: 1.1em;"><b>Cena:</b> #{room.priceRoom} zł</p>
+							<p style="margin-top: 10px; font-size: 1.1em;"><b>Cena:</b> #{room.price} zł</p>
 						
 
 						<h:commandButton value="Anuluj" />
@@ -40,7 +40,7 @@
 
 				<div style="clear: both"></div>
 		</div>
-		<!-- </h:dataTable> -->
+		
 		</ui:repeat>
 	</div>
 	<div style="clear: both"></div>

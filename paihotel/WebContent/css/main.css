@@ -29,7 +29,7 @@
 	text-align: center;
 }
 
-.input-text, input[type=text] {
+.input-text, input[type=text], input[type=password] {
 	margin-top: 20px;
 	background-color: #efefef;
 	color: #666666;
@@ -53,7 +53,7 @@
 	outline: none;
 }
 
-input[type=text]:focus, textarea:focus {
+input[type=text]:focus, textarea:focus, input[type=password]:focus {
 	background-color: #fdf8ff;
 }
 
@@ -120,7 +120,12 @@ input[type=text]:focus, textarea:focus {
 	width: 62%;
 	margin: 2%;
 }
-
+@media only screen and (max-width: 900px) {
+	.offer img, .description-room {
+		width: 100%;
+		float: none;
+	}
+}
 .options-room {
 	float: left;
 	padding: 15px;
@@ -163,7 +168,7 @@ input[type=text]:focus, textarea:focus {
 	
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 900px) {
 	.side-bar, .main-content {
 		width: auto;
 		float: none;

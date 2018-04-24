@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import hotel.dao.Domain;
 import lombok.Data;
@@ -22,7 +24,9 @@ public class Booking implements Domain {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date startDate;
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date endDate;
 	
 	@ManyToOne

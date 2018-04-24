@@ -11,38 +11,21 @@
 	<ui:include src="#{componentController.getMainMenu()}" />
 
 	<div class="side-bar">
-		<ui:include src="#{componentController.getClientAccountMenu()}" />
+		<ui:include src="#{componentController.getConfigurationMenu()}" />
 
 	</div>
 	<div class="main-content">
 
-		<h2>Historia wizyt:</h2>
+		<h2>Słownik cech</h2>
+		<h3>Dodawanie:</h3>
+		<h:form>
+			
+					Cecha: <input type="text" />
+			<br />
 
-		
-		<table class="tab">
-			<tr>
+			<h:commandButton value="Dodaj" />
+		</h:form>
 
-				<th>Nazwa</th>
-				<th>Opis</th>
-				<th>Data</th>
-				<th>Cena</th>
-
-			</tr>
-			<ui:repeat var="room" value="#{room.findAllRooms()}">
-				<tr>
-					<td>#{room.name}</td>
-					<td>#{room.description}</td>
-					<td>10.01.2015-12.02.2015</td>
-					<td>#{room.price}</td>
-
-				</tr>
-
-
-			</ui:repeat>
-		</table>
-
-
-	
 	</div>
 	<div style="clear: both"></div>
 

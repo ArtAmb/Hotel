@@ -19,7 +19,7 @@ import lombok.Data;
 public class RoomController {
 
 	private Integer id;
-	private String roomName;
+	private String name;
 	private String description;
 	private BigDecimal price;
 
@@ -31,7 +31,7 @@ public class RoomController {
 	public String saveRoom() {
 
 		Room room = new Room();
-		room.setName(roomName);
+		room.setName(name);
 		room.setPrice(price);
 		room.setDescription(description);
 
@@ -52,6 +52,9 @@ public class RoomController {
 		return roomDAO.findByQuery(query);
 	}
 	
+	public String findRoom() {
+		return "rooms-results";
+	}
 	
 	
 

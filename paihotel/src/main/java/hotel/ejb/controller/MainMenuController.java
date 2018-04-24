@@ -22,7 +22,7 @@ public class MainMenuController {
 			Arrays.asList(new MenuItem("hello.xhtml", "Start"), new MenuItem("booking.xhtml", "Rezerwacja"),
 					new MenuItem("contact.xhtml", "Kontakt")));
 
-	private MenuItem logIn = new MenuItem("client-account.xhtml", "Zaloguj"); // commandButtonie action=#{authorizationController.logIn()}
+	private MenuItem logIn = new MenuItem("login.xhtml", "Zaloguj"); // commandButtonie action=#{authorizationController.logIn()}
 	private MenuItem logOut = new MenuItem("client-account.xhtml", "Profil"); // w profulu musi byc button wyloguj ktory wywola  authorizationController.logOut()
 
 	public ArrayList<MenuItem> getDefaultItems() {

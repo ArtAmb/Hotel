@@ -18,19 +18,19 @@
 
 			<h2>Rezerwacje</h2>					
 			
-			<ui:repeat var="room" value="#{roomController.findAllRooms()}">
+			<ui:repeat var="booking" value="#{bookingController.findAllBookings()}">
 				<div class="offer">
 					<h:form>
-						<h3>#{room.nameRoom}</h3>
-						<h3>Data: 10.02.2018 - 13.02.2018</h3>
+						<h3>#{booking.id}</h3>
+						<h3>Data: #{booking.startDate} - #{booking.endDate}</h3>
 						<img src="img/apartament.jpg" />
 						<div class="description-room">
-							<p style="margin-bottom: 15px; font-size: 1.3em;">#{room.descriptionRoom}</p>
+							<p style="margin-bottom: 15px; font-size: 1.3em;"></p>
 
 							<p><b>Wyposażenie:</b> Lodówka, Telewizor, Komputer</p>
 							<p><b>Cechy:</b> Widok na morze</p>
 							<p><b>Wyżywnienie:</b> Śniadania i obiadokolacje</p>
-							<p style="margin-top: 10px; font-size: 1.1em;"><b>Cena:</b> #{room.priceRoom} zł</p>
+							<p style="margin-top: 10px; font-size: 1.1em;"><b>Cena:</b>  zł</p>
 						
 
 						<h:commandButton value="Anuluj" />

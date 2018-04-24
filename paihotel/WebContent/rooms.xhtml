@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+<ui:include src="#{componentController.getHead()}" />
+
+<h:body bgcolor="white">
+	<ui:include src="#{componentController.getMainMenu()}" />
+	<div class="content">
+
+
+		<h2>Pokoje</h2>
+		<h3>Wyszukiwarka</h3>
+		<h:form>
+			<h:selectOneRadio >
+				<f:selectItem itemValue="room" itemLabel="Pokój" />
+				<f:selectItem itemValue="hall" itemLabel="Sala" />
+			</h:selectOneRadio>
+			Id: <h:inputText value="#{roomController.query.id}" />
+			Nazwa: <h:inputText value="#{roomController.query.name}" />
+			Numer: <h:inputText value="#{roomController.query.number}" />
+			Piętro: <h:inputText value="#{roomController.query.floor}" />
+
+			<h:commandButton value='szukaj'
+				action='#{roomController.findRoom()}' />
+		</h:form>
+
+		<h3>Wszystkie pokoje:</h3>
+
+
+	</div>
+</h:body>
+</html>

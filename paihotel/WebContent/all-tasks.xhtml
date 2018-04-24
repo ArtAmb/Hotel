@@ -17,34 +17,41 @@
 	<div class="main-content">
 
 		<h2>Wszystkie zadania</h2>
-		Wyszukaj: <input type="text" />
-		<h:commandButton value='Szukaj' />
+		<h3>Wyszukiwarka:</h3>
+		<h:form>
+		
+			Typ: <h:inputText value="#{testController.query.testInt}" />
+			Data: <h:inputText value="#{testController.query.testInt2}" />			
+
+			<h:commandButton value='szukaj' action='#{testController.findMyTest()}' />
+		</h:form>
 		
 		<h3>Lista zadań:</h3>
 
 		<table class="tab">
-			<ui:repeat var="room" value="#{roomController.findAllRooms()}">
+			<ui:repeat var="task" value="#{taskController.findAllTasks()}">
 				<tr>
 
-					<th>Nazwa</th>
+					<th>Id</th>
+					<th>Typ</th>
 					<th>Opis</th>
-					<th>Data wpłynięcia</th>
 					<th>Do kiedy wykonać</th>
-					<th>Miejsce</th>
-					<th>Klient</th>
-					<th>Wizyta</th>
-					<th>Akcja</th>
+					<th>Hotel</th>
+					<th>Rezerwacja</th>
+					<th>Przyjęcie</th>
+					<th>Status</th>
 
 
 				</tr>
 
 				<tr>
-					<td>#{room.nameRoom}</td>
-					<td>#{room.descriptionRoom}</td>
-					<td>10.02.2017</td>
-					<td>11.02.2017</td>
-					<td>Pokój 37</td>
-					<td>Jan Kowalski<h:commandButton value='Szczegóły' /></td>
+					<td>#{task.id}</td>
+					<td>#{task.type}</td>
+					<td>#{task.dascription}</td>
+					<td>#{task.date}</td>
+					<td>#{task.hotel}</td>
+					<td>#{task.booking} <h:commandButton value='Szczegóły' /></td>
+					<td>#{task.party} <h:commandButton value='Szczegóły' /></td>
 					<td><h:commandButton value='Szczegóły' /></td>
 					<td><h:commandButton value='Zatwierdz/Zakończ' /></td>
 
