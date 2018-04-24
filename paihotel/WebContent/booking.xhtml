@@ -3,6 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
 <ui:include src="#{componentController.getHead()}" />
@@ -13,55 +14,50 @@
 		<h2>Rezerwacja</h2>
 
 		<ui:include src="#{componentController.getBookingEtaps()}" />
-		
-		<h:form>			
+
+		<h:form>
 			<div class="filters">
 				<div class="booking-general">
-					Przyjazd: <input type="text" name="arrival"/>
-					Wyjazd: <input type="text" name="departure"/>
-					Ilość osób: <input type="text" name="persons" value="1"/>
-					Ilość pokoi: <input type="text" name="rooms" value="1"/>
-					Cena max: <input type="text" name="max-price" value="500"/>
+					Przyjazd:
+					<h:inputText styleClass="input-text" name="arrival" />
+					Wyjazd:
+					<h:inputText styleClass="input-text" name="departure" />
+					Ilość osób:
+					<h:inputText styleClass="input-text" name="persons" value="1" />
+					Ilość pokoi:
+					<h:inputText styleClass="input-text" name="rooms" value="1" />
+					Cena max:
+					<h:inputText styleClass="input-text" name="max-price" value="500" />
 				</div>
 				<div class="booking-options">
 					<div class="filter">
-					<h4>Wyposażenie:</h4>
-						<label><input type='checkbox'/> Lodówka</label><br/>
-						<label><input type='checkbox'/> Mikrofalówka</label><br/>
-						<label><input type='checkbox'/> Telewizor</label><br/>
-						<label><input type='checkbox'/> Komputer</label><br/>
-						<label><input type='checkbox'/> Wanna</label><br/>
-						<label><input type='checkbox'/> Prysznic</label>						
+						<h4>Cechy:</h4>
+						<h:selectManyCheckbox>
+							<f:selectItem itemValue="1" itemLabel="Lodówka" /><br/>
+							<f:selectItem itemValue="2" itemLabel="Mikrofalówka" /><br/>
+							<f:selectItem itemValue="3" itemLabel="Telewizor" /><br/>
+							<f:selectItem itemValue="4" itemLabel="Komputer" /><br/>
+							<f:selectItem itemValue="5" itemLabel="Wanna" /><br/>
+							<f:selectItem itemValue="6" itemLabel="Prysznic" /><br/>
+							<f:selectItem itemValue="7" itemLabel="Widok na morze" /><br/>
+							<f:selectItem itemValue="5" itemLabel="Widok na góry" /><br/>
+
+						</h:selectManyCheckbox>
 					</div>
-					<div class="filter">
-					<h4>Cechy:</h4>
-						<label><input type='checkbox'/> Widok na morze</label><br/>
-						<label><input type='checkbox'/> Widok na góry</label><br/>
-											
-					</div>
-					<div class="filter">
-					<h4>Wyżywienie:</h4>
-						<label><input type='checkbox'/> Brak</label><br/>
-						<label><input type='checkbox'/> Śniadania</label><br/>
-						<label><input type='checkbox'/> Śniadania i obiadokolacje</label><br/>
-											
-					</div>
-					<div style="clear:both"></div>
-					
+
+					<div style="clear: both"></div>
+
 				</div>
 				<h:commandButton value='Szukaj' action="room" />
 			</div>
 
 
-			
+
 		</h:form>
-		
-		<br/>
-		<br/>
-		<br/>
-		<br/>
+
+		<br /> <br /> <br /> <br />
 		<h:form>
-		
+
 			<h:commandButton value='Szukaj' action="roomController.findByQuery()" />
 		</h:form>
 
