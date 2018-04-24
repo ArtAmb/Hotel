@@ -10,7 +10,7 @@
 			
 				<ul class="nav navbar-nav">
 					<ui:repeat var="menuItem"
-						value="#{mainMenuController.defaultItems}">
+						value="#{mainMenuController.getMenu()}">
 						<li><a href="#{menuItem.redirectPath}">#{menuItem.name}</a></li>
 					</ui:repeat>
 					<li><select class="navbar-nav-select" style="margin-top: 15px">

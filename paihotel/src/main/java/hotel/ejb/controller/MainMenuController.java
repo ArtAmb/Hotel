@@ -2,12 +2,14 @@ package hotel.ejb.controller;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.inject.Named;
 
+import hotel.domain.User;
 import lombok.Data;
 
 @Named
@@ -15,18 +17,63 @@ import lombok.Data;
 @LocalBean
 public class MainMenuController {
 
-	@EJB 
+	@EJB
 	private AuthorizationController authorizationController; // TODO do zastnowienia czy to napewno trzyma sesje i stan
-	
+
 	private ArrayList<MenuItem> defaultItems = new ArrayList<MenuItem>(
 			Arrays.asList(new MenuItem("hello.xhtml", "Start"), new MenuItem("booking.xhtml", "Rezerwacja"),
 					new MenuItem("contact.xhtml", "Kontakt")));
 
-	private MenuItem logIn = new MenuItem("login.xhtml", "Zaloguj"); // commandButtonie action=#{authorizationController.logIn()}
-	private MenuItem logOut = new MenuItem("client-account.xhtml", "Profil"); // w profulu musi byc button wyloguj ktory wywola  authorizationController.logOut()
+	private MenuItem logIn = new MenuItem("login.xhtml", "Zaloguj"); // commandButtonie
+																		// action=#{authorizationController.logIn()}
+	private MenuItem logOut = new MenuItem("client-account.xhtml", "Profil"); // w profulu musi byc button wyloguj ktory
+																				// wywola
+																		// authorizationController.logOut()
 
+	
+	private ArrayList<MenuItem> employeeItems = new ArrayList<MenuItem>(
+			Arrays.asList(new MenuItem("hello.xhtml", "Zadania"), 
+					new MenuItem("booking.xhtml", "Terminarz"),
+					new MenuItem("contact.xhtml", "Wizyty"), 
+					new MenuItem("hello.xhtml", "Przyjecia"),
+					new MenuItem("hello.xhtml", "Pokoje"),
+					new MenuItem("hello.xhtml", "Klienci"),
+					new MenuItem("hello.xhtml", "Pracownicy")));
+	
+	private ArrayList<MenuItem> adminItems = new ArrayList<MenuItem>(
+			Arrays.asList(new MenuItem("hello.xhtml", "Zadania"), 
+					new MenuItem("booking.xhtml", "Terminarz"),
+					new MenuItem("contact.xhtml", "Wizyty"), 
+					new MenuItem("hello.xhtml", "Przyjecia"),
+					new MenuItem("hello.xhtml", "Pokoje"),
+					new MenuItem("hello.xhtml", "Klienci"),
+					new MenuItem("hello.xhtml", "Pracownicy"),
+					new MenuItem("hello.xhtml", "Konfiguracja")));
+	
+	private ArrayList<MenuItem> clientItems = new ArrayList<MenuItem>(
+			Arrays.asList(new MenuItem("hello.xhtml", "Start"), new MenuItem("booking.xhtml", "Rezerwacja"),
+					new MenuItem("contact.xhtml", "Kontakt")));
+	
 	public ArrayList<MenuItem> getDefaultItems() {
 		return defaultItems;
+	}
+
+	public ArrayList<MenuItem> getMenu() {
+		User user = authorizationController.getUser();
+		if (user == null)
+			return getDefaultItems();
+		switch (user.getRole()) {
+		case "ADMIN":
+			return adminItems;
+		case "CLIENT":
+			return clientItems;
+		case "EMPLOYEE":
+			return employeeItems;
+
+		default:
+			return getDefaultItems();
+		}
+
 	}
 
 	private boolean isLogged = false;

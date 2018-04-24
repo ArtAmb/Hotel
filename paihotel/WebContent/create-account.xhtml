@@ -13,19 +13,23 @@
 
 
 		<h:form>
-			<h2>Logowanie</h2>
+			<h2>Rejestracja</h2>
 			Login:
-			<h:inputText id="login" value="#{authorizationController.authorization.login}"/>
+			<h:inputText id="login" value="#{authorizationController.newUser.login}"/>
 			
 			<br/>
 
 			Hasło:
-			<h:inputSecret id="password" value="#{authorizationController.authorization.password}"/>
+			<h:inputSecret id="password" value="#{authorizationController.newUser.password}"/>
 			
 			<br/>
 			
+			Rola:
+			<h:inputText id="role" value="#{authorizationController.newUser.role}"/>
+			<br/>
+			
 
-		<h:commandButton value="Zaloguj" action="#{authorizationController.logIn()}" />
+		<h:commandButton value="Zarejestruj" action="#{authorizationController.addNewUser}" />
 		</h:form>
 
 
