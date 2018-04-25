@@ -10,6 +10,7 @@ import javax.inject.Named;
 
 import hotel.dao.ClientDAO;
 import hotel.domain.Client;
+import hotel.domain.Room;
 import lombok.Data;
 
 @Stateless
@@ -68,6 +69,10 @@ public class ClientController {
 	
 	public List<Client> findByQuery(){
 		return clientDAO.findByQuery(query);
+	}
+		
+	public String findClient() {
+		return "clients-results";
 	}
 	
 	

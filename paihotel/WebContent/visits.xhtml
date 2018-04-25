@@ -14,64 +14,51 @@
 
 
 		<h2>Wizyty</h2>
-		
-		<h3>Dodawanie:</h3>
+
+		<h3>Wyszukiwarka:</h3>
+
 		<h:form>
-			
-			Nazwa: <h:inputText styleClass="input-text" value="#{roomController.name}" />
-			<br />
-			Termin: <h:inputText styleClass="input-text" />
-			<br />
-			Koszt: <h:inputText styleClass="input-text" />
-			<br />
-			Klient: <h:inputText styleClass="input-text" />
-			<h:commandButton value='Szukaj' />
-			<br/>
-			Pokój: <h:inputText styleClass="input-text" />
-			<h:commandButton value='Szukaj' />	
-			<br/>			
-			Uwagi:<br />
-			<h:inputTextarea rows="10" cols="50"
-				value="#{roomController.description}" styleClass="textarea"></h:inputTextarea>
+			Id: <h:inputText value="#{testController.query.testInt}" />
+			Imię klienta: <h:inputText value="#{testController.query.testInt2}" />
+			Nazwisko klienta: <h:inputText value="#{testController.query.testInt2}" />			
 
-			<br />
-
-			<h:commandButton value="Dodaj" />
+			<h:commandButton value='szukaj' action='#{testController.findMyTest()}' />
 		</h:form>
-		
-		Wyszukaj: <h:inputText styleClass="input-text" />
-		<h:commandButton value='Szukaj' />
-		
+
+
 		<h3>Lista wizyt:</h3>
 
 		<table class="tab">
-			<ui:repeat var="room" value="#{roomController.findAllRooms()}">
+
+			<tr>
+				<th>Id</th>
+				<th>Nazwa</th>
+				<th>Termin</th>
+				<th>Koszt</th>
+				<th>Klient</th>
+				<th>Pokój</th>
+				<th>Status</th>
+
+
+
+			</tr>
+			<ui:repeat var="room" value="#{bookingController.findAllBookings()}">
 				<tr>
-
-					<th>Nazwa</th>
-					<th>Termin</th>
-					<th>Koszt</th>
-					<th>Klient</th>
-					<th>Pokój</th>
-					<th>Uwagi</th>	
-					
-
-				</tr>
-
-				<tr>
-					<td>#{room.name}</td>
-					<td>10.02.2017</td>
-					<td>200zł</td>
-					<td> Jan Kowalski <h:commandButton value='Szczegóły' action="client-data" /></td>
-					<td> Pokój 27 <h:commandButton value='Szczegóły' /></td>
-					<td>Jakies tam uwagi</td>
-					
-
+					<td>#{booking.id}</td>
+					<td>#{booking.room.name}</td>
+					<td>#{booking.room.startDate} - #{booking.room.endDate}</td>
+					<td>#{booking.room.price}</td>
+					<td>#{booking.client.name} #{booking.client.surname} <h:commandButton
+							value='Szczegóły' /></td>
+					<td>Pokój #{booking.room.number} <h:commandButton
+							value='Szczegóły' /></td>
+					<td>#{booking.room.status} <h:commandButton
+							value='Szczegóły' /></td>
 
 				</tr>
 			</ui:repeat>
 		</table>
-		
+
 
 
 	</div>

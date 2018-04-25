@@ -28,35 +28,7 @@
 		
 		<h3>Lista zadań:</h3>
 
-		<table class="tab">
-			<ui:repeat var="room" value="#{roomController.findAllRooms()}">
-				<tr>
-
-					<th>Nazwa</th>
-					<th>Opis</th>
-					<th>Data wpłynięcia</th>
-					<th>Do kiedy wykonać</th>
-					<th>Miejsce</th>
-					<th>Klient</th>
-					<th>Wizyta</th>
-					<th>Akcja</th>
-
-
-				</tr>
-
-				<tr>
-					<td>#{room.nameRoom}</td>
-					<td>#{room.descriptionRoom}</td>
-					<td>10.02.2017</td>
-					<td>11.02.2017</td>
-					<td>Pokój 37</td>
-					<td>Jan Kowalski<h:commandButton value='Szczegóły' /></td>
-					<td><h:commandButton value='Szczegóły' /></td>
-					<td><h:commandButton value='Zatwierdz/Zakończ' /></td>
-
-
-				</tr>
-			</ui:repeat>
+		
 		</table>
 
 	</div>

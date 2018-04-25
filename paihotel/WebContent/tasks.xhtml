@@ -3,7 +3,8 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
 
 <ui:include src="#{componentController.getHead()}" />
 
@@ -34,14 +35,23 @@
 			Typ: <h:inputText styleClass="input-text"
 				value="#{taskController.type}" />
 			<br />
-			Do kiedy wykonać: <h:inputText styleClass="input-text" />
+			Do kiedy wykonać: <h:inputText styleClass="input-text" value="#{taskController.date}" />
 			<br />			
 			Opis:<br />
 			<h:inputTextarea rows="10" cols="50"
-				value="#{taskController.description}" styleClass="textarea"></h:inputTextarea>
+				value="#{taskController.description}" styleClass="textarea"/>
 			<br />
+			Hotel: <h:selectOneMenu > <!-- value="#{taskController.hotel}" -->
+				<f:selectItems value="#{hotelController.findByQuery()}" var="hotel" itemLabel="#{hotel.name}" itemValue="#{hotel.id}" />
+			</h:selectOneMenu>
+			Rezerwacja: <h:selectOneMenu > 
+				<f:selectItems />
+			</h:selectOneMenu>
+			Przyjęcie: <h:selectOneMenu > 
+				<f:selectItems />
+			</h:selectOneMenu>
 
-			<h:commandButton value="Dodaj" />
+			<h:commandButton value="Dodaj" action='#{taskController.saveTask()}' />
 		</h:form>
 
 

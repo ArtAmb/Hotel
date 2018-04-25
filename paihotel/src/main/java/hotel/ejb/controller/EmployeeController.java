@@ -52,7 +52,9 @@ public class EmployeeController {
 	public List<Employee> findByQuery(){
 		return employeeDAO.findByQuery(query);
 	}
-	
+	public String findEmployee() {
+		return "employees-results";
+	}
 	
 	
 

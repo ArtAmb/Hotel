@@ -10,6 +10,7 @@ import javax.ejb.Stateless;
 import javax.inject.Named;
 
 import hotel.dao.TaskDAO;
+import hotel.domain.Hotel;
 import hotel.domain.Task;
 import lombok.Data;
 
@@ -24,6 +25,7 @@ public class TaskController {
 	private String description;
 	private String state;
 	private String type;
+	private Hotel hotel;
 
 	private Task query = new Task();
 

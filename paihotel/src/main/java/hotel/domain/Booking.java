@@ -29,6 +29,8 @@ public class Booking implements Domain {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date endDate;
 	
+	private String status;
+	
 	@ManyToOne
 	private Room room;
 	@ManyToOne

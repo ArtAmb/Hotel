@@ -50,7 +50,9 @@ public class BookingController {
 	public List<Booking> findByQuery(){
 		return bookingDAO.findByQuery(query);
 	}
-	
+	public String findBooking() {
+		return "visits-results";
+	}
 	
 	
 

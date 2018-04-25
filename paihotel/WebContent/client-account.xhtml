@@ -20,16 +20,17 @@
 			<h2>Najbliższa wizyta</h2>
 
 
-			<ui:repeat var="room" value="#{roomController.findAllRooms()}">
+			<ui:repeat var="booking" value="#{bookingController.findAllBookings()}">
 				<div class="offer">
 					<h:form>
-						<h3>#{room.name}</h3>
+						<h3>Data: #{booking.startDate} - #{booking.endDate}</h3>
+						<h3>#{booking.room.name}</h3>
 						<img src="img/apartament.jpg" />
 						<div class="description-room">
-							<p style="margin-bottom: 15px; font-size: 1.3em;">#{room.description}</p>
+							<p style="margin-bottom: 15px; font-size: 1.3em;">#{booking.room.description}</p>
 
 							<p><b>Cechy:</b> Widok na morze, Prysznic, Komputer</p>
-							<p style="margin-top: 10px; font-size: 1.1em;"><b>Cena:</b> #{room.price} zł</p>
+							<p style="margin-top: 10px; font-size: 1.1em;"><b>Cena:</b> #{booking.room.price} zł</p>
 						
 
 						<h:commandButton value="Anuluj" />
