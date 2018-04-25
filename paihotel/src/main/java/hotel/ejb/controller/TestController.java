@@ -9,7 +9,10 @@ import javax.inject.Named;
 
 import hotel.dao.MyTestDAO;
 import hotel.domain.MyTest;
+import hotel.ejb.controller.DatatableService.TableData;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Stateless
 @LocalBean
@@ -20,27 +23,34 @@ public class TestController {
 	@EJB
 	private MyTestDAO myTestDAO;
 
+	@EJB
+	private DatatableService datatableService;
+
 	private MyTest query = new MyTest();
 	private MyTest newMyTest = new MyTest();
 
-	public List<MyTest> findByQuery() {
+	@Getter
+	@Setter
+	private TableData dataTableQueryResult;
+
+	public TableData findByQuery() {
 		System.out.println("LOG INFO: " + query);
-		return myTestDAO.findByQuery(query);
+
+		dataTableQueryResult = datatableService.prepareDataMyTest(myTestDAO.findByQuery(query));
+		return dataTableQueryResult;
 	}
-	
+
 	public List<MyTest> findAll() {
 		return myTestDAO.findAll();
 	}
-	
+
 	public String findMyTest() {
 		return "myTests-results";
 	}
-	
+
 	public String saveMyTest() {
 		myTestDAO.save(newMyTest);
 		return null;
 	}
-	
-	
 
 }

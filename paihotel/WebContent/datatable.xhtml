@@ -1,0 +1,20 @@
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+
+	<table class="tab">
+		<ui:repeat var="header" value="#{headers}">
+			<th>#{header}</th>
+		</ui:repeat>
+
+		<ui:repeat var="oneRow" value="#{rows}">
+			<tr>
+				<ui:repeat var="value" value="#{oneRow.values}">
+					<td>#{value.value}</td>
+				</ui:repeat>
+			</tr>
+		</ui:repeat>
+	</table>
+
+</ui:fragment>
