@@ -32,23 +32,23 @@ public class MainMenuController {
 
 	
 	private ArrayList<MenuItem> employeeItems = new ArrayList<MenuItem>(
-			Arrays.asList(new MenuItem("hello.xhtml", "Zadania"), 
-					new MenuItem("booking.xhtml", "Terminarz"),
-					new MenuItem("contact.xhtml", "Wizyty"), 
-					new MenuItem("hello.xhtml", "Przyjecia"),
-					new MenuItem("hello.xhtml", "Pokoje"),
-					new MenuItem("hello.xhtml", "Klienci"),
-					new MenuItem("hello.xhtml", "Pracownicy")));
+			Arrays.asList(new MenuItem("tasks.xhtml", "Zadania"), 
+					new MenuItem("timetable.xhtml", "Terminarz"),
+					new MenuItem("visits.xhtml", "Wizyty"), 
+					new MenuItem("party.xhtml", "Przyjecia"),
+					new MenuItem("rooms.xhtml", "Pokoje"),
+					new MenuItem("clients.xhtml", "Klienci"),
+					new MenuItem("employees.xhtml", "Pracownicy")));
 	
 	private ArrayList<MenuItem> adminItems = new ArrayList<MenuItem>(
-			Arrays.asList(new MenuItem("hello.xhtml", "Zadania"), 
-					new MenuItem("booking.xhtml", "Terminarz"),
-					new MenuItem("contact.xhtml", "Wizyty"), 
-					new MenuItem("hello.xhtml", "Przyjecia"),
-					new MenuItem("hello.xhtml", "Pokoje"),
-					new MenuItem("hello.xhtml", "Klienci"),
-					new MenuItem("hello.xhtml", "Pracownicy"),
-					new MenuItem("hello.xhtml", "Konfiguracja")));
+			Arrays.asList(new MenuItem("tasks.xhtml", "Zadania"), 
+					new MenuItem("timetable.xhtml", "Terminarz"),
+					new MenuItem("visits.xhtml", "Wizyty"), 
+					new MenuItem("party.xhtml", "Przyjecia"),
+					new MenuItem("rooms.xhtml", "Pokoje"),
+					new MenuItem("clients.xhtml", "Klienci"),
+					new MenuItem("employees.xhtml", "Pracownicy"),
+					new MenuItem("configuration.xhtml", "Konfiguracja")));
 	
 	private ArrayList<MenuItem> clientItems = new ArrayList<MenuItem>(
 			Arrays.asList(new MenuItem("hello.xhtml", "Start"), new MenuItem("booking.xhtml", "Rezerwacja"),
