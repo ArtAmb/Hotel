@@ -8,6 +8,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.inject.Named;
 
+import hotel.domain.Client;
 import hotel.domain.MyTest;
 import lombok.Data;
 
@@ -33,6 +34,27 @@ public class DatatableService {
 			values.add(prepareValue(myTest.getTestInt2()));
 			values.add(prepareValue(myTest.getTestString()));
 			values.add(prepareValue(myTest.getTestString2()));
+			row.setValues(values);
+
+			rows.add(row);
+		}
+		tableData.setRows(rows);
+
+		return tableData;
+	}
+	
+	public TableData prepareDataForClient(List<Client> clients) {
+		TableData tableData = new TableData();
+		tableData.setTabHeaders(Arrays.asList("ID", "Imie", "Nazwisko"));
+
+		List<Row> rows = new LinkedList<>();
+		for (Client client : clients) {
+			Row row = new Row();
+
+			List<Value> values = new LinkedList<>();
+
+			values.add(prepareValue(client.getName()));
+			values.add(prepareValue(client.getSurname()));
 			row.setValues(values);
 
 			rows.add(row);

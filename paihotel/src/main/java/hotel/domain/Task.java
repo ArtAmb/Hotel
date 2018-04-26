@@ -36,4 +36,7 @@ public class Task implements Domain {
 	
 	@ManyToOne
 	private Booking booking;
+	
+	@ManyToOne
+	private Room room;
 }

@@ -44,23 +44,18 @@
 			<h:inputTextarea rows="10" cols="50"
 				value="#{roomController.description}" styleClass="textarea"></h:inputTextarea>
 			<br />
-			Hotel: <h:selectOneMenu > 
+			Hotel: <h:selectOneMenu> 
 				<f:selectItems value="#{hotelController.findByQuery()}" var="hotel" itemLabel="#{hotel.name}" itemValue="#{hotel.id}" />
 			</h:selectOneMenu><br />
-			Status:
-			<h:selectOneMenu value="#{roomController.state}"> 
-  				 <f:selectItem itemValue = "free" itemLabel = "Wolny" /> 
-  				 <f:selectItem itemValue = "busy" itemLabel = "Zajęty" />
-  				 <f:selectItem itemValue = "toClean" itemLabel = "Do posprzątania" />  
-			</h:selectOneMenu> 	<br />
+			
 			Cechy:
-			<h:selectOneRadio > 
+			<h:selectManyCheckbox > 
 				<f:selectItems value="#{featureController.findByQuery()}" var="feature" itemLabel="#{feature.name}" itemValue="#{feature.id}" />
-			</h:selectOneRadio><br />
+			</h:selectManyCheckbox><br />
 			Oferty:
-			<h:selectOneRadio > 
+			<h:selectManyCheckbox > 
 				<f:selectItems value="#{offertController.findByQuery()}" var="offert" itemLabel="#{offert.priceDiscount}"  itemValue="#{offert.id}" />
-			</h:selectOneRadio><br />
+			</h:selectManyCheckbox><br />
 
 			<h:commandButton value="Dodaj" action="#{roomController.saveRoom()}" />
 

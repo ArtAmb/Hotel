@@ -30,7 +30,7 @@ public class RoomController {
 	
 	private BigDecimal price;
 	
-	private Hotel hotel;
+	private Hotel hotel = new Hotel();
 	
 
 	private Room query = new Room();
