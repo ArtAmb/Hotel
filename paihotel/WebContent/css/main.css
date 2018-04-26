@@ -201,3 +201,19 @@ input[type=text]:focus, textarea:focus, input[type=password]:focus {
 	background-color: #4c99e2;
 	color: white;
 }
+label
+{
+	padding-left:5px;
+	padding-right:15px;
+	
+}
+select[multiple], select[size] {
+    height: auto;
+    margin: 15px;
+}
+button, html input[type=button], input[type=reset], input[type=submit] {
+    -webkit-appearance: button;
+    cursor: pointer;
+    margin: 8px 0;
+}
+
