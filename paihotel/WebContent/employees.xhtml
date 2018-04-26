@@ -16,7 +16,8 @@
 		<h3>Wyszukiwarka:</h3>
 		<h:form>
 			Imię: <h:inputText value="#{employeeController.query.name}" />
-			Nazwisko: <h:inputText value="#{employeesController.query.surname}" />
+			Nazwisko: <h:inputText value="#{employeeController.query.surname}" />
+			<br/>
 			
 
 			<h:commandButton value='szukaj' action='#{employeeController.findEmployee()}' />

@@ -20,6 +20,8 @@ public class Party implements Domain {
 	@ManyToOne
 	private Room room;
 	
+	@ManyToOne
+	private Client client;
 		
 	private String state;
 }

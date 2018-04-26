@@ -39,10 +39,7 @@
 			<h:inputTextarea rows="10" cols="50"
 				value="#{taskController.description}" styleClass="textarea"/>
 			<br />
-			Hotel: <h:selectOneMenu > 
-				<f:selectItems value="#{hotelController.findByQuery()}" var="hotel" itemLabel="#{hotel.name}" itemValue="#{hotel.id}" />
-			</h:selectOneMenu><br />
-			
+				
 			Rezerwacja: <h:selectOneMenu > 
 				<f:selectItems />
 				<f:selectItems value="#{bookingController.findByQuery()}" var="booking" itemLabel="#{booking.id}" itemValue="#{booking.id}" />

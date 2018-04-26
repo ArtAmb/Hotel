@@ -42,7 +42,7 @@
 
 
 			</tr>
-			<ui:repeat var="room" value="#{bookingController.findAllBookings()}">
+			<ui:repeat var="booking" value="#{bookingController.findAllBookings()}">
 				<tr>
 					<td>#{booking.id}</td>
 					<td>#{booking.room.name}</td>
