@@ -10,7 +10,6 @@ import javax.inject.Named;
 
 import hotel.dao.ClientDAO;
 import hotel.domain.Client;
-import hotel.domain.Room;
 import lombok.Data;
 
 @Stateless

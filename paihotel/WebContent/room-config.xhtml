@@ -3,7 +3,8 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
 
 <ui:include src="#{componentController.getHead()}" />
 
@@ -20,16 +21,46 @@
 		<h3>Dodawanie:</h3>
 		<h:form>
 			
+			<h:selectOneRadio value="#{roomController.type}" >
+				<f:selectItem itemValue="room" itemLabel="Pokój" />
+				<f:selectItem itemValue="hall" itemLabel="Sala" />
+			</h:selectOneRadio>
 			Nazwa: <h:inputText styleClass="input-text"
 				value="#{roomController.name}" />
+			<br />
+			Numer: <h:inputText styleClass="input-text"
+				value="#{roomController.number}" />
+			<br />
+			Piętro: <h:inputText styleClass="input-text"
+				value="#{roomController.floor}" />
+			<br />
+			Liczba osób: <h:inputText styleClass="input-text"
+				value="#{roomController.maxNumberOfPeople}" />
 			<br />
 			Cena: <h:inputText styleClass="input-text"
 				value="#{roomController.price}" />
 			<br />
-				Opis:<br />
+			Opis:<br />
 			<h:inputTextarea rows="10" cols="50"
 				value="#{roomController.description}" styleClass="textarea"></h:inputTextarea>
 			<br />
+			Hotel: <h:selectOneMenu > 
+				<f:selectItems value="#{hotelController.findByQuery()}" var="hotel" itemLabel="#{hotel.name}" itemValue="#{hotel.id}" />
+			</h:selectOneMenu><br />
+			Status:
+			<h:selectOneMenu value="#{roomController.state}"> 
+  				 <f:selectItem itemValue = "free" itemLabel = "Wolny" /> 
+  				 <f:selectItem itemValue = "busy" itemLabel = "Zajęty" />
+  				 <f:selectItem itemValue = "toClean" itemLabel = "Do posprzątania" />  
+			</h:selectOneMenu> 	<br />
+			Cechy:
+			<h:selectOneRadio > 
+				<f:selectItems value="#{featureController.findByQuery()}" var="feature" itemLabel="#{feature.name}" itemValue="#{feature.id}" />
+			</h:selectOneRadio><br />
+			Oferty:
+			<h:selectOneRadio > 
+				<f:selectItems value="#{offertController.findByQuery()}" var="offert" itemLabel="#{offert.priceDiscount}"  itemValue="#{offert.id}" />
+			</h:selectOneRadio><br />
 
 			<h:commandButton value="Dodaj" action="#{roomController.saveRoom()}" />
 

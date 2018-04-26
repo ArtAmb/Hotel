@@ -18,13 +18,13 @@
 
 		<h:form>
 			<h2>Dane osobowe:</h2>
-		<h:dataTable var="client" value="#{clientController.findOne(1)}">
+		<ui:repeat var="client" value="#{clientController.findOne(1)}">
 		Imię: #{client.name} <br /> Nazwisko: #{client.surname} <br /> Email: #{client.email}<br />
-		Telefon: #{client.phone}<br /> Ulica/nr domu/ nr mieszkania: #{client.strret} #{client.homeNr} #{client.flatNr} <br />
-		Kod pocztowy: #{client.zipcode}<br /> Miasto: #{client.city}<br />
+		Telefon: #{client.phone}<br /> Ulica/nr domu/ nr mieszkania: #{client.street} #{client.homeNr} #{client.flatNr} <br />
+		Kod pocztowy: #{client.zipCode}<br /> Miasto: #{client.city}<br />
 		
 		
-		</h:dataTable>
+		</ui:repeat>
 		
 
 

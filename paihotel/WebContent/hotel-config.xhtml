@@ -3,7 +3,8 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
 
 <ui:include src="#{componentController.getHead()}" />
 
@@ -16,25 +17,22 @@
 	</div>
 	<div class="main-content">
 
-		<h2>Sale</h2>
+		<h2>Hotel</h2>
 		<h3>Dodawanie:</h3>
 		<h:form>
-			
-					Nazwa: <h:inputText styleClass="input-text" value="#{roomController.name}" />
+						
+			Nazwa: <h:inputText styleClass="input-text"
+				value="#{hotelController.name}" />
 			<br />
-			Cena za osobę: <h:inputText styleClass="input-text" value="#{roomController.price}" />
-			<br />
-				Opis:<br />
-			<h:inputTextarea rows="10" cols="50"
-				value="#{roomController.description}" styleClass="textarea"></h:inputTextarea>
-
+			Adres: <h:inputText styleClass="input-text"
+				value="#{hotelController.address}" />
 			<br />
 
-			<h:commandButton value="Dodaj" action="#{roomController.saveRoom()}" />
-			<br />
+			<h:commandButton value="Dodaj" action="#{hotelController.saveHotel()}" />
+
 		</h:form>
 
-		<h3>Lista sal:</h3>
+		<h3>Lista hoteli:</h3>
 
 		<table class="tab">
 

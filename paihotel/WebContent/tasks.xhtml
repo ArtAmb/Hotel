@@ -21,13 +21,11 @@
 		<h3>Wyszukiwarka:</h3>
 		<h:form>
 		
-			Typ: <h:inputText styleClass="input-text"
-				value="#{testController.query.testInt}" />
-			Data: <h:inputText styleClass="input-text"
-				value="#{testController.query.testInt2}" />
+			Typ: <h:inputText value="#{taskController.query.type}" />
+			Data: <h:inputText value="#{taskController.query.date}" />
 
 			<h:commandButton value='szukaj'
-				action='#{testController.findMyTest()}' />
+				action='#{taskController.findTask()}' />
 		</h:form>
 		<h3>Dodawanie:</h3>
 		<h:form>
@@ -41,17 +39,26 @@
 			<h:inputTextarea rows="10" cols="50"
 				value="#{taskController.description}" styleClass="textarea"/>
 			<br />
-			Hotel: <h:selectOneMenu > <!-- value="#{taskController.hotel}" -->
+			Hotel: <h:selectOneMenu > 
 				<f:selectItems value="#{hotelController.findByQuery()}" var="hotel" itemLabel="#{hotel.name}" itemValue="#{hotel.id}" />
-			</h:selectOneMenu>
+			</h:selectOneMenu><br />
+			
 			Rezerwacja: <h:selectOneMenu > 
 				<f:selectItems />
-			</h:selectOneMenu>
+				<f:selectItems value="#{bookingController.findByQuery()}" var="booking" itemLabel="#{booking.id}" itemValue="#{booking.id}" />
+			</h:selectOneMenu><br />
+			
 			Przyjęcie: <h:selectOneMenu > 
 				<f:selectItems />
-			</h:selectOneMenu>
+				<f:selectItems value="#{partyController.findByQuery()}" var="party" itemLabel="#{party.id}" itemValue="#{party.id}" />
+			</h:selectOneMenu><br />
+			
+			Pokój: <h:selectOneMenu > 
+				<f:selectItems />
+				<f:selectItems value="#{roomController.findByQuery()}" var="room" itemLabel="#{room.number}" itemValue="#{room.id}" />
+			</h:selectOneMenu><br />
 
-			<h:commandButton value="Dodaj" action='#{taskController.saveTask()}' />
+			<h:commandButton value="Dodaj" action="#{taskController.saveTask()}" />
 		</h:form>
 
 

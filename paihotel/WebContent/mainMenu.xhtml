@@ -1,6 +1,7 @@
 <ui:fragment xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
 
 	<nav class="navbar navbar-default main-menu">
 		<div class="container-fluid">
@@ -13,10 +14,9 @@
 						value="#{mainMenuController.getMenu()}">
 						<li><a href="#{menuItem.redirectPath}">#{menuItem.name}</a></li>
 					</ui:repeat>
-					<li><select class="navbar-nav-select" style="margin-top: 15px">
-							<option>Kielce</option>
-							<option>Warszawa</option>
-					</select></li>
+					<li><h:selectOneMenu > 
+				<f:selectItems value="#{hotelController.findByQuery()}" var="hotel" itemLabel="#{hotel.name}" itemValue="#{hotel.id}" />
+			</h:selectOneMenu><br /></li>
 					<!--  				<li><a href="/">Rezerwacja</a></li>
 					<li><a href="contact.xhtml">Kontakt</a></li>
 					<li><a href="/">Pracownicy</a></li>

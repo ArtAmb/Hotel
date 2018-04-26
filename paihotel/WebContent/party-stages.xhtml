@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:include src="#{componentController.getHead()}" />
+
+<h:body bgcolor="white">
+	<ui:include src="#{componentController.getMainMenu()}" />
+
+	<div class="content">
+
+		<h2>Przyjęcia</h2>
+		<h3>Dodawanie etapów przyjęcia:</h3>
+		<h:form>				
+			
+			
+			Typ: <h:inputText styleClass="input-text"
+				value="#{stageController.type}" />
+			<br />
+			Status:
+			<h:selectOneMenu value="#{stageController.state}"> 
+  				 <f:selectItem  />   				
+			</h:selectOneMenu> <br />
+			Opis:<br />
+			<h:inputTextarea rows="10" cols="50"
+				value="#{stageController.description}" styleClass="textarea"></h:inputTextarea>
+			<br />
+			
+			<h:commandButton value="Dodaj" action="#{stageController.saveStage()}" />
+
+		</h:form>
+
+			
+		<h3>Etapy przyjęcia:</h3>
+
+
+
+
+	</div>
+
+
+</h:body>
+</html>

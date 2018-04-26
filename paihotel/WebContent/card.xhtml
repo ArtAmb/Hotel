@@ -3,8 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
 <ui:include src="#{componentController.getHead()}" />
 
@@ -16,11 +15,9 @@
 		<h2>Karty klientów</h2>
 		<h3>Wyszukiwarka:</h3>
 		<h:form>
-			Id <h:inputText value="#{testController.query.testInt}" />
-			Nazwisko klienta <h:inputText value="#{testController.query.testInt2}" />
-			
+			Id <h:inputText value="#{keyCardController.query.id}" />			
 
-			<h:commandButton value='szukaj' action='#{testController.findMyTest()}' />
+			<h:commandButton value='szukaj' action='#{keyCardController.findKeyCard()}' />
 		</h:form>
 		
 		

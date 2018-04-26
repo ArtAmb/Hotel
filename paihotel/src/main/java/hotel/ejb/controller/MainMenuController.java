@@ -2,7 +2,6 @@ package hotel.ejb.controller;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.stream.Collectors;
 
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
@@ -35,7 +34,7 @@ public class MainMenuController {
 			Arrays.asList(new MenuItem("tasks.xhtml", "Zadania"), 
 					new MenuItem("timetable.xhtml", "Terminarz"),
 					new MenuItem("visits.xhtml", "Wizyty"), 
-					new MenuItem("party.xhtml", "Przyjecia"),
+					new MenuItem("parties.xhtml", "Przyjecia"),
 					new MenuItem("rooms.xhtml", "Pokoje"),
 					new MenuItem("clients.xhtml", "Klienci"),
 					new MenuItem("employees.xhtml", "Pracownicy")));

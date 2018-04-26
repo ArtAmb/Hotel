@@ -17,8 +17,10 @@ import lombok.Data;
 @LocalBean
 public class HotelController {
 
-	private Integer id;
+	private Long id;	
+	 
 	private String name;
+	private String address;
 	
 	private Hotel query = new Hotel();
 	
@@ -29,6 +31,7 @@ public class HotelController {
 
 		Hotel hotel = new Hotel();
 		hotel.setName(name);
+		hotel.setAddress(address);
 		
 		hotelDAO.save(hotel);
 		

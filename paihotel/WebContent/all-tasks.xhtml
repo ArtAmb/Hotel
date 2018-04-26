@@ -20,11 +20,11 @@
 		<h3>Wyszukiwarka:</h3>
 		<h:form>
 		
-			Typ: <h:inputText value="#{testController.query.testInt}" />
-			Data: <h:inputText value="#{testController.query.testInt2}" />
+			Typ: <h:inputText value="#{taskController.query.type}" />
+			Data: <h:inputText value="#{taskController.query.date}" />
 
 			<h:commandButton value='szukaj'
-				action='#{testController.findMyTest()}' />
+				action='#{taskController.findTask()}' />
 		</h:form>
 
 		<h3>Lista zadań:</h3>

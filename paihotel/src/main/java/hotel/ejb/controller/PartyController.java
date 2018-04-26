@@ -50,6 +50,9 @@ public class PartyController {
 		return partyDAO.findByQuery(query);
 	}
 	
+	public String findParty() {
+		return "parties-results";
+	}
 	
 	
 

@@ -20,10 +20,12 @@
 		<h3>Dodawanie:</h3>
 		<h:form>
 			
-					Cecha: <h:inputText styleClass="input-text" />
+		Cecha: <h:inputText styleClass="input-text"
+				value="#{featureController.name}" />
 			<br />
 
-			<h:commandButton value="Dodaj" />
+			<h:commandButton value="Dodaj"
+				action="#{featureController.saveFeature()}" />
 		</h:form>
 
 	</div>

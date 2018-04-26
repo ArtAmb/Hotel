@@ -18,7 +18,8 @@ public class DatatableService {
 
 	public TableData prepareDataMyTest(List<MyTest> myTests) {
 		TableData tableData = new TableData();
-		tableData.setHeaders(Arrays.asList("ID", "Int1", "Int2", "String1", "String2"));
+		tableData.setTabHeaders(Arrays.asList("ID", "Int1", "Int2", "String1", "String2"));
+		
 
 		List<Row> rows = new LinkedList<>();
 
@@ -53,7 +54,7 @@ public class DatatableService {
 
 	@Data
 	public static class TableData {
-		private List<String> headers;
+		private List<String> tabHeaders;
 		private List<Row> rows;
 	}
 

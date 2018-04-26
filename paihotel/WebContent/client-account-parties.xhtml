@@ -11,25 +11,15 @@
 	<ui:include src="#{componentController.getMainMenu()}" />
 
 	<div class="side-bar">
-		<ui:include src="#{componentController.getTasksMenu()}" />
+		<ui:include src="#{componentController.getClientAccountMenu()}" />
 
 	</div>
 	<div class="main-content">
 
-		<h2>Wszystkie zadania</h2>
-		<h3>Wyszukiwarka:</h3>
-		<h:form>
-		
-			Typ: <h:inputText value="#{taskController.query.type}" />
-			Data: <h:inputText value="#{taskController.query.date}" />
+		<h2>Przyjęcia:</h2>
 
-			<h:commandButton value='szukaj'
-				action='#{taskController.findTask()}' />
-		</h:form>
-		
-		<h3>Lista zadań:</h3>
-
-		
+	
+	
 	</div>
 	<div style="clear: both"></div>
 

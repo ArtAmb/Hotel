@@ -3,9 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
-
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <ui:include src="#{componentController.getHead()}" />
 
 <h:body bgcolor="white">
@@ -16,11 +14,11 @@
 		<h2>Klienci</h2>
 		<h3>Wyszukiwarka</h3>
 		<h:form>
-			Imię: <h:inputText value="#{testController.query.testInt}" />
-			Nazwisko: <h:inputText value="#{testController.query.testInt2}" />
+			Imię: <h:inputText value="#{clientController.query.name}" />
+			Nazwisko: <h:inputText value="#{clientController.query.surname}" />
 			
 
-			<h:commandButton value='szukaj' action='#{testController.findMyTest()}' />
+			<h:commandButton value='szukaj' action='#{clientController.findClient()}' />
 		</h:form>
 		
 		<h3>Dodawanie:</h3>

@@ -20,5 +20,6 @@ public class Party implements Domain {
 	@ManyToOne
 	private Room room;
 	
+		
 	private String state;
 }

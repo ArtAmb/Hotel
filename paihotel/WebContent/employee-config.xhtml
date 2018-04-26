@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:include src="#{componentController.getHead()}" />
+
+<h:body bgcolor="white">
+	<ui:include src="#{componentController.getMainMenu()}" />
+
+	<div class="side-bar">
+		<ui:include src="#{componentController.getConfigurationMenu()}" />
+
+	</div>
+	<div class="main-content">
+
+		<h2>Pracownicy</h2>
+		<h3>Dodawanie:</h3>
+		<h:form>
+						
+			Imię: <h:inputText styleClass="input-text"
+				value="#{employeeController.name}" />
+			<br /> 
+			Nazwisko: <h:inputText styleClass="input-text"
+				value="#{employeeController.surname}" />
+			<br />
+			Hotel: <h:selectOneMenu > 
+				<f:selectItems value="#{hotelController.findByQuery()}" var="hotel" itemLabel="#{hotel.name}" itemValue="#{hotel.id}" />
+			</h:selectOneMenu><br />
+
+
+			<h:commandButton value="Dodaj"
+				action="#{employeeController.saveEmployee()}" />			
+
+		</h:form>
+		
+			<h:form>
+			<h2>Rejestracja</h2>
+			Login:
+			<h:inputText id="login" value="#{authorizationController.newUser.login}"/>
+			
+			<br/>
+
+			Hasło:
+			<h:inputSecret id="password" value="#{authorizationController.newUser.password}"/>
+			
+			<br/>
+			
+			Rola:
+			<h:inputText id="role" value="#{authorizationController.newUser.role}"/>
+			<br/>
+			
+
+		<h:commandButton value="Zarejestruj" action="#{authorizationController.addNewUser}" />
+		</h:form>
+
+		<h3>Lista pracowników:</h3>
+		
+
+	</div>
+	<div style="clear: both"></div>
+
+</h:body>
+</html>

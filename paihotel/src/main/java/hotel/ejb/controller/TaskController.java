@@ -57,5 +57,9 @@ public class TaskController {
 	public List<Task> findByQuery() {
 		return taskDAO.findByQuery(query);
 	}
+	
+	public String findTask() {
+		return "tasks-results";
+	}
 
 }

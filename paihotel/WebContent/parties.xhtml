@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:include src="#{componentController.getHead()}" />
+
+<h:body bgcolor="white">
+	<ui:include src="#{componentController.getMainMenu()}" />
+
+	<div class="content">
+
+
+		<h2>Przyjęcia</h2>
+		<h3>Dodawanie:</h3>
+		<h:form>				
+			
+			Sala: <h:selectOneMenu > 
+				<f:selectItems value="#{roomController.findByQuery()}" var="room" itemLabel="#{room.id}" itemValue="#{room.id}" />
+			</h:selectOneMenu><br />
+			Hotel: <h:selectOneMenu > 
+				<f:selectItems value="#{hotelController.findByQuery()}" var="hotel" itemLabel="#{hotel.name}" itemValue="#{hotel.id}" />
+			</h:selectOneMenu><br />
+			Klient: <h:selectOneMenu > 
+				<f:selectItems value="#{clientController.findByQuery()}" var="client" itemLabel="#{client.surname}" itemValue="#{client.id}" />
+			</h:selectOneMenu><br />
+			Status:
+			<h:selectOneMenu value="#{roomController.state}"> 
+  				 <f:selectItem  />   				
+			</h:selectOneMenu> <br />
+			
+
+			<h:commandButton value="Dodaj" action="#{partyController.saveParty()}" />
+
+		</h:form>
+
+		<h3>Wyszukiwarka:</h3>
+
+		<h:form>
+			Id: <h:inputText value="#{partyController.query.id}" />
+			Sala: <h:inputText value="#{partyController.query.room.id}" />
+			
+			<h:commandButton value='szukaj' action='#{partyController.findParty()}' />
+		</h:form>
+
+
+		<h3>Lista przyjęć:</h3>
+
+
+
+
+	</div>
+
+
+</h:body>
+</html>

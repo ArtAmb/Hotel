@@ -27,7 +27,8 @@ public class Room implements Domain {
 	private String type;
 	
 	private Integer number;
-	private Integer floor;	
+	private Integer floor;
+	private Integer maxNumberOfPeople;
 	
 	private BigDecimal price;
 	

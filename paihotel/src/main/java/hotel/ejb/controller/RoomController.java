@@ -9,6 +9,7 @@ import javax.ejb.Stateless;
 import javax.inject.Named;
 
 import hotel.dao.RoomDAO;
+import hotel.domain.Hotel;
 import hotel.domain.Room;
 import lombok.Data;
 
@@ -18,10 +19,19 @@ import lombok.Data;
 @LocalBean
 public class RoomController {
 
-	private Integer id;
 	private String name;
 	private String description;
+	private String state;
+	private String type;
+	
+	private Integer number;
+	private Integer floor;	
+	private Integer maxNumberOfPeople;
+	
 	private BigDecimal price;
+	
+	private Hotel hotel;
+	
 
 	private Room query = new Room();
 	
@@ -34,6 +44,12 @@ public class RoomController {
 		room.setName(name);
 		room.setPrice(price);
 		room.setDescription(description);
+		room.setType(type);
+		room.setState(state);
+		room.setFloor(floor);
+		room.setNumber(number);
+		room.setMaxNumberOfPeople(maxNumberOfPeople);
+		
 
 		roomDAO.save(room);
 		
