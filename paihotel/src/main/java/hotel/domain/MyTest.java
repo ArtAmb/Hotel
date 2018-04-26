@@ -7,9 +7,11 @@ import javax.persistence.Id;
 
 import hotel.dao.Domain;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity 
+@NoArgsConstructor
 public class MyTest implements Domain {
 
 	@Id

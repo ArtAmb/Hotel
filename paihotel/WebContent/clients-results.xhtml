@@ -16,8 +16,7 @@
 		<h2>Klienci</h2>
 		<h3>Wyniki wyszukiwania:</h3>
 		<ui:include src="datatable.xhtml">
-			<ui:param name="tabHeaders" value="#{clientController.findAndFillDatatable().tabHeaders}"></ui:param>
-			<ui:param name="rows" value="#{clientController.clientData.rows}"></ui:param>
+			<ui:param name="tableData" value="#{clientDatatableController.fillDatatableAndGet()}"></ui:param>
 		</ui:include>
 
 	</div>

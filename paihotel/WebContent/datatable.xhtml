@@ -4,11 +4,11 @@
 
 
 	<table class="tab">
-		<ui:repeat var="tabHeader" value="#{tabHeaders}">
+		<ui:repeat var="tabHeader" value="#{tableData.tabHeaders}">
 			<th>#{tabHeader}</th>
 		</ui:repeat>
 
-		<ui:repeat var="oneRow" value="#{rows}">
+		<ui:repeat var="oneRow" value="#{tableData.rows}">
 			<tr>
 				<ui:repeat var="value" value="#{oneRow.values}">
 					<td>#{value.value}</td>

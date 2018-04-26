@@ -15,8 +15,7 @@
 		<h2>My tests - results</h2>
 
 		<ui:include src="datatable.xhtml">
-			<ui:param name="headers" value="#{testController.findByQuery().headers}"></ui:param>
-			<ui:param name="rows" value="#{testController.dataTableQueryResult.rows}"></ui:param>
+			<ui:param name="tableData" value="#{myTestDatatableController.fillDatatableAndGet()}"></ui:param>
 		</ui:include>
 	</div>
 	

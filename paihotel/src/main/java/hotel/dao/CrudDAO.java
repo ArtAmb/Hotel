@@ -122,5 +122,9 @@ public class CrudDAO<ID extends Serializable, EntityClass> {
 	public List<EntityClass> findAll(Page page) {
 		return prepareQueryForAll().setFirstResult(page.getFirst()).setMaxResults(page.getMax()).getResultList();
 	}
+	
+	public Class<EntityClass> getEntityClass(){
+		return entityClass;
+	}
 
 }

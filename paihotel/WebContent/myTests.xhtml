@@ -14,14 +14,14 @@
 
 		<h2>My tests</h2>
 	
-		<h3>Wyszukaj:</h3>
+		<h3>Wyszukaj:</h3> 
 		<h:form>
-			TestInt <h:inputText value="#{testController.query.testInt}" />
-			TestInt2 <h:inputText value="#{testController.query.testInt2}" />
-			TestString <h:inputText value="#{testController.query.testString}" />
-			TestString2 <h:inputText value="#{testController.query.testString2}" />
+			TestInt <h:inputText value="#{myTestDatatableController.query.testInt}" />
+			TestInt2 <h:inputText value="#{myTestDatatableController.query.testInt2}" />
+			TestString <h:inputText value="#{myTestDatatableController.query.testString}" />
+			TestString2 <h:inputText value="#{myTestDatatableController.query.testString2}" />
 
-			<h:commandButton value='szukaj' action='#{testController.findMyTest()}' />
+			<h:commandButton value='szukaj' action='#{myTestDatatableController.redirectToQueryResult()}' />
 		</h:form>
 
 
