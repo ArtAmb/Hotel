@@ -14,11 +14,11 @@
 		<h2>Klienci</h2>
 		<h3>Wyszukiwarka</h3>
 		<h:form>
-			Imię: <h:inputText value="#{clientController.query.name}" />
-			Nazwisko: <h:inputText value="#{clientController.query.surname}" />
+			Imię: <h:inputText value="#{clientDatatableController.query.name}" />
+			Nazwisko: <h:inputText value="#{clientDatatableController.query.surname}" />
 			
 
-			<h:commandButton value='szukaj' action='#{clientController.findClient()}' />
+			<h:commandButton value='szukaj' action='#{clientDatatableController.redirectToQueryResult()}' />
 		</h:form>
 		
 		<h3>Dodawanie:</h3>

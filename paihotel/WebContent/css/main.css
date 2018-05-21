@@ -1,3 +1,65 @@
+/*FONTS*/
+@font-face
+{
+	font-family: 'Lato-Regular';
+	src: url('Lato-Regular.ttf');
+}
+@font-face
+{
+	font-family: 'Merienda-Regular';
+	src: url('Merienda-Regular.ttf');
+}
+
+body
+{
+	font-family: 'Lato-Regular';
+}
+/*HEADER*/
+#header
+{
+    font-family: 'Merienda-Regular';
+    width: 100%;
+    color: black;
+    text-align: center;
+}
+#logo
+{
+
+    margin-left: 10px;
+    margin-top:17px;
+    font-size: 24px;
+    float:left;
+}
+#logo img
+{
+	width:100px;
+}
+.menu
+{
+    float:right;
+    line-height:200%;
+    font-size:17px;
+    list-style-type:none;
+}
+
+.menu > li
+{
+    float:left;
+    width:100px;
+}
+
+a
+{
+    color:black;
+    text-decoration: none;
+}
+
+.menu a:hover
+{
+    color:#660099;
+}
+
+
 .required {
 	display: block;
 	background-color: red;
@@ -5,9 +67,7 @@
 	border-color: green;
 }
 
-.navbar-nav-select {
-	margin-top: 15px;
-}
+
 
 .content {
 	margin: 30px;
@@ -151,7 +211,7 @@ input[type=text]:focus, textarea:focus, input[type=password]:focus {
 }
 
 .main-content {
-	width: 85%;
+	
 	float: left;
 	padding: 2%;
 }
@@ -209,7 +269,7 @@ label
 }
 select[multiple], select[size] {
     height: auto;
-    margin: 15px;
+    
 }
 button, html input[type=button], input[type=reset], input[type=submit] {
     -webkit-appearance: button;
