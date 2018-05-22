@@ -13,8 +13,7 @@
 	<div class="content">
 		<h2>Rezerwacja</h2>
 
-		<ui:include src="#{componentController.getBookingEtaps()}" />
-
+		
 		<h:form>
 			<div class="filters">
 				<div class="booking-general">
@@ -49,6 +48,7 @@
 
 				</div>
 				<h:commandButton value='Szukaj' action="#{roomController.findByQuery()}" />
+				<h:commandButton value='Szukaj' action="room" />
 			</div>
 		</h:form>
 

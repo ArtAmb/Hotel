@@ -23,6 +23,7 @@
 	<class>hotel.domain.Stage</class>
 	<class>hotel.domain.Task</class>
 	<class>hotel.domain.User</class>
+	<class>hotel.domain.News</class>
 
 	</persistence-unit>
 </persistence>
