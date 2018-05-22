@@ -12,13 +12,10 @@
 	
 		<div class="side-bar">
 			<ui:include src="#{componentController.getClientAccountMenu()}" />
-
 		</div>
-		<div class="main-content">
 		
-
+		<div class="main-content">
 			<h2>Najbliższa wizyta</h2>
-
 
 			<ui:repeat var="booking" value="#{bookingController.findAllBookings()}">
 				<div class="offer">
@@ -34,15 +31,17 @@
 						
 
 						<h:commandButton value="Anuluj" />
-				</div>
-				</h:form>
-
+						</div>
+					</h:form>
 				<div style="clear: both"></div>
+				</div>
+			</ui:repeat>
+			
 		</div>
-		
-		</ui:repeat>
-	</div>
 	<div style="clear: both"></div>
+	<h:form>
+		<h:commandButton value="Wyloguj" action="#{authorizationController.logOut()}" />
+	</h:form>
 	
 </h:body>
 </html>
