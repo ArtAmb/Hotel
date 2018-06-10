@@ -6,9 +6,9 @@ import java.util.stream.Collectors;
 
 import hotel.dao.CrudDAO;
 import hotel.dao.Page;
-import hotel.ejb.controller.DatatableService.Row;
-import hotel.ejb.controller.DatatableService.TableData;
-import hotel.ejb.controller.DatatableService.Value;
+import hotel.ejb.services.DatatableService.Row;
+import hotel.ejb.services.DatatableService.TableData;
+import hotel.ejb.services.DatatableService.Value;
 
 public abstract class BaseDataTableController<ID extends Serializable, EntityClass> {
 

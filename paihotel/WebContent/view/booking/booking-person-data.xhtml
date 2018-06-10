@@ -15,27 +15,27 @@
 		
 		<div class="booking-person-data-form">
 			<h:form>
-				Imię: <h:inputText styleClass="input-text" name="name" />
+				Imię: <h:inputText styleClass="input-text" name="name" value="#{bookingController.clientData.name}"/>
 				<br /> 
-				Nazwisko: <h:inputText styleClass="input-text" name="surname" />
+				Nazwisko: <h:inputText styleClass="input-text" name="surname" value="#{bookingController.clientData.surname}"/>
 				<br /> 
-				Email: <h:inputText styleClass="input-text" name="email" />
+				Email: <h:inputText styleClass="input-text" name="email" value="#{bookingController.clientData.email}"/>
 				<br /> 
-				Telefon: <h:inputText styleClass="input-text" name="phone" />
+				Telefon: <h:inputText styleClass="input-text" name="phone" value="#{bookingController.clientData.phone}"/>
 				<br />
-				Ulica/nr domu/ nr mieszkania: <h:inputText styleClass="input-text" name="street" />
-				<h:inputText styleClass="input-text" name="home-nr" />
-				<h:inputText styleClass="input-text" name="flat-nr" />
+				Ulica/nr domu/ nr mieszkania: <h:inputText styleClass="input-text" name="street" value="#{bookingController.clientData.street}"/>
+				<h:inputText styleClass="input-text" name="home-nr" value="#{bookingController.clientData.homeNr}"/>
+				<h:inputText styleClass="input-text" name="flat-nr" value="#{bookingController.clientData.flatNr}"/>
 				<br />
-				Kod pocztowy: <h:inputText styleClass="input-text" name="zip-code" />
+				Kod pocztowy: <h:inputText styleClass="input-text" name="zip-code" value="#{bookingController.clientData.zipCode}"/>
 				<br /> 
-				Miasto: <h:inputText styleClass="input-text" name="city" />
+				Miasto: <h:inputText styleClass="input-text" name="city" value="#{bookingController.clientData.city}"/>
 				<br />
 				<div class="booking-prices">
 					Suma: 500zł <br />Zadatek: 200zł
 				</div>
 				<h:commandButton style="margin:0 20px;" value='Wstecz' action="room" />
-				<h:commandButton value='Zarezerwuj' />
+				<h:commandButton value='Zarezerwuj' action="#{bookingController.makeBooking()}"/>
 			</h:form>
 		</div>
 

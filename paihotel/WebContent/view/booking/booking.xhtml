@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 <ui:include src="#{componentController.getHead()}" />
 
@@ -13,16 +14,17 @@
 	<div class="content">
 		<h2>Rezerwacja</h2>
 
-		
+
 		<h:form>
 			<div class="filters">
 				<div class="booking-general">
 					Przyjazd:
-					<h:inputText styleClass="input-text" />
+					<h:inputText styleClass="input-text" value="#{bookingController.startDate}"/>
 					Wyjazd:
-					<h:inputText styleClass="input-text"  />
+					<h:inputText styleClass="input-text" value="#{bookingController.endDate}"/>
 					Ilość osób:
-					<h:inputText styleClass="input-text" value="#{roomController.maxNumberOfPeople}" />
+					<h:inputText styleClass="input-text"
+						value="#{roomController.maxNumberOfPeople}" />
 					Ilość pokoi:
 					<h:inputText styleClass="input-text" />
 					Cena max:
@@ -31,28 +33,61 @@
 				<div class="booking-options">
 					<div class="filter">
 						<h4>Cechy:</h4>
-						<h:selectManyCheckbox>
-							<f:selectItem itemValue="1" itemLabel="Lodówka" />
-							<f:selectItem itemValue="2" itemLabel="Mikrofalówka" />
-							<f:selectItem itemValue="3" itemLabel="Telewizor" />
-							<f:selectItem itemValue="4" itemLabel="Komputer" />
-							<f:selectItem itemValue="5" itemLabel="Wanna" />
-							<f:selectItem itemValue="6" itemLabel="Prysznic" />
-							<f:selectItem itemValue="7" itemLabel="Widok na morze" />
-							<f:selectItem itemValue="5" itemLabel="Widok na góry" />
-
+						<h:selectManyCheckbox value="#{bookingController.features}">
+							<f:selectItems value="#{featureController.findAllFeatures()}"
+								var="feature" itemLabel="#{feature.name}"
+								itemValue="#{feature.id}" />
 						</h:selectManyCheckbox>
 					</div>
 
 					<div style="clear: both"></div>
 
 				</div>
-				
-				<h:commandButton value='Szukaj' action="room" />
+
+				<h:commandButton value='Szukaj'
+					action="#{bookingController.refreshView()}" />
+
 			</div>
 		</h:form>
 
-		
+
+		<ui:repeat var="room" value="#{bookingController.findByQuery()}">
+			<div class="offer">
+				<h:form>
+					<h3>#{room.room.name}</h3>
+					<img src="/paihotel/img/apartament.jpg" />
+					<div class="description-room">
+						<p style="margin-bottom: 15px; font-size: 1.3em;">#{room.room.description}</p>
+
+						<p>
+							<b>Cechy:</b>
+							<ui:repeat var="feature" value="#{room.room.features}">
+								#{feature.name} 
+							</ui:repeat>
+						</p>
+						<p style="margin-top: 10px; font-size: 1.1em;">
+							<b>Cena:</b> #{room.room.price} zł
+						</p>
+						<c:if test="#{not empty room.bookings}">
+						<p>
+							<b>W podanym okresie pokój został zarezerwowany w dniach:</b>
+							<ui:repeat var="booking" value="#{room.bookings}">
+							<div>
+							Od: #{booking.startDate} do #{booking.endDate}
+							</div>
+							</ui:repeat>
+							<b>Prosimy wyszukać dogodniejszy termin</b>
+						</p>	
+						</c:if>
+
+						<h:commandButton value="Rezerwuj" action="booking-person-data" />
+					</div>
+				</h:form>
+
+				<div style="clear: both"></div>
+			</div>
+		</ui:repeat>
+
 
 	</div>
 

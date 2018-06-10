@@ -11,8 +11,8 @@ import javax.inject.Named;
 
 import hotel.dao.ClientDAO;
 import hotel.domain.Client;
-import hotel.ejb.controller.DatatableService.Row;
-import hotel.ejb.controller.DatatableService.Value;
+import hotel.ejb.services.DatatableService.Row;
+import hotel.ejb.services.DatatableService.Value;
 import lombok.Getter;
 import lombok.Setter;
 

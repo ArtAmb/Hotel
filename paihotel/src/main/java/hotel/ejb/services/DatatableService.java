@@ -1,4 +1,4 @@
-package hotel.ejb.controller;
+package hotel.ejb.services;
 
 import java.util.Arrays;
 import java.util.LinkedList;

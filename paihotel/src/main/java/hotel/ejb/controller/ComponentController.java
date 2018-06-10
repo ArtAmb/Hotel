@@ -4,8 +4,6 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.inject.Named;
 
-import hotel.Utils;
-
 @Named
 @Stateless
 @LocalBean

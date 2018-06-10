@@ -1,5 +1,7 @@
 package hotel.ejb.controller;
 
+import java.util.Optional;
+
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -13,9 +15,9 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-@Stateless
 @LocalBean
 @Named
+@Stateless
 public class AuthorizationController {
 
 	@Getter
@@ -56,28 +58,36 @@ public class AuthorizationController {
 	}
 
 	public String logIn() {
-		User user = userDAO.findByQuery(User.builder().login(authorization.getLogin())
-				.password(authorization.getPassword()).active(true).build()).iterator().next();
-		if (user == null) {
+		Optional<User> optUser = userDAO.findByQuery(
+				User.builder()
+				.login(authorization.getLogin())
+				.password(authorization.getPassword())
+				.active(true)
+				.build()).stream().findFirst();
+		
+		if (!optUser.isPresent()) {
 			errorMessage = "Bledny login lub haslo";
+			return null;
 		}
 
+		User user = optUser.get();
+		
 		if (!user.isActive()) {
 			errorMessage = "User o login " + user.getLogin() + " jest zablokowany";
-			return null; // TODO
+			return null; 
 		}
 
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 
 		session.setAttribute("user", user);
 
-		return null; // TODO udalo sie
+		return "hello"; // TODO udalo sie
 	}
 
 	public String logOut() {
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 		session.removeAttribute("user");
-		return null; // TODO strona logowania
+		return "login"; // TODO strona logowania
 	}
 
 }

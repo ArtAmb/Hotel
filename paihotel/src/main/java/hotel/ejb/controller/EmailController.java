@@ -1,14 +1,14 @@
 package hotel.ejb.controller;
 
 import javax.ejb.EJB;
-import javax.ejb.Stateless;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 
 import hotel.ejb.services.EmailService;
 import lombok.Data;
 
 @Named
-@Stateless
+@RequestScoped
 @Data
 public class EmailController {	
 
