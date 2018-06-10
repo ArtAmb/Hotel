@@ -45,7 +45,7 @@
 		</h:form>
 
 		<h3>Lista klientów:</h3>
-		<ui:include src="datatable.xhtml">
+		<ui:include src="#{componentController.getDatatable()}">
 			<ui:param name="tableData" value="#{clientDatatableController.fillDatatableAndGet()}"></ui:param>
 		</ui:include>
 

@@ -8,8 +8,11 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.inject.Named;
 
+import hotel.Utils;
 import hotel.domain.User;
 import lombok.Data;
+
+
 
 @Named
 @Stateless
@@ -19,40 +22,45 @@ public class MainMenuController {
 	@EJB
 	private AuthorizationController authorizationController; // TODO do zastnowienia czy to napewno trzyma sesje i stan
 
+	@EJB
+	private ComponentController componentController;
+
 	private ArrayList<MenuItem> defaultItems = new ArrayList<MenuItem>(
-			Arrays.asList(new MenuItem("hello.xhtml", "Start"), new MenuItem("booking.xhtml", "Rezerwacja"),
-					new MenuItem("contact.xhtml", "Kontakt")));
+			Arrays.asList(
+					new MenuItem(Utils.getUrl("hello.xhtml"), "Start"),
+					new MenuItem(Utils.getViewUrl("booking/booking.xhtml"), "Rezerwacja"),
+					new MenuItem(Utils.getViewUrl("contact/contact.xhtml"), "Kontakt")));
 
-	private MenuItem logIn = new MenuItem("login.xhtml", "Zaloguj"); // commandButtonie
-																		// action=#{authorizationController.logIn()}
-	private MenuItem logOut = new MenuItem("client-account.xhtml", "Profil"); // w profulu musi byc button wyloguj ktory
-																				// wywola
-																		// authorizationController.logOut()
+	private MenuItem logIn = new MenuItem(Utils.getViewUrl("authorization/login.xhtml"), "Zaloguj");
+	private MenuItem logOut = new MenuItem(Utils.getViewUrl("client/client-account.xhtml"), "Profil");
 
-	
 	private ArrayList<MenuItem> employeeItems = new ArrayList<MenuItem>(
-			Arrays.asList(new MenuItem("tasks.xhtml", "Zadania"), 
-					new MenuItem("timetable.xhtml", "Terminarz"),
-					new MenuItem("visits.xhtml", "Wizyty"), 
-					new MenuItem("parties.xhtml", "Przyjecia"),
-					new MenuItem("rooms.xhtml", "Pokoje"),
-					new MenuItem("clients.xhtml", "Klienci"),
-					new MenuItem("employees.xhtml", "Pracownicy")));
-	
+			Arrays.asList(
+					new MenuItem(Utils.getViewUrl("tasks/tasks.xhtml"), "Zadania"),
+					new MenuItem(Utils.getViewUrl("timetable/timetable.xhtml"), "Terminarz"),
+					new MenuItem(Utils.getViewUrl("visits/visits.xhtml"), "Wizyty"),
+					new MenuItem(Utils.getViewUrl("parties/parties.xhtml"), "Przyjecia"),
+					new MenuItem(Utils.getViewUrl("room/rooms.xhtml"), "Pokoje"),
+					new MenuItem(Utils.getViewUrl("client/clients.xhtml"), "Klienci"),
+					new MenuItem(Utils.getViewUrl("employee/employees.xhtml"), "Pracownicy")));
+
 	private ArrayList<MenuItem> adminItems = new ArrayList<MenuItem>(
-			Arrays.asList(new MenuItem("tasks.xhtml", "Zadania"), 
-					new MenuItem("timetable.xhtml", "Terminarz"),
-					new MenuItem("visits.xhtml", "Wizyty"), 
-					new MenuItem("parties.xhtml", "Przyjecia"),
-					new MenuItem("rooms.xhtml", "Pokoje"),
-					new MenuItem("clients.xhtml", "Klienci"),
-					new MenuItem("employees.xhtml", "Pracownicy"),
-					new MenuItem("configuration.xhtml", "Konfiguracja")));
-	
+			Arrays.asList(
+					new MenuItem(Utils.getViewUrl("tasks/tasks.xhtml"), "Zadania"),
+					new MenuItem(Utils.getViewUrl("timetable/timetable.xhtml"), "Terminarz"),
+					new MenuItem(Utils.getViewUrl("visits/visits.xhtml"), "Wizyty"),
+					new MenuItem(Utils.getViewUrl("parties/parties.xhtml"), "Przyjecia"),
+					new MenuItem(Utils.getViewUrl("room/rooms.xhtml"), "Pokoje"),
+					new MenuItem(Utils.getViewUrl("client/clients.xhtml"), "Klienci"),
+					new MenuItem(Utils.getViewUrl("employee/employees.xhtml"), "Pracownicy"),
+					new MenuItem(Utils.getViewUrl("config/configuration.xhtml"), "Konfiguracja")));
+
 	private ArrayList<MenuItem> clientItems = new ArrayList<MenuItem>(
-			Arrays.asList(new MenuItem("hello.xhtml", "Start"), new MenuItem("booking.xhtml", "Rezerwacja"),
-					new MenuItem("contact.xhtml", "Kontakt")));
-	
+			Arrays.asList(
+					new MenuItem(Utils.getUrl("hello.xhtml"), "Start"),
+					new MenuItem(Utils.getViewUrl("booking/booking.xhtml"), "Rezerwacja"),
+					new MenuItem(Utils.getViewUrl("contact/contact.xhtml"), "Kontakt")));
+
 	public ArrayList<MenuItem> getDefaultItems() {
 		return defaultItems;
 	}
@@ -75,14 +83,25 @@ public class MainMenuController {
 
 	}
 
-	private boolean isLogged = false;
-
 	public MenuItem getLogInOut() {
 		if (authorizationController.isLogIn())
 			return logOut;
 		else
 			return logIn;
 	}
+
+	public String getLogoUrl() {
+		return Utils.getUrl("img/logo.png");
+	}
+
+	public String getHelloPageUrl() {
+		return Utils.getUrl("hello.xhtml");
+	}
+	
+	public String getHeaderImgUrl() {
+		return Utils.getUrl("img/header.jpg");
+	}
+	
 
 	@Data
 	public static class MenuItem {
@@ -93,6 +112,5 @@ public class MainMenuController {
 
 		private String redirectPath;
 		private String name;
-
 	}
 }

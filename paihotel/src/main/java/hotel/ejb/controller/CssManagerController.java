@@ -4,6 +4,8 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.inject.Named;
 
+import hotel.Utils;
+
 @Named
 @Stateless
 @LocalBean
@@ -11,7 +13,7 @@ public class CssManagerController {
 	private final String basePath = "css/";
 
 	private String getCssPath(String cssPath) {
-		return basePath + cssPath;
+		return Utils.getUrl(basePath + cssPath);
 	}
 	
 	

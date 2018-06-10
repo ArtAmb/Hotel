@@ -5,7 +5,7 @@
 
 	<div id="header">
 		<div id="logo">
-			<a href="hello.xhtml"><img src="img/logo.png"/><span style="color: #4c99e2;"> Pod</span> kamykiem</a>
+			<a href="#{mainMenuController.getHelloPageUrl()}"><img src="#{mainMenuController.getLogoUrl()}" /><span style="color: #4c99e2;"> Pod</span> kamykiem</a>
 		</div>
 		<ul class="menu">
 			<ui:repeat var="menuItem" value="#{mainMenuController.getMenu()}">
@@ -21,7 +21,7 @@
 		</ul>
 		<div style="clear: both;"></div>
 		<div class="slider">
-			<img src="img/header.jpg" width="100%"/>
+			<img src="#{mainMenuController.getHeaderImgUrl()}" width="100%"/>
 		</div>
 	</div>
 
