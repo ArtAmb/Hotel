@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateful;
+import javax.ejb.Stateless;
 import javax.inject.Named;
 
 import hotel.Utils;
@@ -17,6 +18,8 @@ import hotel.domain.Booking;
 import hotel.domain.Client;
 import hotel.domain.Feature;
 import hotel.domain.Room;
+import hotel.ejb.services.SessionManagerService;
+import hotel.ejb.services.SessionObject;
 import hotel.ejb.services.rooms.RoomService;
 import hotel.ejb.services.rooms.dto.RoomDTO;
 import lombok.Data;
@@ -27,13 +30,12 @@ import lombok.Data;
 @LocalBean
 public class BookingController {
 
-	private Long roomToBookId;
 	private Date startDate = new Date(System.currentTimeMillis());
 	private Date endDate = Utils.addDays(startDate, 5);
 	private List<Long> features = new LinkedList<>();
 
 	private Booking query = new Booking();
-	private Client clientData;
+	private Client clientData = new Client();
 	@EJB
 	private BookingDAO bookingDAO;
 
@@ -43,6 +45,9 @@ public class BookingController {
 	@EJB
 	private RoomDAO roomDAO;
 
+	@EJB
+	private SessionManagerService sessionManagerService;
+	
 	public String saveBooking() {
 		Booking booking = new Booking();
 		booking.setStartDate(startDate);
@@ -53,6 +58,8 @@ public class BookingController {
 		return "booking";
 	}
 
+	
+	
 	public List<Booking> findAllBookings() {
 		return bookingDAO.findAll();
 	}
@@ -80,8 +87,10 @@ public class BookingController {
 	}
 
 	public String makeBooking() {
+		Long roomID = (Long) sessionManagerService.getFromSession(SessionObject.ROOM_ID);
 		
-		Room bookingRoom = roomDAO.findOne(roomToBookId);
+		Room bookingRoom = roomDAO.findOne(roomID);
+		sessionManagerService.removeFromSession(SessionObject.ROOM_ID.getName());
 		
 		Booking booking = Booking.builder()
 				.client(clientData)
@@ -92,5 +101,9 @@ public class BookingController {
 		
 		return "hello"; 
 	}
-	
+	public String chooseRoomToBook(Long roomId) { 
+		sessionManagerService.saveInSession(SessionObject.ROOM_ID, roomId);
+		
+		return Utils.getViewUrl("booking/booking-person-data");
+	}
 }

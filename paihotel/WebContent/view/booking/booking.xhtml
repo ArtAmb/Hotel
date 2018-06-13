@@ -79,8 +79,8 @@
 							<b>Prosimy wyszukać dogodniejszy termin</b>
 						</p>	
 						</c:if>
-
-						<h:commandButton value="Rezerwuj" action="booking-person-data" />
+						
+						<h:commandButton value="Rezerwuj" action="#{bookingController.chooseRoomToBook(room.room.id)}" />
 					</div>
 				</h:form>
 
