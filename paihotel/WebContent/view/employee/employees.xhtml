@@ -15,15 +15,17 @@
 		<h2>Pracownicy</h2>
 		<h3>Wyszukiwarka:</h3>
 		<h:form>
-			Imię: <h:inputText value="#{employeeController.query.name}" />
-			Nazwisko: <h:inputText value="#{employeeController.query.surname}" />
+			Imię: <h:inputText value="#{employeeDatatableController.query.name}" />
+			Nazwisko: <h:inputText value="#{employeeDatatableController.query.surname}" />
 			<br/>
 			
 
-			<h:commandButton value='szukaj' action='#{employeeController.findEmployee()}' />
+			<h:commandButton value='szukaj' action='#{employeeDatatableController.redirectToQueryResult()}' />
 		</h:form>
-		<h3>Lista pracowników:</h3>
-		
+		<h3>Lista wszystkich pracowników:</h3>
+		<ui:include src="#{componentController.getDatatable()}">
+			<ui:param name="tableData" value="#{employeeDatatableController.fillDatatableAndGet()}"></ui:param>
+		</ui:include>
 
 
 	</div>

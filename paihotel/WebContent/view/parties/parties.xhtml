@@ -18,30 +18,38 @@
 		<h3>Dodawanie:</h3>
 		<h:form>				
 			
-			Sala: <h:selectOneMenu > 
-				<f:selectItems value="#{roomController.findByQuery()}" var="room" itemLabel="#{room.id}" itemValue="#{room.id}" />
-			</h:selectOneMenu><br />
-			Klient: <h:selectOneMenu > 
-				<f:selectItems value="#{clientController.findByQuery()}" var="client" itemLabel="#{client.surname}" itemValue="#{client.id}" />
-			</h:selectOneMenu><br />
-						
+			Sala: <h:selectOneMenu>
+				<f:selectItems value="#{roomController.findByQuery()}" var="room"
+					itemLabel="#{room.id}" itemValue="#{room.id}" />
+			</h:selectOneMenu>
+			<br />
+			Klient: <h:selectOneMenu>
+				<f:selectItems value="#{clientController.findByQuery()}"
+					var="client" itemLabel="#{client.surname}" itemValue="#{client.id}" />
+			</h:selectOneMenu>
+			<br />
 
-			<h:commandButton value="Dodaj" action="#{partyController.saveParty()}" />
+
+			<h:commandButton value="Dodaj"
+				action="#{partyController.saveParty()}" />
 
 		</h:form>
 
 		<h3>Wyszukiwarka:</h3>
 
 		<h:form>
-			Id: <h:inputText value="#{partyController.query.id}" />
-			Sala: <h:inputText value="#{partyController.query.room.id}" />
+			Id: <h:inputText value="#{partyDatatableController.query.id}" />
 			
-			<h:commandButton value='szukaj' action='#{partyController.findParty()}' />
+
+			<h:commandButton value='szukaj' action='#{partyDatatableController.redirectToQueryResult()}' />
 		</h:form>
 
 
 		<h3>Lista przyjęć:</h3>
-
+		<ui:include src="#{componentController.getDatatable()}">
+			<ui:param name="tableData"
+				value="#{partyDatatableController.fillDatatableAndGet()}"></ui:param>
+		</ui:include>
 
 
 

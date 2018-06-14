@@ -15,13 +15,16 @@
 		<h2>Karty klientów</h2>
 		<h3>Wyszukiwarka:</h3>
 		<h:form>
-			Id <h:inputText value="#{keyCardController.query.id}" />			
+			Id <h:inputText value="#{keyCardDatatableController.query.id}" />			
 
-			<h:commandButton value='szukaj' action='#{keyCardController.findKeyCard()}' />
+			<h:commandButton value='szukaj' action='#{keyCardDatatableController.redirectToQueryResult()}' />
 		</h:form>
 		
 		
 		<h3>Wszystkie karty klientów:</h3>
+		<ui:include src="#{componentController.getDatatable()}">
+			<ui:param name="tableData" value="#{keyCardDatatableController.fillDatatableAndGet()}"></ui:param>
+		</ui:include>
 
 
 	</div>
