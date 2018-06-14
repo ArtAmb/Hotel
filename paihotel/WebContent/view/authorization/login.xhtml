@@ -25,8 +25,12 @@
 			<br/>
 			
 
-		<h:commandButton value="Zaloguj" action="#{authorizationController.logIn()}" />
+		<h:commandButton value="Zaloguj" type="submit" action="#{authorizationController.tryToLogIn()}" />
 		</h:form>
+		<br/>
+		#{authorizationController.errorMessage}		
+		
+		
 
 
 	</div>

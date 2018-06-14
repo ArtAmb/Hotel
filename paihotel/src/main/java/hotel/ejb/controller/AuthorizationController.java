@@ -1,24 +1,32 @@
 package hotel.ejb.controller;
 
+import java.io.Serializable;
 import java.util.Optional;
 
+import javax.annotation.ManagedBean;
 import javax.ejb.EJB;
-import javax.ejb.LocalBean;
-import javax.ejb.Stateless;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 
+import com.mysql.jdbc.StringUtils;
+
+import hotel.Utils;
 import hotel.dao.UserDAO;
 import hotel.domain.User;
-import lombok.Data;
+import hotel.ejb.services.authorization.dto.Authorization;
+import hotel.ejb.services.authorization.dto.UserDTO;
+import hotel.ejb.services.authorization.mapper.UserMapper;
 import lombok.Getter;
 import lombok.Setter;
 
-@LocalBean
+@ManagedBean
+@RequestScoped
 @Named
-@Stateless
-public class AuthorizationController {
+public class AuthorizationController implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Getter
 	@Setter
@@ -26,20 +34,21 @@ public class AuthorizationController {
 
 	@Getter
 	@Setter
-	private String errorMessage;
-
+	private UserDTO newUser = new UserDTO();
+	
 	@Getter
 	@Setter
-	private User newUser = new User();
+	private String errorMessage;
+
 
 	@EJB
 	private UserDAO userDAO;
 
-	public boolean isLogIn() {
+	static public boolean isLogIn() {
 		return getUser() != null;
 	}
 
-	public User getUser() {
+	static public User getUser() {
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 
 		return (User) session.getAttribute("user");
@@ -47,17 +56,18 @@ public class AuthorizationController {
 
 	public String addNewUser() {
 		newUser.setActive(true);
-		userDAO.save(newUser);
+		userDAO.save(UserMapper.map(newUser));
 		return "hello";
 	}
 
-	@Data
-	public class Authorization {
-		private String login;
-		private String password;
-	}
-
-	public String logIn() {
+	public String tryToLogIn() {
+		if(StringUtils.isNullOrEmpty(authorization.getLogin()) 
+				|| StringUtils.isNullOrEmpty(authorization.getPassword())) {
+			errorMessage = "Podaj login i has³o";
+			return null;
+			
+		}
+		
 		Optional<User> optUser = userDAO.findByQuery(
 				User.builder()
 				.login(authorization.getLogin())
@@ -81,13 +91,14 @@ public class AuthorizationController {
 
 		session.setAttribute("user", user);
 
-		return "hello"; // TODO udalo sie
+		return "/hello?faces-redirect=true"; 
 	}
 
-	public String logOut() {
+	public String logOutTheUser() {
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 		session.removeAttribute("user");
-		return "login"; // TODO strona logowania
+		//return "/" + Utils.getViewUrl("login"); // TODO strona logowania ?faces-redirect=true
+		return "../authorization/login";
 	}
 
 }

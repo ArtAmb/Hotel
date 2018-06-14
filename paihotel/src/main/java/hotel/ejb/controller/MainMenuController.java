@@ -20,9 +20,6 @@ import lombok.Data;
 public class MainMenuController {
 
 	@EJB
-	private AuthorizationController authorizationController; // TODO do zastnowienia czy to napewno trzyma sesje i stan
-
-	@EJB
 	private ComponentController componentController;
 
 	private ArrayList<MenuItem> defaultItems = new ArrayList<MenuItem>(
@@ -66,7 +63,7 @@ public class MainMenuController {
 	}
 
 	public ArrayList<MenuItem> getMenu() {
-		User user = authorizationController.getUser();
+		User user = AuthorizationController.getUser();
 		if (user == null)
 			return getDefaultItems();
 		switch (user.getRole()) {
@@ -84,7 +81,7 @@ public class MainMenuController {
 	}
 
 	public MenuItem getLogInOut() {
-		if (authorizationController.isLogIn())
+		if (AuthorizationController.isLogIn())
 			return logOut;
 		else
 			return logIn;
