@@ -8,7 +8,9 @@ import javax.persistence.ManyToOne;
 
 import hotel.dao.Domain;
 import lombok.Data;
-
+/**
+ * @author Karolina B¹tkowska
+ */
 @Entity
 @Data
 public class Party implements Domain {

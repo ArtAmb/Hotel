@@ -5,7 +5,9 @@ import javax.ejb.Stateless;
 import javax.inject.Named;
 
 import hotel.domain.Feature;
-
+/**
+ * @author Karolina B¹tkowska
+ */
 @Named
 @Stateless
 @LocalBean

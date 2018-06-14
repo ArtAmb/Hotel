@@ -11,7 +11,9 @@ import javax.inject.Named;
 import hotel.dao.PartyDAO;
 import hotel.domain.Party;
 import lombok.Data;
-
+/**
+ * @author Karolina B¹tkowska
+ */
 @Stateless
 @Named
 @Data

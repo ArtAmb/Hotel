@@ -6,7 +6,9 @@ import javax.inject.Named;
 
 import hotel.domain.Offert;
 
-
+/**
+ * @author Karolina B¹tkowska
+ */
 @Named
 @Stateless
 @LocalBean

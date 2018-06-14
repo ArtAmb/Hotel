@@ -5,7 +5,9 @@ import javax.ejb.Stateful;
 import javax.inject.Named;
 
 import lombok.Data;
-
+/**
+ * @author Karolina B¹tkowska
+ */
 @Data
 @Named
 @LocalBean

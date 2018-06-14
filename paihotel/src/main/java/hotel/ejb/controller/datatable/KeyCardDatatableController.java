@@ -15,7 +15,9 @@ import hotel.ejb.services.DatatableService.Row;
 import hotel.ejb.services.DatatableService.Value;
 import lombok.Getter;
 import lombok.Setter;
-
+/**
+ * @author Karolina B¹tkowska
+ */
 @Stateless
 @Named
 @LocalBean

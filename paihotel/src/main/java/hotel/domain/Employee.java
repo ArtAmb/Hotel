@@ -11,7 +11,9 @@ import javax.persistence.OneToOne;
 
 import hotel.dao.Domain;
 import lombok.Data;
-
+/**
+ * @author Karolina B¹tkowska
+ */
 @Data
 @Entity
 public class Employee implements Domain {
