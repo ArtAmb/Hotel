@@ -107,9 +107,14 @@ public class CrudDAO<ID extends Serializable, EntityClass> {
 	}
 
 	public void remove(ID id) {
-		entityManager.remove(id);
+		EntityClass entity = findOne(id);
+		entityManager.remove(entity);
 	}
-
+	
+	public void remove(EntityClass entity) {
+		entityManager.remove(entity);
+	}
+	
 	private TypedQuery<EntityClass> prepareQueryForAll() {
 		return entityManager.createQuery("SELECT tmp from " + entityClass.getName() + " tmp", entityClass);
 	}
