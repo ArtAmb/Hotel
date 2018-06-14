@@ -97,8 +97,7 @@ public class AuthorizationController implements Serializable {
 	public String logOutTheUser() {
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 		session.removeAttribute("user");
-		//return "/" + Utils.getViewUrl("login"); // TODO strona logowania ?faces-redirect=true
-		return "../authorization/login";
+		return Utils.getTemplateUriRedirect("authorization/login.xhtml");
 	}
 
 }

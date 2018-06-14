@@ -14,6 +14,14 @@ public class Utils {
 		return getUrl("view/" + template);
 	}
 
+	public static String getTemplateUri(String template) {
+		return "/view/" + template;
+	}
+	
+	public static String getTemplateUriRedirect(String template) {
+		return getTemplateUri(template) + "?faces-redirect=true";
+	}
+	
 	public static Date addDays(Date date, int days) {
 		Calendar c = Calendar.getInstance();
 		c.setTime(date);
