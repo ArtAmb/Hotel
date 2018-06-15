@@ -10,7 +10,9 @@ import javax.inject.Named;
 import hotel.dao.KeyCardDAO;
 import hotel.domain.KeyCard;
 import lombok.Data;
-
+/**
+ * @author Karolina B¹tkowska
+ */
 @Stateless
 @Named
 @Data

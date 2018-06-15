@@ -20,7 +20,9 @@ import hotel.ejb.services.authorization.dto.UserDTO;
 import hotel.ejb.services.authorization.mapper.UserMapper;
 import lombok.Getter;
 import lombok.Setter;
-
+/**
+ * @author Karolina B¹tkowska
+ */
 @ManagedBean
 @RequestScoped
 @Named

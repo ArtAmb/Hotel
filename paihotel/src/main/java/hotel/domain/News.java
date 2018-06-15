@@ -11,7 +11,9 @@ import javax.persistence.TemporalType;
 
 import hotel.dao.Domain;
 import lombok.Data;
-
+/**
+ * @author Karolina B¹tkowska
+ */
 @Entity
 @Data
 public class News implements Domain {

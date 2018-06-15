@@ -12,7 +12,9 @@ import hotel.Utils;
 import hotel.domain.User;
 import lombok.Data;
 
-
+/**
+ * @author Karolina B¹tkowska
+ */
 
 @Named
 @Stateless

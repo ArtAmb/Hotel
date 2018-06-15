@@ -7,7 +7,9 @@ import javax.persistence.Id;
 
 import hotel.dao.Domain;
 import lombok.Data;
-
+/**
+ * @author Karolina B¹tkowska
+ */
 @Data
 @Entity
 public class Offert implements Domain {

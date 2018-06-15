@@ -4,8 +4,11 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.inject.Named;
 
-import hotel.domain.Employee;
 
+import hotel.domain.Employee;
+/**
+ * @author Karolina B¹tkowska
+ */
 @Named
 @Stateless
 @LocalBean

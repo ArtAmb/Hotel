@@ -11,7 +11,9 @@ import hotel.dao.NewsDAO;
 import hotel.domain.Booking;
 import hotel.domain.News;
 import lombok.Data;
-
+/**
+ * @author Karolina B¹tkowska
+ */
 @Stateless
 @Named
 @Data
