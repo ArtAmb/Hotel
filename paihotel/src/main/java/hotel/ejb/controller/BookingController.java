@@ -32,6 +32,9 @@ import hotel.ejb.services.rooms.dto.RoomDTO;
 import hotel.ejb.services.utils.RandomStringGenerator;
 import lombok.Data;
 
+/**
+ * @author Artur Ambrolewicz
+ */
 @RequestScoped
 @Named
 @Data

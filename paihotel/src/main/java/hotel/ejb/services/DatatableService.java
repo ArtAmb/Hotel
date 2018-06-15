@@ -12,6 +12,9 @@ import hotel.domain.Client;
 import hotel.domain.MyTest;
 import lombok.Data;
 
+/**
+ * @author Artur Ambrolewicz
+ */
 @Stateless
 @Named
 @LocalBean

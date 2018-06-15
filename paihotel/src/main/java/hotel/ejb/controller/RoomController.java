@@ -13,6 +13,9 @@ import hotel.domain.Hotel;
 import hotel.domain.Room;
 import lombok.Data;
 
+/**
+ * @author Artur Ambrolewicz
+ */
 @Stateless
 @Named
 @Data

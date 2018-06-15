@@ -14,6 +14,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+/**
+ * @author Artur Ambrolewicz
+ */
 public class CrudDAO<ID extends Serializable, EntityClass> {
 
 	protected Class<EntityClass> entityClass;

@@ -4,6 +4,9 @@ import javax.ejb.Stateless;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
+/**
+ * @author Artur Ambrolewicz
+ */
 @Stateless
 public class SessionManagerService {
 	

@@ -15,6 +15,9 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * @author Artur Ambrolewicz
+ */
 @Stateless
 @LocalBean
 @Named

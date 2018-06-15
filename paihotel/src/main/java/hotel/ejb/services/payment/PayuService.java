@@ -31,6 +31,9 @@ import hotel.ejb.services.payment.dto.PayuRequest;
 import hotel.ejb.services.payment.dto.PayuResponse;
 import hotel.ejb.services.payment.dto.PayuSettings;
 
+/**
+ * @author Artur Ambrolewicz
+ */
 @Stateless
 @Named
 @LocalBean
