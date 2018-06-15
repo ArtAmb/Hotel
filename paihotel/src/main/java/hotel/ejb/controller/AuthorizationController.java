@@ -59,6 +59,13 @@ public class AuthorizationController implements Serializable {
 		userDAO.save(UserMapper.map(newUser));
 		return "hello";
 	}
+	
+	public String addNewClient() {
+		newUser.setActive(true);
+		newUser.setRole("CLIENT");
+		userDAO.save(UserMapper.map(newUser));
+		return "hello";
+	}
 
 	public String tryToLogIn() {
 		if(StringUtils.isNullOrEmpty(authorization.getLogin()) 

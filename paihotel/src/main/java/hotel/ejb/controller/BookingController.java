@@ -1,5 +1,6 @@
 package hotel.ejb.controller;
 
+import java.io.IOException;
 import java.sql.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -8,23 +9,30 @@ import java.util.stream.Collectors;
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateful;
-import javax.ejb.Stateless;
+import javax.enterprise.context.RequestScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 import hotel.Utils;
 import hotel.dao.BookingDAO;
+import hotel.dao.ClientDAO;
 import hotel.dao.RoomDAO;
 import hotel.domain.Booking;
 import hotel.domain.Client;
 import hotel.domain.Feature;
 import hotel.domain.Room;
+import hotel.domain.User;
 import hotel.ejb.services.SessionManagerService;
 import hotel.ejb.services.SessionObject;
+import hotel.ejb.services.payment.PayuService;
+import hotel.ejb.services.payment.dto.PayuOrderResponse;
 import hotel.ejb.services.rooms.RoomService;
 import hotel.ejb.services.rooms.dto.RoomDTO;
+import hotel.ejb.services.utils.RandomStringGenerator;
 import lombok.Data;
 
-@Stateful
+@RequestScoped
 @Named
 @Data
 @LocalBean
@@ -41,9 +49,15 @@ public class BookingController {
 
 	@EJB
 	private RoomService roomService;
+	
+	@EJB
+	private PayuService payuService;
 
 	@EJB
 	private RoomDAO roomDAO;
+	
+	@EJB
+	private ClientDAO clientDAO;
 
 	@EJB
 	private SessionManagerService sessionManagerService;
@@ -86,24 +100,49 @@ public class BookingController {
 		return null;
 	}
 
-	public String makeBooking() {
-		Long roomID = (Long) sessionManagerService.getFromSession(SessionObject.ROOM_ID);
+	public String makeBooking() throws IOException {
+		User user = AuthorizationController.getUser();
 		
+		clientData.setUser(user);
+		Client newClient = clientDAO.save(clientData);
+		sessionManagerService.saveInSession(SessionObject.BOOKING_CLIENT, newClient);
+		
+	
+		
+		
+		
+		String controlParam = new RandomStringGenerator(8).rand();
+		sessionManagerService.saveInSession(SessionObject.CONTROL_BOOKING_PARAM, controlParam);
+		
+		PayuOrderResponse response = payuService.getPaymentRedirect(user, controlParam);
+		
+		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+	    externalContext.redirect(response.getRedirectUri());
+				
+		return null; 
+	}
+	
+	public void makeRealBooking() throws IOException {
+		Long roomID = (Long) sessionManagerService.getFromSession(SessionObject.ROOM_ID);
 		Room bookingRoom = roomDAO.findOne(roomID);
 		sessionManagerService.removeFromSession(SessionObject.ROOM_ID.getName());
 		
 		Booking booking = Booking.builder()
 				.client(clientData)
+				.startDate(startDate)
+				.endDate(endDate)
 				.room(bookingRoom)
 				.build();
 		
 		bookingDAO.save(booking);
 		
-		return "hello"; 
+		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+	    externalContext.redirect("http://localhost:8080/paihotel/success-book.xhtml");
 	}
+	
 	public String chooseRoomToBook(Long roomId) { 
 		sessionManagerService.saveInSession(SessionObject.ROOM_ID, roomId);
 		
-		return Utils.getViewUrl("booking/booking-person-data");
+		return Utils.getTemplateUriRedirect("booking/booking-person-data");
 	}
 }

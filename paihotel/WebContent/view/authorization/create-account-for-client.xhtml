@@ -11,7 +11,27 @@
 	<ui:include src="#{componentController.getMainMenu()}" />
 	<div class="content">
 
-	Udało się zarezerwować pokój!	
+
+		<h:form>
+			<h2>Rejestracja</h2>
+			Login:
+			<h:inputText id="login" value="#{authorizationController.newUser.login}"/>
+			
+			<br/>
+
+			Hasło:
+			<h:inputSecret id="password" value="#{authorizationController.newUser.password}"/>
+			
+			<br/>
+			
+			Rola:
+			<h:inputText id="role" value="#{authorizationController.newUser.role}"/>
+			<br/>
+			
+
+		<h:commandButton value="Zarejestruj" action="#{authorizationController.addNewUser}" />
+		</h:form>
+
 
 	</div>
 </h:body>

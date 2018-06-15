@@ -1,7 +1,9 @@
 package hotel.ejb.services;
 
+import hotel.domain.Client;
+
 public enum SessionObject {
-	ROOM_ID("roomId", Long.class);
+	ROOM_ID("roomId", Long.class), CONTROL_BOOKING_PARAM("controlBookingParam", String.class), BOOKING_CLIENT("bookingClient", Client.class);
 	
 	private String name;
 	private Class<?> objectClass;
