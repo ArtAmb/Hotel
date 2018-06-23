@@ -11,7 +11,27 @@
 	<ui:include src="#{componentController.getMainMenu()}" />
 	<div class="content">
 
-	Udało się zarezerwować pokój!	
+		<h2>Witamy na stronie sieci hoteli "Pod kamykiem"!</h2>
+		<p>Nasze hotele cieszą się popularnością i zaufaniem od wielu lat.
+			Posiadamy setki zadowolonych klientów. Obiekt oferuje Gościom noclegi
+			w komfortowych, klimatyzowanych pokojach wyposażonych w nowoczesny
+			sprzęt RTV oraz bezpłatny dostęp do Internetu. Na osoby szukające
+			dodatkowego relaksu czeka centrum fitness z siłownią, sauną fińską i
+			turecką oraz oczkiem wodnym. Hotel stanowi zatem idealny wybór dla
+			osób podróżujących służbowo, jak również doskonałe miejsce na
+			rodzinny wypoczynek.</p>
+		<h2>Aktualności</h2>
+		<ui:repeat var="news"
+			value="#{newsController.findAllNews()}">
+			<div class="offer">
+
+				<h3>#{news.title}</h3>
+				<h3>Data: 10.09.2015</h3>
+
+				<p style="margin-bottom: 15px; font-size: 1.3em;">#{news.description}</p>
+
+			</div>
+		</ui:repeat>
 
 	</div>
 </h:body>
