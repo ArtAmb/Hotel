@@ -9,47 +9,50 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.inject.Named;
 
-import hotel.dao.EmployeeDAO;
-import hotel.domain.Employee;
+import hotel.dao.TaskDAO;
+import hotel.domain.Task;
 import hotel.ejb.services.DatatableService.Row;
 import hotel.ejb.services.DatatableService.Value;
 import lombok.Getter;
 import lombok.Setter;
-/**
- * @author Karolina B¹tkowska
- */
+
 @Stateless
 @Named
 @LocalBean
-public class EmployeeDatatableController extends BaseDataTableController<Long, Employee>{
+public class TaskDatatableController extends BaseDataTableController<Long, Task>{
 	
 	@EJB
-	private EmployeeDAO employeeDAO;
+	private TaskDAO taskDAO;
 	
 	@Getter
 	@Setter
-	public Employee query = new Employee();
+	public Task query = new Task();
 	
 	
 	public void beforeQueryAction() {
-		this.crudDAO = employeeDAO;
+		this.crudDAO = taskDAO;
 		this.queryDTO = query;
 		
 	}
 	
 	@Override
 	protected List<String> getHeader() {
-		return Arrays.asList("ID", "Imie", "Nazwisko");
+		return Arrays.asList("ID", "Typ", "Do kiedy", "Opis", "Rezerwacja", "Pokój");
 	}
 
 	@Override
-	protected Row createRow(Employee myTest) {
+	protected Row createRow(Task task) {
 		Row row = new Row();
 		List<Value> values = new LinkedList<>();
 
-		values.add(prepareValue(myTest.getId()));
-		values.add(prepareValue(myTest.getName()));
-		values.add(prepareValue(myTest.getSurname()));
+		values.add(prepareValue(task.getId()));
+		values.add(prepareValue(task.getType()));
+		values.add(prepareValue(task.getDate()));
+		values.add(prepareValue(task.getDescription()));
+		values.add(prepareValue(task.getBooking() != null ? task.getBooking().getId() : null));
+		values.add(prepareValue(task.getRoom() != null ? task.getRoom().getName(): null));
+		
+		
 		row.setValues(values);
 		return row;
 
@@ -57,10 +60,8 @@ public class EmployeeDatatableController extends BaseDataTableController<Long, E
 
 	@Override
 	public String redirectToQueryResult() {
-		return null;
+		return "tasks-results";
 	}
-	
-	
 
 
 }
