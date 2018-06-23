@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.ejb.EJB;
@@ -19,11 +20,13 @@ import hotel.Utils;
 import hotel.dao.BookingDAO;
 import hotel.dao.ClientDAO;
 import hotel.dao.RoomDAO;
+import hotel.dao.UserDAO;
 import hotel.domain.Booking;
 import hotel.domain.Client;
 import hotel.domain.Feature;
 import hotel.domain.Room;
 import hotel.domain.User;
+import hotel.domain.UserRole;
 import hotel.ejb.services.SessionManagerService;
 import hotel.ejb.services.SessionObject;
 import hotel.ejb.services.payment.PayuService;
@@ -49,6 +52,8 @@ public class BookingController {
 	private Booking query = new Booking();
 	private Client clientData = new Client();
 	private String errorMessage = "";
+	@EJB
+	private UserDAO userDAO;
 	@EJB
 	private BookingDAO bookingDAO;
 
@@ -128,7 +133,15 @@ public class BookingController {
 			validate();
 
 			clientData.setUser(user);
-			Client newClient = clientDAO.save(clientData);
+			Optional<Client> optionalClient = clientDAO
+					.findByQuery(Client.builder().email(clientData.getEmail()).build()).stream().findFirst();
+
+			Client newClient = null;
+			if (!optionalClient.isPresent()) {
+				newClient = optionalClient.get();
+			} else
+				newClient = clientDAO.save(clientData);
+
 			sessionManagerService.saveInSession(SessionObject.BOOKING_CLIENT, newClient);
 			String controlParam = new RandomStringGenerator(8).rand();
 			sessionManagerService.saveInSession(SessionObject.CONTROL_BOOKING_PARAM, controlParam);
@@ -147,8 +160,27 @@ public class BookingController {
 		Long roomID = (Long) sessionManagerService.getFromSession(SessionObject.ROOM_ID);
 		Room bookingRoom = roomDAO.findOne(roomID);
 		sessionManagerService.removeFromSession(SessionObject.ROOM_ID.getName());
+		Client client = (Client) sessionManagerService.getFromSession(SessionObject.BOOKING_CLIENT);
+		sessionManagerService.removeFromSession(SessionObject.BOOKING_CLIENT.getName());
+		
+		String pass = new RandomStringGenerator(8).rand();
 
-		Booking booking = Booking.builder().client(clientData).startDate(startDate).endDate(endDate).room(bookingRoom)
+		if (client.getUser() == null) {
+			User user = User.builder()
+					.active(true)
+					.login(client.getEmail())
+					.password(pass)
+					.role(UserRole.CLIENT)
+					.build();
+			
+			userDAO.save(user);
+		}
+
+		Booking booking = Booking.builder()
+				.client(clientData)
+				.startDate(startDate)
+				.endDate(endDate)
+				.room(bookingRoom)
 				.build();
 
 		bookingDAO.save(booking);

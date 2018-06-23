@@ -1,29 +1,43 @@
 package hotel.ejb.controller;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import javax.annotation.ManagedBean;
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
-import javax.ejb.Stateless;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
 import hotel.Utils;
 import hotel.domain.User;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * @author Karolina B¹tkowska
  */
 
 @Named
-@Stateless
-@LocalBean
-public class MainMenuController {
+@SessionScoped
+@ManagedBean
+public class MainMenuController implements Serializable {
+
+	private static final long serialVersionUID = -7364807293944827972L;
 
 	@EJB
 	private ComponentController componentController;
 
+	@Getter
+	@Setter
+	private Long hotelId; 
+	
+	public String switchHotel() {
+		return null;
+	}
+	
 	private ArrayList<MenuItem> defaultItems = new ArrayList<MenuItem>(
 			Arrays.asList(
 					new MenuItem(Utils.getUrl("hello.xhtml"), "Start"),
@@ -69,11 +83,11 @@ public class MainMenuController {
 		if (user == null)
 			return getDefaultItems();
 		switch (user.getRole()) {
-		case "ADMIN":
+		case ADMIN:
 			return adminItems;
-		case "CLIENT":
+		case CLIENT:
 			return clientItems;
-		case "EMPLOYEE":
+		case EMPLOYEE:
 			return employeeItems;
 
 		default:

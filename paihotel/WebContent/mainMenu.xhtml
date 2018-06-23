@@ -11,10 +11,16 @@
 			<ui:repeat var="menuItem" value="#{mainMenuController.getMenu()}">
 				<li><a href="#{menuItem.redirectPath}">#{menuItem.name}</a></li>
 			</ui:repeat>
-			<li><h:selectOneMenu>
+			<li>
+			
+			<h:form>
+			<h:selectOneMenu value="#{mainMenuController.hotelId}">
 					<f:selectItems value="#{hotelController.findByQuery()}" var="hotel"
 						itemLabel="#{hotel.name}" itemValue="#{hotel.id}" />
-				</h:selectOneMenu><br /></li>
+				</h:selectOneMenu><br/>
+				<h:commandButton action="#{mainMenuController.switchHotel()}">Zmień</h:commandButton>
+			</h:form>
+				</li>
 
 
 			<li><a href="#{mainMenuController.getLogInOut().redirectPath}">#{mainMenuController.getLogInOut().name}</a></li>
