@@ -26,7 +26,7 @@
 				<f:selectItem itemValue="hall" itemLabel="Sala" />
 			</h:selectOneRadio>
 			Nazwa: <h:inputText styleClass="input-text"
-				value="#{roomController.name}" />
+				value="#{roomController.name}" required="true"/>
 			<br />
 			Numer: <h:inputText styleClass="input-text"
 				value="#{roomController.number}" />
@@ -44,12 +44,12 @@
 			<h:inputTextarea rows="10" cols="50"
 				value="#{roomController.description}" styleClass="textarea"></h:inputTextarea>
 			<br />
-			Hotel: <h:selectOneMenu> 
+			Hotel: <h:selectOneMenu value="#{roomController.hotelID}"> 
 				<f:selectItems value="#{hotelController.findByQuery()}" var="hotel" itemLabel="#{hotel.name}" itemValue="#{hotel.id}" />
 			</h:selectOneMenu><br />
 			
 			Cechy:
-			<h:selectManyCheckbox > 
+			<h:selectManyCheckbox value="#{roomController.features}" required="true"> 
 				<f:selectItems value="#{featureController.findByQuery()}" var="feature" itemLabel="#{feature.name}" itemValue="#{feature.id}" />
 			</h:selectManyCheckbox><br />
 			Oferty:

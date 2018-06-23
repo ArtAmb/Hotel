@@ -25,7 +25,7 @@ public class EmployeeController {
 	private long id;
 	private String name;
 	private String surname;
-	
+	private long hotelID;
 	
 	
 
@@ -37,7 +37,7 @@ public class EmployeeController {
 	@EJB
 	private HotelDAO hotelDAO;
 
-	public String saveEmployee(long hotelID) {
+	public String saveEmployee() {
 		
 		
 		Hotel hotel = hotelDAO.findOne(hotelID);

@@ -39,7 +39,7 @@ public class EmployeeDatatableController extends BaseDataTableController<Long, E
 	
 	@Override
 	protected List<String> getHeader() {
-		return Arrays.asList("ID", "Imie", "Nazwisko", "Hotel");
+		return Arrays.asList("ID", "Imie", "Nazwisko" ,"Hotel");
 	}
 
 	@Override

@@ -27,13 +27,13 @@
 			Nazwisko: <h:inputText styleClass="input-text"
 				value="#{employeeController.surname}" />
 			<br />
-			Hotel: <h:selectOneMenu > 
+			Hotel: <h:selectOneMenu value="#{employeeController.hotelID}" > 
 				<f:selectItems value="#{hotelController.findByQuery()}" var="hotel" itemLabel="#{hotel.name}" itemValue="#{hotel.id}" />
 			</h:selectOneMenu><br />
 
 
 			<h:commandButton value="Dodaj"
-				action="#{employeeController.saveEmployee(hotel.id)}" />			
+				action="#{employeeController.saveEmployee()}" />			
 
 		</h:form>
 		

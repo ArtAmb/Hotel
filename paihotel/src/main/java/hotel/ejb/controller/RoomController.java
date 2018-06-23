@@ -1,6 +1,7 @@
 package hotel.ejb.controller;
 
 import java.math.BigDecimal;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -8,7 +9,9 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.inject.Named;
 
+import hotel.dao.HotelDAO;
 import hotel.dao.RoomDAO;
+import hotel.domain.Feature;
 import hotel.domain.Hotel;
 import hotel.domain.Room;
 import lombok.Data;
@@ -33,16 +36,20 @@ public class RoomController {
 	
 	private BigDecimal price;
 	
-	private Hotel hotel = new Hotel();
-	
+	private long hotelID;	
+	List<Feature> features =new LinkedList<>();
 
 	private Room query = new Room();
 	
 	@EJB
 	private RoomDAO roomDAO;
+	@EJB
+	private HotelDAO hotelDAO;
 
 	public String saveRoom() {
+		Hotel hotel = hotelDAO.findOne(hotelID);
 
+		
 		Room room = new Room();
 		room.setName(name);
 		room.setPrice(price);
@@ -52,7 +59,8 @@ public class RoomController {
 		room.setFloor(floor);
 		room.setNumber(number);
 		room.setMaxNumberOfPeople(maxNumberOfPeople);
-		
+		room.setHotel(hotel);
+		room.setFeatures(features);
 
 		roomDAO.save(room);
 		
