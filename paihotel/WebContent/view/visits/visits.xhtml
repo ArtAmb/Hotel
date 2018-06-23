@@ -31,7 +31,6 @@
 
 			<tr>
 				<th>Id</th>
-				<th>Nazwa</th>
 				<th>Termin</th>
 				<th>Koszt</th>
 				<th>Klient</th>
@@ -44,7 +43,6 @@
 			<ui:repeat var="booking" value="#{bookingController.findAllBookings()}">
 				<tr>
 					<td>#{booking.id}</td>
-					<td>#{booking.room.name}</td>
 					<td>#{booking.startDate} - #{booking.endDate}</td>
 					<td>#{booking.room.price}</td>
 					<td>#{booking.client.name} #{booking.client.surname} <h:commandButton

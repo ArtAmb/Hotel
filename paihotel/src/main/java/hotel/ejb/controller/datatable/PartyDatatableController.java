@@ -15,47 +15,49 @@ import hotel.ejb.services.DatatableService.Row;
 import hotel.ejb.services.DatatableService.Value;
 import lombok.Getter;
 import lombok.Setter;
+
 /**
  * @author Karolina B¹tkowska
  */
 @Stateless
 @Named
 @LocalBean
-public class PartyDatatableController extends BaseDataTableController<Long, Party>{
-	
+public class PartyDatatableController extends BaseDataTableController<Long, Party> {
+
 	@EJB
 	private PartyDAO PartyDAO;
-	
+
 	@Getter
 	@Setter
 	public Party query = new Party();
-	
-	
+
 	public void beforeQueryAction() {
 		this.crudDAO = PartyDAO;
 		this.queryDTO = query;
-		
+
 	}
-	
+
 	@Override
 	protected List<String> getHeader() {
 		return Arrays.asList("ID", "Sala ID", "Nazwa sali", "Status", "Imie", "Nazwisko");
 	}
 
 	@Override
-	protected Row createRow(Party Party) {
+	protected Row createRow(Party party) {
 		Row row = new Row();
 		List<Value> values = new LinkedList<>();
 
-		values.add(prepareValue(Party.getId()));
-		values.add(prepareValue(Party.getRoom().getId()));
-		values.add(prepareValue(Party.getRoom().getName()));
-		values.add(prepareValue(Party.getState()));
-		values.add(prepareValue(Party.getClient().getName()));
-		values.add(prepareValue(Party.getClient().getSurname()));
-		
-		
-		
+		values.add(prepareValue(party.getId()));
+		values.add(prepareValue(party.getState()));
+		if (party.getRoom() != null) {
+			values.add(prepareValue(party.getRoom().getId()));
+			values.add(prepareValue(party.getRoom().getName()));
+		}
+		if (party.getClient() != null) {
+			values.add(prepareValue(party.getClient().getName()));
+			values.add(prepareValue(party.getClient().getSurname()));
+		}
+
 		row.setValues(values);
 		return row;
 
@@ -65,6 +67,5 @@ public class PartyDatatableController extends BaseDataTableController<Long, Part
 	public String redirectToQueryResult() {
 		return "parties-results";
 	}
-
 
 }

@@ -13,50 +13,29 @@
 
 	<div class="side-bar">
 		<ui:include src="#{componentController.getTasksMenu()}" />
-
 	</div>
 	<div class="main-content">
 
 		<h2>Zadania</h2>
-		<h3>Wyszukiwarka:</h3>
-		<h:form>
-		
-			Typ: <h:inputText value="#{taskController.query.type}" />
-			Data: <h:inputText value="#{taskController.query.date}" />
 
-			<h:commandButton value='szukaj'
-				action='#{taskController.findTask()}' />
-		</h:form>
 		<h3>Dodawanie:</h3>
 		<h:form>
-			
-			Typ: <h:inputText styleClass="input-text"
-				value="#{taskController.type}" />
-			<br />
-			Do kiedy wykonać: <h:inputText styleClass="input-text" value="#{taskController.date}" />
-			<br />			
-			Opis:<br />
-			<h:inputTextarea rows="10" cols="50"
-				value="#{taskController.description}" styleClass="textarea"/>
-			<br />
-				
-			Rezerwacja: <h:selectOneMenu > 
-				<f:selectItems />
-				<f:selectItems value="#{bookingController.findByQuery()}" var="booking" itemLabel="#{booking.id}" itemValue="#{booking.id}" />
-			</h:selectOneMenu><br />
-			
-			Przyjęcie: <h:selectOneMenu > 
-				<f:selectItems />
-				<f:selectItems value="#{partyController.findByQuery()}" var="party" itemLabel="#{party.id}" itemValue="#{party.id}" />
-			</h:selectOneMenu><br />
-			
-			Pokój: <h:selectOneMenu > 
-				<f:selectItems />
-				<f:selectItems value="#{roomController.findByQuery()}" var="room" itemLabel="#{room.number}" itemValue="#{room.id}" />
-			</h:selectOneMenu><br />
-
 			<h:commandButton value="Dodaj" action="#{taskController.saveTask()}" />
 		</h:form>
+
+		<h2>Zadania</h2>
+		<h3>Wyszukiwarka:</h3>
+		<h:form>
+			Id: <h:inputText value="#{taskDatatableController.query.id}" />
+			<br/>
+
+			<h:commandButton value='szukaj' action='#{taskDatatableController.redirectToQueryResult()}' />
+		</h:form>
+		<h3>Zadania:</h3>
+		<ui:include src="#{componentController.getDatatable()}">
+			<ui:param name="tableData" value="#{taskDatatableController.fillDatatableAndGet()}"></ui:param>
+		</ui:include>
+
 
 
 	</div>
