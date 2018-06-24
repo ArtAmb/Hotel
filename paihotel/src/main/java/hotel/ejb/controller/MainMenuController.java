@@ -5,12 +5,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import javax.annotation.ManagedBean;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.ejb.LocalBean;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
 import hotel.Utils;
+import hotel.dao.HotelDAO;
+import hotel.domain.Hotel;
 import hotel.domain.User;
 import lombok.Data;
 import lombok.Getter;
@@ -30,12 +32,25 @@ public class MainMenuController implements Serializable {
 	@EJB
 	private ComponentController componentController;
 
+	@EJB
+	private HotelDAO hotelDAO;
+	
 	@Getter
 	@Setter
 	private Long hotelId; 
 	
+	@Getter
+	@Setter
+	private Hotel chosenHotel;
+	
 	public String switchHotel() {
+		chosenHotel = hotelDAO.findOne(hotelId);
 		return null;
+	}
+	
+	@PostConstruct
+	private void init() {
+		chosenHotel = hotelDAO.findAll().stream().findFirst().orElse(null);
 	}
 	
 	private ArrayList<MenuItem> defaultItems = new ArrayList<MenuItem>(

@@ -12,6 +12,7 @@ import javax.ejb.LocalBean;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.mysql.jdbc.StringUtils;
@@ -72,6 +73,9 @@ public class BookingController {
 	@EJB
 	private SessionManagerService sessionManagerService;
 
+	@Inject
+	private MainMenuController mainMenuController;
+	
 	public String saveBooking() {
 		Booking booking = new Booking();
 		booking.setStartDate(startDate);
@@ -92,9 +96,12 @@ public class BookingController {
 
 	public List<RoomDTO> findByQuery() {
 
-		List<Room> rooms = roomDAO.findAll();
+		List<Room> rooms = roomDAO.findByQuery(Room.builder().hotel(mainMenuController.getChosenHotel()).build());
+		
 		List<RoomDTO> avaliableRooms = rooms.stream().filter(
-				r -> r.getFeatures().stream().map(Feature::getId).collect(Collectors.toList()).containsAll(features))
+				r -> r.getFeatures().stream().map(Feature::getId)
+				.collect(Collectors.toList())
+				.containsAll(features))
 				.map(r -> roomService.findRoomBookings(r, startDate, endDate)).collect(Collectors.toList());
 
 		return avaliableRooms;

@@ -1,23 +1,22 @@
 package hotel.ejb.controller;
 
-
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.ManagedBean;
 import javax.ejb.EJB;
-import javax.ejb.LocalBean;
-import javax.ejb.Stateless;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import hotel.dao.TaskDAO;
-import hotel.domain.Hotel;
 import hotel.domain.Task;
 import lombok.Data;
 
-@Stateless
 @Named
 @Data
-@LocalBean
+@ManagedBean
+@RequestScoped
 public class TaskController {
 
 	private Integer id;
@@ -25,23 +24,39 @@ public class TaskController {
 	private String description;
 	private String state;
 	private String type;
-	private Hotel hotel;
 
 	private Task query = new Task();
+
+	@Inject
+	private MainMenuController mainMenuController;
 
 	@EJB
 	private TaskDAO taskDAO;
 
+	void validate() {
+		if (date == null) {
+			throw new IllegalStateException("Data nie moze byc pusta");
+		}
+		if (description == null && description.equals("")) {
+			throw new IllegalStateException("Opis nie moze byc pusty");
+		}
+	}
+
 	public String saveTask() {
 
-		Task task = new Task();
-		
-		task.setDate(date);
-		task.setDescription(description);
-		task.setType(type);
+		try {
+			validate();
+			Task task = new Task();
 
-		taskDAO.save(task);
-		
+			task.setDate(date);
+			task.setDescription(description);
+			task.setType(type);
+			task.setHotel(mainMenuController.getChosenHotel());
+
+			taskDAO.save(task);
+		} catch (Exception e) {
+
+		}
 
 		return "task";
 	}
@@ -57,7 +72,7 @@ public class TaskController {
 	public List<Task> findByQuery() {
 		return taskDAO.findByQuery(query);
 	}
-	
+
 	public String findTask() {
 		return "tasks-results";
 	}

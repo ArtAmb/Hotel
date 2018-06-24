@@ -64,6 +64,7 @@ public class CrudDAO<ID extends Serializable, EntityClass> {
 
 			for (PropertyDescriptor pdec : Introspector.getBeanInfo(query.getClass()).getPropertyDescriptors()) {
 				if (pdec.getReadMethod() != null) {
+					boolean isFk = false;
 					Object value = pdec.getReadMethod().invoke(query);
 					if(value instanceof Class<?>)
 						continue;
@@ -72,8 +73,10 @@ public class CrudDAO<ID extends Serializable, EntityClass> {
 						continue;
 					if (value instanceof Collection)
 						continue;
-					if (value instanceof Domain)
+					if (value instanceof Domain) {
+						isFk = true;
 						value = ((Domain) value).getId();
+					}
 
 					boolean isString = value instanceof String;
 					if(isString && value.equals(""))
@@ -81,7 +84,11 @@ public class CrudDAO<ID extends Serializable, EntityClass> {
 
 					queryBuffer.append(" AND ");
 					queryBuffer.append("tmp.");
+					
 					queryBuffer.append(pdec.getName());
+					if(isFk)
+						queryBuffer.append(".id");
+					
 					queryBuffer.append("=");
 					if (isString)
 						queryBuffer.append("'");

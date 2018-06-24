@@ -3,9 +3,13 @@ package hotel.ejb.controller;
 
 import java.util.List;
 
+import javax.annotation.ManagedBean;
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.enterprise.context.RequestScoped;
+import javax.faces.annotation.ManagedProperty;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import hotel.dao.EmployeeDAO;
@@ -16,17 +20,18 @@ import lombok.Data;
 /**
  * @author Karolina B¹tkowska
  */
-@Stateless
+@RequestScoped
 @Named
 @Data
-@LocalBean
+@ManagedBean
 public class EmployeeController {
 
 	private long id;
 	private String name;
 	private String surname;
 	
-	
+	@Inject
+	private MainMenuController mainMenuController;
 	
 
 	private Employee query = new Employee();
@@ -40,7 +45,7 @@ public class EmployeeController {
 	public String saveEmployee(long hotelID) {
 		
 		
-		Hotel hotel = hotelDAO.findOne(hotelID);
+		Hotel hotel = mainMenuController.getChosenHotel();
 		
 
 		Employee employee = new Employee();
@@ -63,6 +68,8 @@ public class EmployeeController {
 	}
 	
 	public List<Employee> findByQuery(){
+		Hotel hotel = hotelDAO.findOne(mainMenuController.getHotelId());
+		query.setHotel(hotel);
 		return employeeDAO.findByQuery(query);
 	}
 	public String findEmployee() {

@@ -7,10 +7,12 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import hotel.dao.TaskDAO;
 import hotel.domain.Task;
+import hotel.ejb.controller.MainMenuController;
 import hotel.ejb.services.DatatableService.Row;
 import hotel.ejb.services.DatatableService.Value;
 import lombok.Getter;
@@ -28,8 +30,11 @@ public class TaskDatatableController extends BaseDataTableController<Long, Task>
 	@Setter
 	public Task query = new Task();
 	
+	@Inject
+	private MainMenuController mainMenuController;
 	
 	public void beforeQueryAction() {
+		query.setHotel(mainMenuController.getChosenHotel());
 		this.crudDAO = taskDAO;
 		this.queryDTO = query;
 		

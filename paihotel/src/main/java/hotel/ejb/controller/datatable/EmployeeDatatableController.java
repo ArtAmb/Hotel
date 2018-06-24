@@ -7,10 +7,12 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import hotel.dao.EmployeeDAO;
 import hotel.domain.Employee;
+import hotel.ejb.controller.MainMenuController;
 import hotel.ejb.services.DatatableService.Row;
 import hotel.ejb.services.DatatableService.Value;
 import lombok.Getter;
@@ -26,15 +28,18 @@ public class EmployeeDatatableController extends BaseDataTableController<Long, E
 	@EJB
 	private EmployeeDAO employeeDAO;
 	
+	@Inject
+	private MainMenuController mainMenuController;
+	
 	@Getter
 	@Setter
 	public Employee query = new Employee();
 	
 	
 	public void beforeQueryAction() {
+		query.setHotel(mainMenuController.getChosenHotel());
 		this.crudDAO = employeeDAO;
 		this.queryDTO = query;
-		
 	}
 	
 	@Override
