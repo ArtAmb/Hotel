@@ -5,29 +5,35 @@
 
 	<div id="header">
 		<div id="logo">
-			<a href="#{mainMenuController.getHelloPageUrl()}"><img src="#{mainMenuController.getLogoUrl()}" /><span style="color: #4c99e2;"> Pod</span> kamykiem</a>
+			<a href="#{mainMenuController.getHelloPageUrl()}"><img
+				src="#{mainMenuController.getLogoUrl()}" /><span
+				style="color: #4c99e2;"> H</span>otel</a>
 		</div>
 		<ul class="menu">
 			<ui:repeat var="menuItem" value="#{mainMenuController.getMenu()}">
-				<li><a href="#{menuItem.redirectPath}">#{menuItem.name}</a></li>
+				<li style="float: left;"><a href="#{menuItem.redirectPath}">#{menuItem.name}</a></li>
 			</ui:repeat>
-			<li>
-			
-			<h:form>
-			<h:selectOneMenu value="#{mainMenuController.hotelId}">
-					<f:selectItems value="#{hotelController.findByQuery()}" var="hotel"
-						itemLabel="#{hotel.name}" itemValue="#{hotel.id}" />
-				</h:selectOneMenu><br/>
-				<h:commandButton action="#{mainMenuController.switchHotel()}">Zmień</h:commandButton>
-			</h:form>
+
+
+			<h:form style="float:left;">
+				<li style="float: left;"><h:selectOneMenu style="margin-left:15px;"
+						value="#{mainMenuController.hotelId}">
+						<f:selectItems value="#{hotelController.findByQuery()}"
+							var="hotel" itemLabel="#{hotel.name}" itemValue="#{hotel.id}" />
+					</h:selectOneMenu></li>
+				<li style="float: left; "><h:commandButton style="margin-left:10px; margin-top:-8px;"
+						action="#{mainMenuController.switchHotel()}" value="Zmień"></h:commandButton>
 				</li>
+			</h:form>
 
 
-			<li><a href="#{mainMenuController.getLogInOut().redirectPath}">#{mainMenuController.getLogInOut().name}</a></li>
+
+			<li style="float: left;"><a
+				href="#{mainMenuController.getLogInOut().redirectPath}">#{mainMenuController.getLogInOut().name}</a></li>
 		</ul>
 		<div style="clear: both;"></div>
 		<div class="slider">
-			<img src="#{mainMenuController.getHeaderImgUrl()}" width="100%"/>
+			<img src="#{mainMenuController.getHeaderImgUrl()}" width="100%" />
 		</div>
 	</div>
 

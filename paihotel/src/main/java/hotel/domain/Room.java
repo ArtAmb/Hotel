@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,7 +31,8 @@ public class Room implements Domain {
 	
 	private String name;
 	private String description;
-	private String state;
+	@Enumerated(EnumType.STRING)
+	private RoomType state;
 	private String type;
 	
 	private Integer number;

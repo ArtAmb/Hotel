@@ -44,7 +44,7 @@ public class EmployeeDatatableController extends BaseDataTableController<Long, E
 	
 	@Override
 	protected List<String> getHeader() {
-		return Arrays.asList("ID", "Imie", "Nazwisko");
+		return Arrays.asList("ID", "Imie", "Nazwisko" ,"Hotel");
 	}
 
 	@Override
@@ -55,6 +55,7 @@ public class EmployeeDatatableController extends BaseDataTableController<Long, E
 		values.add(prepareValue(myTest.getId()));
 		values.add(prepareValue(myTest.getName()));
 		values.add(prepareValue(myTest.getSurname()));
+		values.add(prepareValue(myTest.getHotel().getName()));
 		row.setValues(values);
 		return row;
 

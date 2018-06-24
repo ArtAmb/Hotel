@@ -17,6 +17,8 @@
 	</div>
 	<div class="main-content">
 
+		#{roomController.message}
+
 		<h2>Pokój</h2>
 		<h3>Dodawanie:</h3>
 		<h:form>
@@ -28,13 +30,13 @@
 			Nazwa: <h:inputText styleClass="input-text"
 				value="#{roomController.name}" />
 			<br />
-			Numer: <h:inputText styleClass="input-text"
+			Numer: <h:inputText type="number" styleClass="input-text"
 				value="#{roomController.number}" />
 			<br />
-			Piętro: <h:inputText styleClass="input-text"
+			Piętro: <h:inputText type="number" styleClass="input-text"
 				value="#{roomController.floor}" />
 			<br />
-			Liczba osób: <h:inputText styleClass="input-text"
+			Liczba osób: <h:inputText type="number" styleClass="input-text"
 				value="#{roomController.maxNumberOfPeople}" />
 			<br />
 			Cena: <h:inputText styleClass="input-text"
@@ -44,23 +46,14 @@
 			<h:inputTextarea rows="10" cols="50"
 				value="#{roomController.description}" styleClass="textarea"></h:inputTextarea>
 			<br />
-			Hotel: <h:selectOneMenu> 
-				<f:selectItems value="#{hotelController.findByQuery()}" var="hotel" itemLabel="#{hotel.name}" itemValue="#{hotel.id}" />
-			</h:selectOneMenu><br />
-			
 			Cechy:
-			<h:selectManyCheckbox > 
+			<h:selectManyCheckbox value="#{roomController.features}"> 
 				<f:selectItems value="#{featureController.findByQuery()}" var="feature" itemLabel="#{feature.name}" itemValue="#{feature.id}" />
 			</h:selectManyCheckbox><br />
-			Oferty:
-			<h:selectManyCheckbox > 
-				<f:selectItems value="#{offertController.findByQuery()}" var="offert" itemLabel="#{offert.priceDiscount}"  itemValue="#{offert.id}" />
-			</h:selectManyCheckbox><br />
-
 			<h:commandButton value="Dodaj" action="#{roomController.saveRoom()}" />
 
 		</h:form>
-
+		
 		<h3>Lista pokoi:</h3>
 
 		<table class="tab">

@@ -5,10 +5,7 @@ import java.util.List;
 
 import javax.annotation.ManagedBean;
 import javax.ejb.EJB;
-import javax.ejb.LocalBean;
-import javax.ejb.Stateless;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.annotation.ManagedProperty;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -32,7 +29,6 @@ public class EmployeeController {
 	
 	@Inject
 	private MainMenuController mainMenuController;
-	
 
 	private Employee query = new Employee();
 	
@@ -42,17 +38,14 @@ public class EmployeeController {
 	@EJB
 	private HotelDAO hotelDAO;
 
-	public String saveEmployee(long hotelID) {
-		
+	public String saveEmployee() {
 		
 		Hotel hotel = mainMenuController.getChosenHotel();
-		
 
 		Employee employee = new Employee();
 		employee.setName(name);
 		employee.setSurname(surname);
 		employee.setHotel(hotel);
-		
 
 		employeeDAO.save(employee);
 		
