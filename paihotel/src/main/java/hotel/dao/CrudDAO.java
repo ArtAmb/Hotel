@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.sql.Date;
 import java.util.Collection;
 import java.util.List;
 
@@ -79,6 +80,8 @@ public class CrudDAO<ID extends Serializable, EntityClass> {
 					}
 
 					boolean isString = value instanceof String;
+					boolean isDate = value instanceof Date;
+					
 					if(isString && value.equals(""))
 						continue;
 
@@ -90,10 +93,10 @@ public class CrudDAO<ID extends Serializable, EntityClass> {
 						queryBuffer.append(".id");
 					
 					queryBuffer.append("=");
-					if (isString)
+					if (isString || isDate )
 						queryBuffer.append("'");
 					queryBuffer.append(value.toString());
-					if (isString)
+					if (isString || isDate)
 						queryBuffer.append("'");
 				
 				}

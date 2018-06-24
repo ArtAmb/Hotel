@@ -32,8 +32,9 @@ public class Room implements Domain {
 	private String name;
 	private String description;
 	@Enumerated(EnumType.STRING)
-	private RoomType state;
-	private String type;
+	private RoomStatus state;
+	@Enumerated(EnumType.STRING)
+	private RoomType type;
 	
 	private Integer number;
 	private Integer floor;

@@ -9,10 +9,16 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 import hotel.dao.Domain;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Bill implements Domain {
 
 	@Id
@@ -21,6 +27,8 @@ public class Bill implements Domain {
 	
 	private BigDecimal price;
 	private String state;
+	
+	private String description; 
 	
 	@ManyToOne
 	private Booking booking;

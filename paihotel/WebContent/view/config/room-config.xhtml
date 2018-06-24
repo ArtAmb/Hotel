@@ -24,8 +24,8 @@
 		<h:form>
 			
 			<h:selectOneRadio value="#{roomController.type}" >
-				<f:selectItem itemValue="room" itemLabel="Pokój" />
-				<f:selectItem itemValue="hall" itemLabel="Sala" />
+				<f:selectItem itemValue="ROOM" itemLabel="Pokój" />
+				<f:selectItem itemValue="HALL" itemLabel="Sala" />
 			</h:selectOneRadio>
 			Nazwa: <h:inputText styleClass="input-text"
 				value="#{roomController.name}" />
@@ -73,8 +73,6 @@
 					<td>#{room.description}</td>
 					<td>#{room.price}</td>
 					<td><h:commandButton value="Edytuj" /></td>
-					<td><h:commandButton value="Usuń" /></td>
-
 				</tr>
 			</ui:repeat>
 		</table>

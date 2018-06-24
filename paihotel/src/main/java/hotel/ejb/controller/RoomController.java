@@ -20,6 +20,7 @@ import hotel.dao.FeatureDAO;
 import hotel.dao.HotelDAO;
 import hotel.dao.RoomDAO;
 import hotel.domain.Room;
+import hotel.domain.RoomStatus;
 import hotel.domain.RoomType;
 import lombok.Data;
 
@@ -35,14 +36,14 @@ public class RoomController {
 	private String name;
 	private String description;
 	private String state;
-	private String type = RoomType.ROOM.name();
-
 	private Integer number;
 	private Integer floor;
 	private Integer maxNumberOfPeople;
+	private BigDecimal price;
+	
+	private String type = RoomType.ROOM.name();
 	private String message = "";
 
-	private BigDecimal price;
 
 	List<Long> features = new LinkedList<>();
 
@@ -87,7 +88,9 @@ public class RoomController {
 		type = null;
 		number = null;
 		floor = null;
+		price = null;
 		maxNumberOfPeople = null;
+		features = new LinkedList<>();
 		message = "Dodano pokój";
 	}
 
@@ -99,8 +102,8 @@ public class RoomController {
 			room.setName(name);
 			room.setPrice(price);
 			room.setDescription(description);
-			room.setType(type);
-			room.setState(RoomType.valueOf(state));
+			room.setType(RoomType.valueOf(type));
+			room.setState(RoomStatus.FREE);
 			room.setFloor(floor);
 			room.setNumber(number);
 			room.setMaxNumberOfPeople(maxNumberOfPeople);

@@ -4,6 +4,8 @@ import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -33,7 +35,8 @@ public class Booking implements Domain {
 	//@Temporal(TemporalType.TIMESTAMP)
 	private Date endDate;
 	
-	private String status;
+	@Enumerated(EnumType.STRING)
+	private BookingStatus status;
 	
 	@ManyToOne
 	private Room room;

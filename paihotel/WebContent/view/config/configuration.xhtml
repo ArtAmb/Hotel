@@ -17,11 +17,24 @@
 		<div class="main-content">
 
 			<h2>Konfiguracja:</h2>
-			
-					Czas trwania doby hotelowej : <h:inputText styleClass="input-text" name="hotelNight" value="20"/> godzin <br/>
-					Maksymalny czas oczekiwania na aktywacje rezerwacji: <h:inputText styleClass="input-text" name="hotelNight" value="20"/>
-					
-				
+
+			Czas trwania doby hotelowej :
+			<h:inputText styleClass="input-text" name="hotelNight"
+				value="#{hotelConfigController.hotelDayInMS}" />
+			godzin (in MS)<br /> Maksymalny czas oczekiwania na aktywacje
+			rezerwacji:
+			<h:inputText styleClass="input-text" name="hotelNight"
+				value="#{hotelConfigController.timeUntilBookingCancelInMS}" />
+
+			<h:form>
+				<h:commandButton
+					action="#{hotelConfigController.startHotelDayThread()}"
+					value="START HOTEL DAY SCHEDULER" />
+			</h:form>
+			<h:form>
+				<h:commandButton action="#{hotelConfigController.hotelDayAction()}"
+					value="INVOKE HOTEL DAY ACTION" />
+			</h:form>
 
 
 		</div>

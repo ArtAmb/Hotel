@@ -23,6 +23,7 @@ import hotel.dao.ClientDAO;
 import hotel.dao.RoomDAO;
 import hotel.dao.UserDAO;
 import hotel.domain.Booking;
+import hotel.domain.BookingStatus;
 import hotel.domain.Client;
 import hotel.domain.Feature;
 import hotel.domain.Room;
@@ -53,6 +54,7 @@ public class BookingController {
 	private Booking query = new Booking();
 	private Client clientData = new Client();
 	private String errorMessage = "";
+	
 	@EJB
 	private UserDAO userDAO;
 	@EJB
@@ -87,7 +89,7 @@ public class BookingController {
 	}
 
 	public List<Booking> findAllBookings() {
-		return bookingDAO.findAll();
+		return bookingDAO.findByHotel(mainMenuController.getChosenHotel());
 	}
 
 	public Booking findOne(Long id) {
@@ -144,7 +146,7 @@ public class BookingController {
 					.findByQuery(Client.builder().email(clientData.getEmail()).build()).stream().findFirst();
 
 			Client newClient = null;
-			if (!optionalClient.isPresent()) {
+			if (optionalClient.isPresent()) {
 				newClient = optionalClient.get();
 			} else
 				newClient = clientDAO.save(clientData);
@@ -188,6 +190,7 @@ public class BookingController {
 				.startDate(startDate)
 				.endDate(endDate)
 				.room(bookingRoom)
+				.status(BookingStatus.BOOKED)
 				.build();
 
 		bookingDAO.save(booking);

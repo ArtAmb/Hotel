@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:include src="#{componentController.getHead()}" />
+
+<h:body bgcolor="white">
+	<ui:include src="#{componentController.getMainMenu()}" />
+
+	<div class="content">
+
+
+		<h2>Wizyta</h2>
+		<table class="tab">
+			<tr>
+				<th>Id</th>
+				<th>Termin</th>
+				<th>Koszt</th>
+				<th>Klient</th>
+				<th>Pokój</th>
+				<th>Status</th>
+			</tr>
+			<tr>
+				<td>#{bookingDetailControler.choosenOne.id}</td>
+				<td>#{bookingDetailControler.choosenOne.startDate} -
+					#{bookingDetailControler.choosenOne.endDate}</td>
+				<td>#{bookingDetailControler.choosenOne.room.price}</td>
+				<td>#{bookingDetailControler.choosenOne.client.name}
+					#{bookingDetailControler.choosenOne.client.surname} <h:commandButton
+						value='Szczegóły' />
+				</td>
+				<td>Pokój #{bookingDetailControler.choosenOne.room.number} <h:commandButton
+						value='Szczegóły' /></td>
+				<td>#{bookingDetailControler.choosenOne.status}</td>
+			</tr>
+		</table>
+		<h:form
+			rendered="#{bookingDetailControler.choosenOne.status == WAITING_FOR_ACCEPT}">
+			<h:commandButton value="Potwierdz wizyte"
+				action="#{bookingDetailControler.acceptBooking()}" />
+		</h:form>
+
+
+
+		<table class="tab">
+			<tr>
+				<th>Id</th>
+				<th>Koszt</th>
+				<th>Opis</th>
+			</tr>
+			<ui:repeat var="bill"
+				value="#{bookingDetailControler.findAllBills()}">
+				<tr>
+					<td>#{bill.id}</td>
+					<td>#{bill.price}</td>
+					<td>#{bill.description}</td>
+				</tr>
+			</ui:repeat>
+		</table>
+
+		<h:form>
+			
+		Dodaj nowy koszt: <br />
+			<h:inputText styleClass="input-text"
+				value="#{bookingDetailControler.newBill.price}" />
+			<h:inputText styleClass="input-text"
+				value="#{bookingDetailControler.newBill.description}" />
+
+			<h:commandButton value="Dodaj"
+				action="#{bookingDetailControler.addNewBill()}" />
+		</h:form>
+
+
+	</div>
+
+
+</h:body>
+</html>
