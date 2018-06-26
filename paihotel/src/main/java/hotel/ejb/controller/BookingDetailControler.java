@@ -22,6 +22,7 @@ import hotel.domain.Bill;
 import hotel.domain.BillState;
 import hotel.domain.Booking;
 import hotel.domain.BookingStatus;
+import hotel.domain.CardStatus;
 import hotel.domain.KeyCard;
 import hotel.domain.Room;
 import hotel.domain.Task;
@@ -80,7 +81,7 @@ public class BookingDetailControler implements Serializable {
 		choosenOne.setCards(new LinkedList<>());
 		
 		for(int i = 0; i < choosenOne.getGuests().size(); ++i) {
-			KeyCard card = keyCardDAO.save(KeyCard.builder().active(true).codeNumber(stringGenerator.rand()).build());
+			KeyCard card = keyCardDAO.save(KeyCard.builder().state(CardStatus.ACTIVE).codeNumber(stringGenerator.rand()).build());
 			choosenOne.getCards().add(card);
 			
 		}
