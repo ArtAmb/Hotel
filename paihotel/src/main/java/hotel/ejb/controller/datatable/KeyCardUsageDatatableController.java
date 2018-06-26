@@ -9,8 +9,8 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.inject.Named;
 
-import hotel.dao.KeyCardDAO;
-import hotel.domain.KeyCard;
+import hotel.dao.KeyCardUsageDAO;
+import hotel.domain.KeyCardUsage;
 import hotel.ejb.services.DatatableService.Row;
 import hotel.ejb.services.DatatableService.Value;
 import lombok.Getter;
@@ -21,34 +21,35 @@ import lombok.Setter;
 @Stateless
 @Named
 @LocalBean
-public class KeyCardDatatableController extends BaseDataTableController<Long, KeyCard>{
+public class KeyCardUsageDatatableController extends BaseDataTableController<Long, KeyCardUsage>{
 	
 	@EJB
-	private KeyCardDAO KeyCardDAO;
+	private KeyCardUsageDAO KeyCardUsageDAO;
 	
 	@Getter
 	@Setter
-	public KeyCard query = new KeyCard();
+	public KeyCardUsage query = new KeyCardUsage();
 	
 	
 	public void beforeQueryAction() {
-		this.crudDAO = KeyCardDAO;
+		this.crudDAO = KeyCardUsageDAO;
 		this.queryDTO = query;
 		
 	}
 	
 	@Override
 	protected List<String> getHeader() {
-		return Arrays.asList("ID", "Number");
+		return Arrays.asList("ID", "Opis", "Rezerwacja");
 	}
 
 	@Override
-	protected Row createRow(KeyCard KeyCard) {
+	protected Row createRow(KeyCardUsage KeyCardUsage) {
 		Row row = new Row();
 		List<Value> values = new LinkedList<>();
 
-		values.add(prepareValue(KeyCard.getId()));
-		values.add(prepareValue(KeyCard.getCodeNumber()));
+		values.add(prepareValue(KeyCardUsage.getId()));
+		values.add(prepareValue(KeyCardUsage.getDescription()));
+		values.add(prepareValue(KeyCardUsage.getBooking()));
 		
 		row.setValues(values);
 		return row;
@@ -57,7 +58,7 @@ public class KeyCardDatatableController extends BaseDataTableController<Long, Ke
 
 	@Override
 	public String redirectToQueryResult() {
-		return "cards-results";
+		return "card-details";
 	}
 
 
