@@ -6,12 +6,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import hotel.dao.Domain;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 /**
  * @author Karolina B¹tkowska
  */
 @Entity
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class KeyCard implements Domain {
 
 	@Id
@@ -21,5 +27,5 @@ public class KeyCard implements Domain {
 	private boolean active;
 	
 	private String comments;
-	private Integer codeNumber;
+	private String codeNumber;
 }

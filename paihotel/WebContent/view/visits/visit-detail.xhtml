@@ -30,7 +30,7 @@
 					#{bookingDetailControler.choosenOne.client.surname} <h:commandButton
 						value='Szczegóły' />
 				</td>
-				<td><ui:repeat var="room" value="#{booking.rooms}">
+				<td><ui:repeat var="room" value="#{bookingDetailControler.choosenOne.rooms}">
 					Pokój #{room.number} <br />
 					</ui:repeat></td>
 				<td>#{bookingDetailControler.choosenOne.status}</td>
@@ -38,10 +38,10 @@
 		</table>
 		<h:form
 			rendered="#{bookingDetailControler.choosenOne.status == 'WAITING_FOR_ACCEPT'}">
-			
+
 			<h:commandButton value="Zamelduj gosci"
 				action="#{clientGuestController.signInSomeGuests(bookingDetailControler.choosenOne.id)}" />
-				
+
 			<h:commandButton value="Potwierdz wizyte"
 				action="#{bookingDetailControler.acceptBooking()}" />
 		</h:form>
@@ -79,15 +79,50 @@
 			<br />
 			<br />
 			<h:form>
-				<h:commandButton action="bookingDetailControler.finishVisit" value="Podsumuj i zakoncz wizyte" />
+				<h:commandButton action="bookingDetailControler.finishVisit"
+					value="Podsumuj i zakoncz wizyte" />
 			</h:form>
 		</h:panelGroup>
 		<br /> <br />
 
+		<h2>Zameldowani goscie</h2>
+		<table class="tab">
+			<tr>
+				<th>Id</th>
+				<th>Nr dowodu</th>
+				<th>Imie</th>
+				<th>Nazwisko</th>
+			</tr>
+			<ui:repeat var="guest"
+				value="#{bookingDetailControler.choosenOne.guests}">
+				<tr>
+					<td>#{guest.id}</td>
+					<td>#{guest.identityCardNumber}</td>
+					<td>#{guest.name}</td>
+					<td>#{guest.surname}</td>
+				</tr>
+			</ui:repeat>
+		</table>
+		<br /> <br />
+		
+		<h2>Wydane karty</h2>
+		<table class="tab">
+			<tr>
+				<th>Id</th>
+				<th>Nr karty</th>
+				<th>Czy aktywna</th>
+			
+			</tr>
+			<ui:repeat var="card"
+				value="#{bookingDetailControler.choosenOne.cards}">
+				<tr>
+					<td>#{card.id}</td>
+					<td>#{card.codeNumber}</td>
+					<td>#{card.active}</td>
+				</tr>
+			</ui:repeat>
+		</table>
 
-		<h:form>
-			<h:commandButton action="bookingDetailControler.finishVisit()" value="Podsumuj i zakoncz wizyte" />
-		</h:form>
 	</div>
 
 

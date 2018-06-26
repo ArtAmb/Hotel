@@ -3,6 +3,7 @@ package hotel.ejb.controller;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.annotation.ManagedBean;
@@ -15,13 +16,16 @@ import com.mysql.jdbc.StringUtils;
 import hotel.Utils;
 import hotel.dao.BillDAO;
 import hotel.dao.BookingDAO;
+import hotel.dao.KeyCardDAO;
 import hotel.dao.TaskDAO;
 import hotel.domain.Bill;
 import hotel.domain.BillState;
 import hotel.domain.Booking;
 import hotel.domain.BookingStatus;
+import hotel.domain.KeyCard;
 import hotel.domain.Room;
 import hotel.domain.Task;
+import hotel.ejb.services.utils.RandomStringGenerator;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -56,6 +60,9 @@ public class BookingDetailControler implements Serializable {
 	@EJB
 	private TaskDAO taskDAO;
 	
+	@EJB
+	private KeyCardDAO keyCardDAO;
+	
 	
 	public String visitDetail(Long bookingId) {
 		choosenOne = bookingDAO.findOne(bookingId);
@@ -66,6 +73,16 @@ public class BookingDetailControler implements Serializable {
 		if(choosenOne.getGuests() == null || choosenOne.getGuests().isEmpty()) {
 			errorMessage = "Musisz zameldowaæ gosci";
 			return null;
+		}
+		
+		RandomStringGenerator stringGenerator = new RandomStringGenerator(8);
+		
+		choosenOne.setCards(new LinkedList<>());
+		
+		for(int i = 0; i < choosenOne.getGuests().size(); ++i) {
+			KeyCard card = keyCardDAO.save(KeyCard.builder().active(true).codeNumber(stringGenerator.rand()).build());
+			choosenOne.getCards().add(card);
+			
 		}
 		choosenOne.setStatus(BookingStatus.IN_PROGRESS);
 		choosenOne = bookingDAO.save(choosenOne);
