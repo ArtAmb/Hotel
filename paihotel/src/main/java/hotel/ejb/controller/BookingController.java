@@ -189,10 +189,13 @@ public class BookingController {
 				.client(clientData)
 				.startDate(startDate)
 				.endDate(endDate)
-				.room(bookingRoom)
 				.status(BookingStatus.BOOKED)
 				.build();
-
+		if(booking.getRooms() == null) {
+			booking.setRooms(new LinkedList<>());
+		}
+		booking.getRooms().add(bookingRoom);
+		
 		bookingDAO.save(booking);
 
 		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();

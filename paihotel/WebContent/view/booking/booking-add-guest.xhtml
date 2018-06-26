@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<ui:include src="#{componentController.getHead()}" />
+
+<h:body bgcolor="white">
+	<ui:include src="#{componentController.getMainMenu()}" />
+	<div class="content">
+	zameldowano / max ilosc <br />
+	#{clientGuestController.currentNumberOfGuests} / #{clientGuestController.maxGuests} <br/> <br/>
+		#{clientGuestController.message}<br/>
+		<h:panelGroup
+			rendered="#{clientGuestController.identityCardNumber == null}">
+			<h:form>
+		Nr dowodu: <h:inputText
+					value="#{clientGuestController.identityCardNumber}"	/>
+				<h:commandButton value="Szukaj" action="#{clientGuestController.findByIdentityCardNumber()}"  />
+			</h:form>
+		</h:panelGroup>
+
+		<h:panelGroup
+			rendered="#{clientGuestController.identityCardNumber != null}">
+		Nr dowodu: #{clientGuestController.identityCardNumber} 
+			<h:form>
+				<h:commandButton action="#{clientGuestController.restart()}"
+					value="Restart" />
+			</h:form>
+
+			<h:form>
+		Imie: <h:inputText value="#{clientGuestController.newClient.name}" />
+		Nazwisko: <h:inputText
+					value="#{clientGuestController.newClient.surname}" />
+
+				<h:commandButton action="#{clientGuestController.addNewGuest()}"
+					value="Dodaj" />
+			</h:form>
+
+		</h:panelGroup>
+	</div>
+
+	<h:form>
+		<h:commandButton value="Zakoncz"
+			action="#{clientGuestController.finishSigningGuests()}" />
+	</h:form>
+
+</h:body>
+</html>

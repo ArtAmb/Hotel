@@ -3,41 +3,43 @@ package hotel.ejb.controller.datatable;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import javax.annotation.ManagedBean;
 import javax.ejb.EJB;
-import javax.ejb.LocalBean;
-import javax.ejb.Stateless;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 
 import hotel.dao.BookingDAO;
 import hotel.domain.Booking;
+import hotel.domain.Room;
 import hotel.ejb.services.DatatableService.Row;
 import hotel.ejb.services.DatatableService.Value;
 import lombok.Getter;
 import lombok.Setter;
 
-@Stateless
+@RequestScoped
 @Named
-@LocalBean
+@ManagedBean
 public class BookingDatatableController extends BaseDataTableController<Long, Booking>{
 	
 	@EJB
-	private BookingDAO BookingDAO;
+	private BookingDAO bookingDAO;
 	
 	@Getter
 	@Setter
-	public Booking query = new Booking();
+	private Booking query = new Booking();
 	
 	
 	public void beforeQueryAction() {
-		this.crudDAO = BookingDAO;
+		this.crudDAO = bookingDAO;
 		this.queryDTO = query;
 		
 	}
 	
 	@Override
 	protected List<String> getHeader() {
-		return Arrays.asList("ID", "Hotel", "Pokoj ID","Imie", "Nazwisko", "Status", "Data pocz.", "Data koniec");
+		return Arrays.asList("ID", "Pokoj ID","Imie", "Nazwisko", "Status", "Data pocz.", "Data koniec");
 	}
 
 	@Override
@@ -46,8 +48,7 @@ public class BookingDatatableController extends BaseDataTableController<Long, Bo
 		List<Value> values = new LinkedList<>();
 
 		values.add(prepareValue(myTest.getId()));
-		values.add(prepareValue(myTest.getRoom().getHotel().getName()));
-		values.add(prepareValue(myTest.getRoom().getId()));
+		values.add(prepareValue(myTest.getRooms() != null ? myTest.getRooms().stream().map(Room::getId).collect(Collectors.toList()) : null));
 		values.add(prepareValue(myTest.getClient().getName()));
 		values.add(prepareValue(myTest.getClient().getSurname()));
 		values.add(prepareValue(myTest.getStatus()));

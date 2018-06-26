@@ -11,14 +11,16 @@ import hotel.dao.Domain;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Client implements Domain{
+public class Client implements Domain {
 
 	@Id 
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -35,6 +37,8 @@ public class Client implements Domain{
 	private String flatNr;
 	private String zipCode;
 	private String city; 
+	
+	private String identityCardNumber;  
 	
 	@ManyToOne
 	@JoinColumn(name = "user")

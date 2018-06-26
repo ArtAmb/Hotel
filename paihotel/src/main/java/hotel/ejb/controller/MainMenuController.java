@@ -14,6 +14,7 @@ import hotel.Utils;
 import hotel.dao.HotelDAO;
 import hotel.domain.Hotel;
 import hotel.domain.User;
+import hotel.domain.UserRole;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -61,6 +62,7 @@ public class MainMenuController implements Serializable {
 
 	private MenuItem logIn = new MenuItem(Utils.getViewUrl("authorization/login.xhtml"), "Zaloguj");
 	private MenuItem logOut = new MenuItem(Utils.getViewUrl("client/client-account.xhtml"), "Profil");
+	private MenuItem logOutForEmployee = new MenuItem(Utils.getViewUrl("authorization/logout.xhtml"), "Profil");
 
 	private ArrayList<MenuItem> employeeItems = new ArrayList<MenuItem>(
 			Arrays.asList(
@@ -112,8 +114,13 @@ public class MainMenuController implements Serializable {
 	}
 
 	public MenuItem getLogInOut() {
-		if (AuthorizationController.isLogIn())
+		if (AuthorizationController.isLogIn()) {
+			UserRole userRole = AuthorizationController.getUser().getRole();
+			if(userRole != null && (userRole.equals(UserRole.ADMIN) || userRole.equals(UserRole.EMPLOYEE)))
+				return logOutForEmployee;
+			
 			return logOut;
+		}
 		else
 			return logIn;
 	}

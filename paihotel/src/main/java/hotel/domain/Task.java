@@ -11,10 +11,16 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import hotel.dao.Domain;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Task implements Domain {
 
 	@Id

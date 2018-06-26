@@ -26,7 +26,7 @@ public class Bill implements Domain {
 	private Long id;
 	
 	private BigDecimal price;
-	private String state;
+	private BillState state;
 	
 	private String description; 
 	

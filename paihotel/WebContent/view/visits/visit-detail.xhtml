@@ -18,7 +18,6 @@
 			<tr>
 				<th>Id</th>
 				<th>Termin</th>
-				<th>Koszt</th>
 				<th>Klient</th>
 				<th>Pokój</th>
 				<th>Status</th>
@@ -27,53 +26,68 @@
 				<td>#{bookingDetailControler.choosenOne.id}</td>
 				<td>#{bookingDetailControler.choosenOne.startDate} -
 					#{bookingDetailControler.choosenOne.endDate}</td>
-				<td>#{bookingDetailControler.choosenOne.room.price}</td>
 				<td>#{bookingDetailControler.choosenOne.client.name}
 					#{bookingDetailControler.choosenOne.client.surname} <h:commandButton
 						value='Szczegóły' />
 				</td>
-				<td>Pokój #{bookingDetailControler.choosenOne.room.number} <h:commandButton
-						value='Szczegóły' /></td>
+				<td><ui:repeat var="room" value="#{booking.rooms}">
+					Pokój #{room.number} <br />
+					</ui:repeat></td>
 				<td>#{bookingDetailControler.choosenOne.status}</td>
 			</tr>
 		</table>
 		<h:form
-			rendered="#{bookingDetailControler.choosenOne.status == WAITING_FOR_ACCEPT}">
+			rendered="#{bookingDetailControler.choosenOne.status == 'WAITING_FOR_ACCEPT'}">
+			
+			<h:commandButton value="Zamelduj gosci"
+				action="#{clientGuestController.signInSomeGuests(bookingDetailControler.choosenOne.id)}" />
+				
 			<h:commandButton value="Potwierdz wizyte"
 				action="#{bookingDetailControler.acceptBooking()}" />
 		</h:form>
 
-
-
-		<table class="tab">
-			<tr>
-				<th>Id</th>
-				<th>Koszt</th>
-				<th>Opis</th>
-			</tr>
-			<ui:repeat var="bill"
-				value="#{bookingDetailControler.findAllBills()}">
+		<br /> <br />
+		<h:panelGroup
+			rendered="#{bookingDetailControler.choosenOne.status == 'IN_PROGRESS'}">
+			<table class="tab">
 				<tr>
-					<td>#{bill.id}</td>
-					<td>#{bill.price}</td>
-					<td>#{bill.description}</td>
+					<th>Id</th>
+					<th>Koszt</th>
+					<th>Opis</th>
 				</tr>
-			</ui:repeat>
-		</table>
+				<ui:repeat var="bill"
+					value="#{bookingDetailControler.findAllBills()}">
+					<tr>
+						<td>#{bill.id}</td>
+						<td>#{bill.price}</td>
+						<td>#{bill.description}</td>
+					</tr>
+				</ui:repeat>
+			</table>
 
-		<h:form>
+			<h:form>
 			
 		Dodaj nowy koszt: <br />
-			<h:inputText styleClass="input-text"
-				value="#{bookingDetailControler.newBill.price}" />
-			<h:inputText styleClass="input-text"
-				value="#{bookingDetailControler.newBill.description}" />
+				<h:inputText styleClass="input-text"
+					value="#{bookingDetailControler.newBill.price}" />
+				<h:inputText styleClass="input-text"
+					value="#{bookingDetailControler.newBill.description}" />
 
-			<h:commandButton value="Dodaj"
-				action="#{bookingDetailControler.addNewBill()}" />
+				<h:commandButton value="Dodaj"
+					action="#{bookingDetailControler.addNewBill()}" />
+			</h:form>
+			<br />
+			<br />
+			<h:form>
+				<h:commandButton action="bookingDetailControler.finishVisit" value="Podsumuj i zakoncz wizyte" />
+			</h:form>
+		</h:panelGroup>
+		<br /> <br />
+
+
+		<h:form>
+			<h:commandButton action="bookingDetailControler.finishVisit()" value="Podsumuj i zakoncz wizyte" />
 		</h:form>
-
-
 	</div>
 
 

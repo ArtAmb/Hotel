@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -30,19 +31,18 @@ public class Booking implements Domain {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	//@Temporal(TemporalType.TIMESTAMP)
 	private Date startDate;
-	//@Temporal(TemporalType.TIMESTAMP)
 	private Date endDate;
 	
 	@Enumerated(EnumType.STRING)
 	private BookingStatus status;
 	
 	@ManyToOne
-	private Room room;
-	@ManyToOne
 	private Client client;
-	
+	@ManyToMany
+	private List<Room> rooms;
+	@ManyToMany
+	private List<Client> guests;
 	@OneToMany
 	@JoinColumn(name = "booking")
 	private List<KeyCard> cards;

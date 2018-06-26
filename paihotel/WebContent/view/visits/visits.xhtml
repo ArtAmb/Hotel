@@ -32,7 +32,6 @@
 			<tr>
 				<th>Id</th>
 				<th>Termin</th>
-				<th>Koszt</th>
 				<th>Klient</th>
 				<th>Pokój</th>
 				<th>Status</th>
@@ -44,10 +43,15 @@
 				<tr>
 					<td>#{booking.id}</td>
 					<td>#{booking.startDate} - #{booking.endDate}</td>
-					<td>#{booking.room.price}</td>
 					<td>#{booking.client.name} #{booking.client.surname}
 					 <h:commandButton value='Szczegóły' /></td>
-					<td>Pokój #{booking.room.number} <h:commandButton value='Szczegóły' /></td>
+					 
+					<td>
+					<ui:repeat var="room" value="#{booking.rooms}">
+					Pokój #{room.number} <br />
+					</ui:repeat>
+					</td>
+					
 					<td>#{booking.status}</td>
 					<td>
 					<h:form><h:commandButton value='Szczegóły' action="#{bookingDetailControler.visitDetail(booking.id)}" /></h:form>
