@@ -78,11 +78,12 @@ public class MainMenuController implements Serializable {
 	private ArrayList<MenuItem> adminItems = new ArrayList<MenuItem>(
 			Arrays.asList(
 					new MenuItem(Utils.getViewUrl("tasks/tasks.xhtml"), "Zadania"),
-					new MenuItem(Utils.getViewUrl("timetable/timetable.xhtml"), "Terminarz"),
+					//new MenuItem(Utils.getViewUrl("timetable/timetable.xhtml"), "Terminarz"),
 					new MenuItem(Utils.getViewUrl("visits/visits.xhtml"), "Wizyty"),
 					new MenuItem(Utils.getViewUrl("parties/parties.xhtml"), "Przyjecia"),
 					new MenuItem(Utils.getViewUrl("room/rooms.xhtml"), "Pokoje"),
 					new MenuItem(Utils.getViewUrl("client/clients.xhtml"), "Klienci"),
+					new MenuItem(Utils.getViewUrl("card/cards.xhtml"), "Karty"),
 					new MenuItem(Utils.getViewUrl("employee/employees.xhtml"), "Pracownicy"),
 					new MenuItem(Utils.getViewUrl("config/configuration.xhtml"), "Konfiguracja")));
 

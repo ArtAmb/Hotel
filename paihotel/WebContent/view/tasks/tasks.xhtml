@@ -20,8 +20,7 @@
 		<h2>Zadania</h2>
 
 		<h3>Dodawanie:</h3>
-		<h:form>
-			
+		<h:form>			
 			Typ: <h:inputText styleClass="input-text"
 				value="#{taskController.type}" />
 			<br />
@@ -44,9 +43,7 @@
 				action='#{taskDatatableController.redirectToQueryResult()}' />
 		</h:form>
 		<h3>Wszystkie zadania</h3>
-		<!-- <ui:include src="#{componentController.getDatatable()}">
-			<ui:param name="tableData" value="#{taskDatatableController.fillDatatableAndGet()}"></ui:param>
-		</ui:include>-->
+
 
 		<table class="tab">
 
@@ -56,7 +53,7 @@
 				<th>Id</th>
 				<th>Typ</th>
 				<th>Do kiedy</th>
-				<th>Opis</th>				
+				<th>Opis</th>
 				<th>Rezerwacja</th>
 				<th>Pokój</th>
 				<th>Status</th>
