@@ -81,7 +81,7 @@ public class BookingDetailControler implements Serializable {
 		choosenOne.setCards(new LinkedList<>());
 		
 		for(int i = 0; i < choosenOne.getGuests().size(); ++i) {
-			KeyCard card = keyCardDAO.save(KeyCard.builder().state(CardStatus.ACTIVE).codeNumber(stringGenerator.rand()).build());
+			KeyCard card = keyCardDAO.save(KeyCard.builder().active(true).codeNumber(stringGenerator.rand()).build());
 			choosenOne.getCards().add(card);
 			
 		}
