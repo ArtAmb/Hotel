@@ -3,6 +3,8 @@ package hotel.domain;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -31,9 +33,11 @@ public class Task implements Domain {
 	private Date date;
 	
 	private String description;
-	private String state;
 	private String type;
 
+	@Enumerated(EnumType.STRING)
+	private TaskStatus state;
+	
 	@ManyToOne
 	private Hotel hotel;
 	

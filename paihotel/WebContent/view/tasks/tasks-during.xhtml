@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<ui:include src="#{componentController.getHead()}" />
+
+<h:body bgcolor="white">
+	<ui:include src="#{componentController.getMainMenu()}" />
+
+	<div class="side-bar">
+		<ui:include src="#{componentController.getTasksMenu()}" />
+	</div>
+	<div class="main-content">
+
+		<h2>Zadania w trakcie</h2>
+
+	
+		<table class="tab">
+
+
+			<tr>
+
+				<th>Id</th>
+				<th>Typ</th>
+				<th>Opis</th>
+				<th>Do kiedy</th>
+				<th>Rezerwacja</th>
+				<th>Pokój</th>
+				<th>Status</th>
+
+
+			</tr>
+			<ui:repeat var="task" value="#{taskController.findAllTasks()}">
+				<h:form rendered="#{task.state == 'DURING'}">
+					<tr>
+						<td>#{task.id}</td>
+						<td>#{task.type}</td>
+						<td>#{task.date}</td>
+						<td>#{task.description}</td>
+						<td>#{task.booking.id}</td>
+						<td>#{task.room.name}</td>
+						<td><h:commandButton value='Zakończ' type="submit"
+								action="#{taskController.finishTask(task.id)}" /></td>
+					</tr>
+
+
+				</h:form>
+			</ui:repeat>
+		</table>
+
+
+
+
+	</div>
+	<div style="clear: both"></div>
+
+</h:body>
+</html>

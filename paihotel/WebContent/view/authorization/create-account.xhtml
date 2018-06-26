@@ -21,11 +21,15 @@
 
 			Hasło:
 			<h:inputSecret id="password" value="#{authorizationController.newUser.password}"/>
-						
+			
+			<br/>
+			
+			Rola:
+			<h:inputText id="role" value="#{authorizationController.newUser.role}"/>
 			<br/>
 			
 
-		<h:commandButton value="Zarejestruj" action="#{authorizationController.addNewClient}" />
+		<h:commandButton value="Zarejestruj" action="#{authorizationController.addNewUser}" />
 		</h:form>
 
 
