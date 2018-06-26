@@ -17,7 +17,7 @@
 	</div>
 	<div class="main-content">
 
-		<h2>Zadania</h2>
+		<h2>Zadania do zrobienia</h2>
 
 		<h3>Dodawanie:</h3>
 		<h:form>
@@ -34,20 +34,7 @@
 			<h:commandButton value="Dodaj" action="#{taskController.saveTask()}" />
 		</h:form>
 
-		<h2>Zadania</h2>
-		<h3>Wyszukiwarka:</h3>
-		<h:form>
-			Id: <h:inputText value="#{taskDatatableController.query.id}" />
-			<br />
-
-			<h:commandButton value='szukaj'
-				action='#{taskDatatableController.redirectToQueryResult()}' />
-		</h:form>
-		<h3>Wszystkie zadania</h3>
-		<!-- <ui:include src="#{componentController.getDatatable()}">
-			<ui:param name="tableData" value="#{taskDatatableController.fillDatatableAndGet()}"></ui:param>
-		</ui:include>-->
-
+		
 		<table class="tab">
 
 
@@ -64,27 +51,20 @@
 
 			</tr>
 			<ui:repeat var="task" value="#{taskController.findAllTasks()}">
-
-				<tr>
-					<td>#{task.id}</td>
-					<td>#{task.type}</td>
-					<td>#{task.date}</td>
-					<td>#{task.description}</td>
-					<td>#{task.booking.id}</td>
-					<td>#{task.room.name}</td>
-					<td><h:form rendered="#{task.state == 'TODO'}">
-							<h:commandButton value='Rozpocznij' type="submit"
-								action="#{taskController.startTask(task.id)}" />
-						</h:form> <h:form rendered="#{task.state == 'DURING'}">
-							<h:commandButton value='Zakończ' type="submit"
-								action="#{taskController.finishTask(task.id)}" />
-						</h:form> <h:form rendered="#{task.state == 'FINISHED'}">
-						Zakończone
-						</h:form></td>
-				</tr>
+				<h:form rendered="#{task.state == 'TODO'}">
+					<tr>
+						<td>#{task.id}</td>
+						<td>#{task.type}</td>
+						<td>#{task.date}</td>
+						<td>#{task.description}</td>
+						<td>#{task.booking.id}</td>
+						<td>#{task.room.name}</td>
+						<td><h:commandButton value='Rozpocznij' type="submit"
+								action="#{taskController.startTask(task.id)}" /></td>
+					</tr>
 
 
-
+				</h:form>
 			</ui:repeat>
 		</table>
 
