@@ -52,12 +52,8 @@ public class BookingController implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	@Getter
-	@Setter
-	private Date startDate;
-	@Getter
-	@Setter
-	private Date endDate;
+	private Date startDate = new Date(System.currentTimeMillis());
+	private Date endDate = Utils.addDays(startDate, 5);
 	private List<Long> features = new LinkedList<>();
 
 	private Booking query = new Booking();
@@ -85,8 +81,6 @@ public class BookingController implements Serializable {
 	@EJB
 	private SessionManagerService sessionManagerService;
 	
-	@Getter
-	@Setter
 	private List<Room> rooms;
 	
 	@Inject
@@ -133,8 +127,6 @@ public class BookingController implements Serializable {
 	}
 
 	public String refreshView() {
-		sessionManagerService.saveInSession(SessionObject.BOOKING_START_DATE, startDate);
-		sessionManagerService.saveInSession(SessionObject.BOOKING_END_DATE, endDate);
 		return null;
 	}
 
