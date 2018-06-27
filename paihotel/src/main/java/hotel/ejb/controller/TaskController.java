@@ -46,6 +46,7 @@ public class TaskController {
 	
 	void reset() {
 		
+		date = null;
 		description = null;
 		state = null;
 		type = null;

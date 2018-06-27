@@ -13,4 +13,7 @@ public class NavigationController {
 	public String moveToRooms() {
 		return "room";
 	}
+	public String goToClientRegistration() {
+		return "create-account-for-client";
+	}
 }

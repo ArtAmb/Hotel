@@ -18,7 +18,9 @@
 
 		<h2>Wszystkie zadania</h2>
 		<h3>Wyniki wyszukiwania:</h3>
-		
+		<ui:include src="../../datatable.xhtml">
+			<ui:param name="tableData" value="#{taskDatatableController.fillDatatableAndGet()}"></ui:param>
+		</ui:include>
 
 		
 	</div>

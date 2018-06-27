@@ -23,58 +23,13 @@
 				action='#{clientDatatableController.redirectToQueryResult()}' />
 		</h:form>
 
-		<h3>Dodawanie:</h3>
-		<h:form>
-		Imię: <h:inputText styleClass="input-text" name="name"
-				value="#{clientController.name}" />
-			<br /> 
-				Nazwisko: <h:inputText styleClass="input-text" name="surname"
-				value="#{clientController.surname}" />
-			<br /> 
-				Email: <h:inputText styleClass="input-text" name="email"
-				value="#{clientController.email}" />
-			<br /> 
-				Telefon: <h:inputText styleClass="input-text" name="phone"
-				value="#{clientController.phone}" />
-			<br />
-				Ulica/nr domu/ nr mieszkania: <h:inputText styleClass="input-text"
-				name="street" value="#{clientController.street}" />
-			<h:inputText styleClass="input-text" name="home-nr"
-				value="#{clientController.homeNr}" />
-			<h:inputText styleClass="input-text" name="flat-nr"
-				value="#{clientController.flatNr}" />
-			<br />
-				Kod pocztowy: <h:inputText styleClass="input-text" name="zip-code"
-				value="#{clientController.zipCode}" />
-			<br /> 
-				Miasto: <h:inputText styleClass="input-text" name="city"
-				value="#{clientController.city}" />
-			<br />
-
-
-			<h:commandButton value="Dodaj"
-				action="#{clientController.saveClient()}" />
-		</h:form>
-
+	
 		<h3>Lista klientów:</h3>
-		<!-- <ui:include src="#{componentController.getDatatable()}">
+		 <ui:include src="#{componentController.getDatatable()}">
 			<ui:param name="tableData" value="#{clientDatatableController.fillDatatableAndGet()}"></ui:param>
-		</ui:include> -->
+		</ui:include> 
 
-		<table class="tab">
-			<th>ID</th>
-			<th>Imie</th>
-			<th>Nazwisko</th>
-			<th>Karta</th>
-			<ui:repeat var="client" value="#{clientController.findAllClients()}">
-				<tr>
-					<td>#{client.id}</td>
-					<td>#{client.name}</td>
-					<td>#{client.surname}</td>
-					<td><h:commandButton value="Aktywuj karte" type="submit" action="#{clientController.addCardForClient(client.id)}" /></td>
-				</tr>
-			</ui:repeat>
-		</table>
+		
 
 
 	</div>

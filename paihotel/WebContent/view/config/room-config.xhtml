@@ -63,8 +63,7 @@
 				<th>Nazwa</th>
 				<th>Opis</th>
 				<th>Cena</th>
-				<th>Edycja</th>
-				<th>Usuwanie</th>
+				
 
 			</tr>
 			<ui:repeat var="room" value="#{roomController.findAllRooms()}">
@@ -72,7 +71,7 @@
 					<td>#{room.name}</td>
 					<td>#{room.description}</td>
 					<td>#{room.price}</td>
-					<td><h:commandButton value="Edytuj" /></td>
+				
 				</tr>
 			</ui:repeat>
 		</table>

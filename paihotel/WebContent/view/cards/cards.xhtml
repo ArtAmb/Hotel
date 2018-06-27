@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:include src="#{componentController.getHead()}" />
+
+<h:body bgcolor="white">
+	<ui:include src="#{componentController.getMainMenu()}" />
+	<div class="content">
+
+
+		<h2>Karty klientów</h2>
+		<h3>Wyszukiwarka:</h3>
+		<h:form>
+			Id <h:inputText value="#{keyCardDatatableController.query.id}" />
+
+			<h:commandButton value='szukaj'
+				action='#{keyCardDatatableController.redirectToQueryResult()}' />
+		</h:form>
+		<h3>Sprawdz użycia dla karty o id:</h3>
+		<h:form>
+			Id <h:inputText value="#{keyCardUsageDatatableController.query.id}" />
+
+			<h:commandButton value='Zobacz'
+				action='#{keyCardUsageDatatableController.redirectToQueryResult()}' />
+		</h:form>
+		<h3>Wszystkie karty klientów:</h3>
+		<!--<ui:include src="#{componentController.getDatatable()}">
+			<ui:param name="tableData" value="#{keyCardDatatableController.fillDatatableAndGet()}"></ui:param>
+		</ui:include>-->
+		<table class="tab">
+
+
+			<tr>
+
+				<th>Id</th>
+				<th>Numer</th>
+				<th>Komentarz</th>
+				<th>Aktywacja</th>
+				<th></th>
+
+
+
+			</tr>
+			<ui:repeat var="card" value="#{keyCardController.findAllKeyCards()}">
+
+				<tr>
+					<td>#{card.id}</td>
+					<td>#{card.codeNumber}</td>
+					<td>#{card.comments}</td>
+					<td><h:form rendered="#{card.active == 'false'}">
+							<h:commandButton value='Aktywuj' type="submit"
+								action="#{keyCardController.activate(card.id)}" />
+						</h:form> <h:form rendered="#{card.active == 'true'}">
+							<h:commandButton value='Dezaktywuj' type="submit"
+								action="#{keyCardController.deactivate(card.id)}" />
+						</h:form></td>
+
+				</tr>
+
+
+
+			</ui:repeat>
+		</table>
+
+
+
+	</div>
+</h:body>
+</html>

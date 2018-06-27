@@ -15,21 +15,26 @@
 		<h:form>
 			<h2>Logowanie</h2>
 			Login:
-			<h:inputText id="login" value="#{authorizationController.authorization.login}"/>
-			
-			<br/>
+			<h:inputText id="login"
+				value="#{authorizationController.authorization.login}" />
+
+			<br />
 
 			Hasło:
-			<h:inputSecret id="password" value="#{authorizationController.authorization.password}"/>
-			
-			<br/>
-			
+			<h:inputSecret id="password"
+				value="#{authorizationController.authorization.password}" />
 
-		<h:commandButton value="Zaloguj" type="submit" action="#{authorizationController.tryToLogIn()}" />
+			<br />
+
+
+			<h:commandButton value="Zaloguj" type="submit"
+				action="#{authorizationController.tryToLogIn()}" />
 		</h:form>
-		<br/>
-		#{authorizationController.errorMessage}		
-		
+		<br /> #{authorizationController.errorMessage}
+		<!-- 	<h:form>
+	<h:commandLink style="color:#4c99e2; font-size:1.2em;" value = "Nie masz konta? Zarejestruj się już teraz!" action = "create-account-for-client" /> 
+	</h:form>
+		-->
 		
 
 
