@@ -13,4 +13,5 @@ public class RoomDTO {
 
 	private Room room;
 	private List<Booking> bookings;
+	private Boolean available;
 }

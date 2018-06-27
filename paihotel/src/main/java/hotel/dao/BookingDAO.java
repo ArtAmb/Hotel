@@ -7,10 +7,12 @@ import java.util.stream.Collectors;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.inject.Named;
+import javax.persistence.TypedQuery;
 
 import org.springframework.util.Assert;
 
 import hotel.domain.Booking;
+import hotel.domain.BookingStatus;
 import hotel.domain.Hotel;
 import hotel.domain.Room;
 
@@ -21,14 +23,18 @@ public class BookingDAO extends CrudDAO<Long, Booking> {
 
 	public List<Booking> findByRoomAndBetweenStartDateAndEndDate(Long roomId, Date startDate, Date endDate) {
 
-		String query = String.format(" where  1=1"
+		String query = String.format(" where tmp.status in (?1, ?2, ?3)"
 				+ " AND ((tmp.startDate >= '%s' AND tmp.endDate <= '%s')"
 				+ " OR (tmp.startDate >= '%s' AND tmp.endDate <= '%s')"
 				+ " OR (tmp.startDate >= '%s' AND tmp.endDate <= '%s'))",
 				 startDate, endDate, endDate, endDate, startDate, startDate);
 
-		List<Booking> result = entityManager.createQuery("SELECT tmp from " + entityClass.getName() + " tmp" + query, entityClass)
-				.getResultList();
+		TypedQuery<Booking> preparedQuery = entityManager.createQuery("SELECT tmp from " + entityClass.getName() + " tmp" + query, entityClass);
+		preparedQuery.setParameter(1, BookingStatus.BOOKED);
+		preparedQuery.setParameter(2, BookingStatus.WAITING_FOR_ACCEPT);
+		preparedQuery.setParameter(3, BookingStatus.IN_PROGRESS);
+		
+		List<Booking> result = preparedQuery.getResultList();
 		
 		return result.stream()
 				.filter(b->b.getRooms() != null)
@@ -50,6 +56,15 @@ public class BookingDAO extends CrudDAO<Long, Booking> {
 				.getHotel().getId()
 				.equals(hotel.getId()))
 				.collect(Collectors.toList());
+	}
+	
+	public List<Booking> findByStatus(BookingStatus status) {
+		String query = " where tmp.status = ?1 ";
+
+		TypedQuery<Booking> preparedQuery = entityManager.createQuery("SELECT tmp from " + entityClass.getName() + " tmp" + query, entityClass);
+		preparedQuery.setParameter(1, status);
+		
+		return preparedQuery.getResultList();
 	}
 
 }

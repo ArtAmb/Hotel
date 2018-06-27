@@ -9,6 +9,7 @@ import java.util.List;
 import javax.annotation.ManagedBean;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.mysql.jdbc.StringUtils;
@@ -22,7 +23,6 @@ import hotel.domain.Bill;
 import hotel.domain.BillState;
 import hotel.domain.Booking;
 import hotel.domain.BookingStatus;
-import hotel.domain.CardStatus;
 import hotel.domain.KeyCard;
 import hotel.domain.Room;
 import hotel.domain.Task;
@@ -63,6 +63,9 @@ public class BookingDetailControler implements Serializable {
 	
 	@EJB
 	private KeyCardDAO keyCardDAO;
+	
+	@Inject
+	private MainMenuController mainMenuController;
 	
 	
 	public String visitDetail(Long bookingId) {
@@ -114,7 +117,7 @@ public class BookingDetailControler implements Serializable {
 		totalCost = priceForRooms.add(priceForBills);
 		
 		Bill finalBill = billDAO.save(Bill.builder().booking(choosenOne).price(totalCost).state(BillState.FINAL_TO_PAY).build());
-		
+		taskDAO.save(Task.builder().description("Zakonczenie wizyty: Rachunek: " + finalBill.getPrice() + " PLN").booking(choosenOne).hotel(mainMenuController.getChosenHotel()).date(new Date(System.currentTimeMillis())).build());
 		
 		for(Room room : choosenOne.getRooms()) {
 			taskDAO.save(Task.builder().description("Sprzatanie pokoju").booking(choosenOne).hotel(room.getHotel()).room(room).date(new Date(System.currentTimeMillis())).build());

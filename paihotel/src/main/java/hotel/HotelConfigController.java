@@ -1,8 +1,8 @@
 package hotel;
 
 import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
@@ -10,8 +10,10 @@ import javax.ejb.Stateless;
 import javax.inject.Named;
 
 import hotel.dao.BookingDAO;
+import hotel.dao.KeyCardDAO;
 import hotel.domain.Booking;
 import hotel.domain.BookingStatus;
+import hotel.domain.KeyCard;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -29,8 +31,11 @@ public class HotelConfigController {
 	
 	@Getter
 	@Setter
-	private Long timeUntilBookingCancelInMS = 10000l;
+	private Integer timeUntilBookingCancelInDay = 1;
 
+	@EJB
+	private KeyCardDAO keyCardDAO;
+	
 	public String startHotelDayThread() {
 		new Thread(new Runnable() {
 
@@ -50,7 +55,6 @@ public class HotelConfigController {
 	public String hotelDayAction() {
 
 		System.out.println("Zaczynam dobre hotelowa");
-
 		Date currDate = new Date(System.currentTimeMillis());
 
 		Booking query = Booking.builder().startDate(currDate).build();
@@ -63,6 +67,26 @@ public class HotelConfigController {
 			bookingDAO.save(booking);
 		}
 		
+		
+		List<Booking> bookingsInProgress = bookingDAO.findByStatus(BookingStatus.IN_PROGRESS);
+
+		for(Booking booking: bookingsInProgress) {
+			for(KeyCard card : booking.getCards()) {
+				card.setActive(false);
+				keyCardDAO.save(card);
+			}
+		}
+		
+		Date expiredBookingDate = Utils.addDays(currDate, -timeUntilBookingCancelInDay);
+		
+		List<Booking> expiredBookings = bookingDAO.findByStatus(BookingStatus.BOOKED);
+		expiredBookings = expiredBookings.stream().filter(b->b.getStartDate()!=null).filter(b->b.getStartDate().toString().equals(expiredBookingDate.toString())).collect(Collectors.toList());
+		
+		for(Booking booking: expiredBookings) {
+			booking.setStatus(BookingStatus.CANCELLED);
+			bookingDAO.save(booking);
+		}
+
 		return null;
 	}
 }

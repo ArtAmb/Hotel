@@ -36,6 +36,7 @@
 				</div>
 				<h:commandButton style="margin:0 20px;" value='Wstecz' action="room" />
 				<h:commandButton value='Zarezerwuj' action="#{bookingController.makeBooking()}"/>
+				<h:commandButton value='Zarezerwuj bez payu' action="#{bookingController.makeRealBookingWithoutPayu()}"/>
 			</h:form>
 			#{bookingController.errorMessage}
 		</div>
