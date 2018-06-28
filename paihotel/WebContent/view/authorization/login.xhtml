@@ -30,14 +30,11 @@
 			<h:commandButton value="Zaloguj" type="submit"
 				action="#{authorizationController.tryToLogIn()}" />
 		</h:form>
+		<h:form>
+			<h:commandButton value="Zarejestruj " type="submit"
+				action="#{createNewClientAcountController.redirectToFrom}" />
+		</h:form>
 		<br /> #{authorizationController.errorMessage}
-		<!-- 	<h:form>
-	<h:commandLink style="color:#4c99e2; font-size:1.2em;" value = "Nie masz konta? Zarejestruj się już teraz!" action = "create-account-for-client" /> 
-	</h:form>
-		-->
-		
-
-
 	</div>
 </h:body>
 </html>
