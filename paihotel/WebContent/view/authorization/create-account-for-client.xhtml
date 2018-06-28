@@ -9,26 +9,51 @@
 
 <h:body bgcolor="white">
 	<ui:include src="#{componentController.getMainMenu()}" />
-	<div class="content">
 
-
+	<div class="booking-person-data-form">
 		<h:form>
-			<h2>Rejestracja</h2>
+				Imię: <h:inputText styleClass="input-text" name="name"
+				value="#{createNewClientAcountController.client.name}" />
+			<br /> 
+				Nazwisko: <h:inputText styleClass="input-text" name="surname"
+				value="#{createNewClientAcountController.client.surname}" />
+			<br /> 
+				Email: <h:inputText styleClass="input-text" name="email"
+				value="#{createNewClientAcountController.client.email}" />
+			<br /> 
+				Telefon: <h:inputText styleClass="input-text" name="phone"
+				value="#{createNewClientAcountController.client.phone}" />
+			<br />
+				Ulica/nr domu/ nr mieszkania: <h:inputText styleClass="input-text"
+				name="street"
+				value="#{createNewClientAcountController.client.street}" />
+			<h:inputText styleClass="input-text" name="home-nr"
+				value="#{createNewClientAcountController.client.homeNr}" />
+			<h:inputText styleClass="input-text" name="flat-nr"
+				value="#{createNewClientAcountController.client.flatNr}" />
+			<br />
+				Kod pocztowy: <h:inputText styleClass="input-text" name="zip-code"
+				value="#{createNewClientAcountController.client.zipCode}" />
+			<br /> 
+				Miasto: <h:inputText styleClass="input-text" name="city"
+				value="#{createNewClientAcountController.client.city}" />
+			<br />
+				
 			Login:
-			<h:inputText id="login" value="#{authorizationController.newUser.login}"/>
-			
-			<br/>
-
+			<h:inputText
+				value="#{createNewClientAcountController.user.login}" />
+			<br />
 			Hasło:
-			<h:inputSecret id="password" value="#{authorizationController.newUser.password}"/>
-						
-			<br/>
-			
-
-		<h:commandButton value="Zarejestruj" action="#{authorizationController.addNewClient}" />
+			<h:inputSecret 
+				value="#{createNewClientAcountController.user.password}" />
+			<br />
+			Powtorz hasło:
+			<h:inputSecret 
+				value="#{createNewClientAcountController.repeatedPassword}" />
+			<br />
+			<h:commandButton action="#{createNewClientAcountController.saveNewClient}" value="Zarejestruj" />
 		</h:form>
-
-
+		#{createNewClientAcountController.errorMessage}
 	</div>
 </h:body>
 </html>
