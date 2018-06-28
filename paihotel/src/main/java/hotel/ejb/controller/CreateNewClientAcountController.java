@@ -103,7 +103,7 @@ public class CreateNewClientAcountController {
 		client.setUser(newUser);
 
 		clientDAO.save(client);
-		return Utils.getViewUrl("authorization/create-account-success");
+		return Utils.getTemplateUri("authorization/create-account-success");
 
 	}
 
