@@ -31,7 +31,9 @@
 					value="#{createNewEmployeeAcountController.employee.email}" />
 				<br /> 
 				Pesel: <h:inputText styleClass="input-text" name="pesel"
-					value="#{createNewEmployeeAcountController.employee.pesel}" ><f:validateLength minimum="11" maximum="11" /></h:inputText>
+					value="#{createNewEmployeeAcountController.employee.pesel}">
+					<f:validateLength minimum="11" maximum="11" />
+				</h:inputText>
 				<br /> 
 				Telefon: <h:inputText styleClass="input-text" name="phone"
 					value="#{createNewEmployeeAcountController.employee.phone}" />
@@ -62,6 +64,11 @@
 			<h:inputSecret
 					value="#{createNewEmployeeAcountController.repeatedPassword}" />
 				<br />
+				Rola:
+				<h:selectOneRadio value="#{createNewEmployeeAcountController.user.role}">
+					<f:selectItem itemValue="EMPLOYEE" itemLabel="Pracownik" />
+					<f:selectItem itemValue="ADMIN" itemLabel="Admin" />
+				</h:selectOneRadio>
 				<h:commandButton
 					action="#{createNewEmployeeAcountController.saveNewEmployee}"
 					value="Zarejestruj" />
