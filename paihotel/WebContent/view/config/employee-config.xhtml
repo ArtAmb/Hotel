@@ -19,43 +19,61 @@
 
 		<h2>Pracownicy</h2>
 		<h3>Dodawanie:</h3>
-		<h:form>
-						
-			Imię: <h:inputText styleClass="input-text"
-				value="#{employeeController.name}" />
-			<br /> 
-			Nazwisko: <h:inputText styleClass="input-text"
-				value="#{employeeController.surname}" />
-			<br />
-			
-			<h:commandButton value="Dodaj"
-				action="#{employeeController.saveEmployee()}" />			
-
-		</h:form>
-		
+		<div class="booking-person-data-form">
 			<h:form>
-			<h2>Rejestracja</h2>
+				Imię: <h:inputText styleClass="input-text" name="name"
+					value="#{createNewEmployeeAcountController.employee.name}" />
+				<br /> 
+				Nazwisko: <h:inputText styleClass="input-text" name="surname"
+					value="#{createNewEmployeeAcountController.employee.surname}" />
+				<br /> 
+				Email: <h:inputText styleClass="input-text" name="email"
+					value="#{createNewEmployeeAcountController.employee.email}" />
+				<br /> 
+				Pesel: <h:inputText styleClass="input-text" name="pesel"
+					value="#{createNewEmployeeAcountController.employee.pesel}" ><f:validateLength minimum="11" maximum="11" /></h:inputText>
+				<br /> 
+				Telefon: <h:inputText styleClass="input-text" name="phone"
+					value="#{createNewEmployeeAcountController.employee.phone}" />
+				<br />
+				Ulica/nr domu/ nr mieszkania: <h:inputText styleClass="input-text"
+					name="street"
+					value="#{createNewEmployeeAcountController.employee.street}" />
+				<h:inputText styleClass="input-text" name="home-nr"
+					value="#{createNewEmployeeAcountController.employee.homeNr}" />
+				<h:inputText styleClass="input-text" name="flat-nr"
+					value="#{createNewEmployeeAcountController.employee.flatNr}" />
+				<br />
+				Kod pocztowy: <h:inputText styleClass="input-text" name="zip-code"
+					value="#{createNewEmployeeAcountController.employee.zipCode}" />
+				<br /> 
+				Miasto: <h:inputText styleClass="input-text" name="city"
+					value="#{createNewEmployeeAcountController.employee.city}" />
+				<br />
+				
 			Login:
-			<h:inputText id="login" value="#{authorizationController.newUser.login}"/>
-			
-			<br/>
-
+			<h:inputText value="#{createNewEmployeeAcountController.user.login}" />
+				<br />
 			Hasło:
-			<h:inputSecret id="password" value="#{authorizationController.newUser.password}"/>
-			
-			<br/>
-			
-			Rola:
-			<h:inputText id="role" value="#{authorizationController.newUser.role}"/>
-			<br/>
-			
+			<h:inputSecret
+					value="#{createNewEmployeeAcountController.user.password}" />
+				<br />
+			Powtorz hasło:
+			<h:inputSecret
+					value="#{createNewEmployeeAcountController.repeatedPassword}" />
+				<br />
+				<h:commandButton
+					action="#{createNewEmployeeAcountController.saveNewEmployee}"
+					value="Zarejestruj" />
+			</h:form>
+			#{createNewEmployeeAcountController.errorMessage}
+		</div>
 
-		<h:commandButton value="Zarejestruj" action="#{authorizationController.addNewUser()}" />
-		</h:form>
 
 		<h3>Lista wszystkich pracowników:</h3>
 		<ui:include src="#{componentController.getDatatable()}">
-			<ui:param name="tableData" value="#{employeeDatatableController.fillDatatableAndGet()}"></ui:param>
+			<ui:param name="tableData"
+				value="#{employeeDatatableController.fillDatatableAndGet()}"></ui:param>
 		</ui:include>
 
 	</div>

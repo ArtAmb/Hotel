@@ -10,9 +10,9 @@ import javax.inject.Named;
 import com.mysql.jdbc.StringUtils;
 
 import hotel.Utils;
-import hotel.dao.ClientDAO;
+import hotel.dao.EmployeeDAO;
 import hotel.dao.UserDAO;
-import hotel.domain.Client;
+import hotel.domain.Employee;
 import hotel.domain.User;
 import hotel.domain.UserRole;
 import lombok.Getter;
@@ -21,17 +21,17 @@ import lombok.Setter;
 @RequestScoped
 @Named
 @ManagedBean
-public class CreateNewClientAcountController {
+public class CreateNewEmployeeAcountController {
 
 	@Getter
 	@Setter
 	private User user = new User();
 	@Getter
 	@Setter
-	private Client client = new Client();
+	private Employee employee = new Employee();
 
 	@EJB
-	private ClientDAO clientDAO;
+	private EmployeeDAO employeeDAO;
 
 	@EJB
 	private UserDAO userDAO;
@@ -43,27 +43,29 @@ public class CreateNewClientAcountController {
 	@Setter
 	private String errorMessage;
 
-	public void setClientDAO(ClientDAO clientDAO) {
-		this.clientDAO = clientDAO;
+	public void setEmployeeDAO(EmployeeDAO employeeDAO) {
+		this.employeeDAO = employeeDAO;
 	}
-	
-	public void validateClientPart() {
-		if (StringUtils.isNullOrEmpty(client.getName()))
+
+	public void validateEmployeePart() {
+		if (StringUtils.isNullOrEmpty(employee.getName()))
 			throw new IllegalStateException("Imie jest wymagane");
-		if (StringUtils.isNullOrEmpty(client.getSurname()))
+		if (StringUtils.isNullOrEmpty(employee.getSurname()))
 			throw new IllegalStateException("Nazwisko jest wymagane");
-		if (StringUtils.isNullOrEmpty(client.getEmail()))
+		if (StringUtils.isNullOrEmpty(employee.getEmail()))
 			throw new IllegalStateException("Emial jest wymagany");
-		if (StringUtils.isNullOrEmpty(client.getPhone()))
+		if (StringUtils.isNullOrEmpty(employee.getPhone()))
 			throw new IllegalStateException("Telefon jest wymagany");
-		if (StringUtils.isNullOrEmpty(client.getStreet()))
+		if (StringUtils.isNullOrEmpty(employee.getStreet()))
 			throw new IllegalStateException("Ulica jest wymagana");
-		if (StringUtils.isNullOrEmpty(client.getHomeNr()))
+		if (StringUtils.isNullOrEmpty(employee.getHomeNr()))
 			throw new IllegalStateException("Numer domu jest wymagany");
-		if (StringUtils.isNullOrEmpty(client.getPhone()))
+		if (StringUtils.isNullOrEmpty(employee.getPhone()))
 			throw new IllegalStateException("Telefon jest wymagany");
-		if (StringUtils.isNullOrEmpty(client.getCity()))
-			throw new IllegalStateException("Miasto jest wymagany");
+		if (StringUtils.isNullOrEmpty(employee.getCity()))
+			throw new IllegalStateException("Miasto jest wymagane");
+		if (StringUtils.isNullOrEmpty(employee.getPesel()))
+			throw new IllegalStateException("Pesel jest wymagane");
 	}
 
 	public void validateUserPart() {
@@ -76,39 +78,39 @@ public class CreateNewClientAcountController {
 		}
 	}
 
-	public String saveNewClient() {
+	public String saveNewEmployee() {
 		try {
-			validateClientPart();
+			validateEmployeePart();
 			validateUserPart();
 		} catch (Exception e) {
 			errorMessage = e.getMessage();
 			return null;
 		}
-		Optional<Client> optClient = clientDAO.findByQuery(Client.builder().email(client.getEmail()).build()).stream()
-				.findFirst();
-		if (optClient.isPresent()) {
-			errorMessage = "Klient o takim adresie emial istnieje";
+		Optional<Employee> optEmployee = employeeDAO.findByQuery(Employee.builder().email(employee.getEmail()).build())
+				.stream().findFirst();
+		if (optEmployee.isPresent()) {
+			errorMessage = "Pracownik o takim adresie emial istnieje";
 			return null;
 		}
 
-		Optional<User> optUser = userDAO.findByQuery(User.builder().login(user.getLogin()).active(true).build()).stream()
+		Optional<User> optUser = userDAO
+				.findByQuery(User.builder().login(user.getLogin()).active(true).build()).stream()
 				.findFirst();
 		if (optUser.isPresent()) {
 			errorMessage = "Uzytkownik o takim loginie istnieje";
 			return null;
 		}
-		user.setRole(UserRole.CLIENT);
-
+user.setRole(UserRole.EMPLOYEE);
 		User newUser = userDAO.save(user);
-		client.setUser(newUser);
+		employee.setUser(newUser);
 
-		clientDAO.save(client);
+		employeeDAO.save(employee);
 		return Utils.getViewUrl("authorization/create-account-success");
 
 	}
 
 	public String redirectToFrom() {
-		return Utils.getTemplateUriRedirect("authorization/create-account-for-client");
+		return Utils.getTemplateUriRedirect("config/employee-config");
 	}
 
 }
