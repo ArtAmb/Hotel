@@ -21,17 +21,19 @@
 		<h3>Dodawanie:</h3>
 		<h:form>
 						
-			Nazwa: <h:inputText styleClass="input-text"
-				value="#{hotelController.name}" />
+			Nazwa: <h:inputText id="nazwaHotelu" name="nazwaHotelu" styleClass="input-text"
+				value="#{hotelController.name}" required="true" requiredMessage="Nazwa hotelu jest wymagana" />
 			<br />
 			Adres: <h:inputText styleClass="input-text"
-				value="#{hotelController.address}" />
+				value="#{hotelController.address}"  required="true" requiredMessage="Adres hotelu jest wymagany"/>
 			<br />
-
+			<h:message for="nazwaHotelu" errorStyle="color:red; display:block"/>
 			<h:commandButton value="Dodaj" action="#{hotelController.saveHotel()}" />
 
 		</h:form>
-
+		
+		
+		
 		<h3>Lista hoteli:</h3>
 
 		<table class="tab">
@@ -41,15 +43,17 @@
 				<th>Nazwa</th>
 				<th>Adres</th>
 				<th>Edycja</th>
-				<th>Usuwanie</th>
-
+				
 			</tr>
 			<ui:repeat var="hotel" value="#{hotelController.findAllHotels()}">
 				<tr>
 					<td>#{hotel.name}</td>
 					<td>#{hotel.address}</td>
-					<td><h:commandButton value="Edytuj" /></td>
-					<td><h:commandButton value="Usuń" /></td>
+					<td>
+						<h:form>
+							<h:commandButton value="Edytuj" action="#{hotelUpdateController.editHotel(hotel.id)}" />
+						</h:form>
+					</td>
 
 				</tr>
 			</ui:repeat>

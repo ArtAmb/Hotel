@@ -62,7 +62,10 @@
 			<div class="offer">
 				<h:form>
 					<h3>#{room.room.name}</h3>
-					<img src="/paihotel/img/apartament.jpg" />
+					<h:panelGroup rendered="#{room.room.thumbnail != null}">
+					<h:graphicImage
+						value="#{photoService.getPictureUrl(room.room.thumbnail.name)}" />
+					</h:panelGroup>
 					<div class="description-room">
 						<p style="margin-bottom: 15px; font-size: 1.3em;">#{room.room.description}</p>
 

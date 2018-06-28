@@ -6,10 +6,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import hotel.dao.Domain;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Picture implements Domain {
 
 	@Id
@@ -17,5 +23,11 @@ public class Picture implements Domain {
 	private Long id;
 	
 	private String path;
+	private String name;
+	private String url; 
 	private String pictureNumber;
+	
+	public String toUri() {
+		return "/images/" + name; 
+	}
 }

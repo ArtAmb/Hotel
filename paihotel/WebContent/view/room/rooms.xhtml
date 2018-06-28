@@ -16,17 +16,20 @@
 		<h2>Pokoje</h2>
 		<h3>Wyszukiwarka</h3>
 		<h:form>
-			<h:selectOneRadio >
+			<h:selectOneRadio>
 				<f:selectItem itemValue="room" itemLabel="Pokój" />
 				<f:selectItem itemValue="hall" itemLabel="Sala" />
 			</h:selectOneRadio>
-			Id: <h:inputText styleClass="input-text" value="#{roomController.query.id}" />
-			Nazwa: <h:inputText styleClass="input-text" value="#{roomController.query.name}" />
-			Numer: <h:inputText styleClass="input-text" value="#{roomController.query.number}" />
-			Piętro: <h:inputText styleClass="input-text" value="#{roomController.query.floor}" />
+			Id: <h:inputText styleClass="input-text"
+				value="#{roomController.query.id}" />
+			Nazwa: <h:inputText styleClass="input-text"
+				value="#{roomController.query.name}" />
+			Numer: <h:inputText styleClass="input-text"
+				value="#{roomController.query.number}" />
+			Piętro: <h:inputText styleClass="input-text"
+				value="#{roomController.query.floor}" />
 
-			<h:commandButton value='szukaj'
-				action='#{roomController.findRoom()}' />
+			<h:commandButton value='szukaj' action='#{roomController.findRoom()}' />
 		</h:form>
 
 		<h3>Lista pokoi:</h3>
@@ -34,13 +37,23 @@
 			<div class="offer">
 				<h:form>
 					<h3>#{room.name}</h3>
-						<img src="/paihotel/img/apartament.jpg" />
-						<div class="description-room">
-							<p style="margin-bottom: 15px; font-size: 1.3em;">#{room.description}</p>
+					<h:panelGroup rendered="#{room.thumbnail != null}">
+					<h:graphicImage
+						value="#{photoService.getPictureUrl(room.thumbnail.name)}" />
+					</h:panelGroup>
+					<div class="description-room">
+						<p style="margin-bottom: 15px; font-size: 1.3em;">#{room.description}</p>
 
-							<p><b>Cechy:</b> Widok na morze, Prysznic, Komputer</p>
-							<p style="margin-top: 10px; font-size: 1.1em;"><b>Cena:</b> #{room.price} zł</p>
-				
+						<p>
+							<b>Cechy:</b>
+							<ui:repeat var="feature" value="#{room.features}">
+								#{feature.name} 
+							</ui:repeat>
+						</p>
+						<p style="margin-top: 10px; font-size: 1.1em;">
+							<b>Cena:</b> #{room.price} zł
+						</p>
+
 					</div>
 				</h:form>
 

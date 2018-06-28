@@ -3,13 +3,10 @@ package hotel.ejb.controller;
 import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import javax.annotation.ManagedBean;
 import javax.ejb.EJB;
-import javax.ejb.LocalBean;
-import javax.ejb.Stateless;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -20,6 +17,7 @@ import com.mysql.jdbc.StringUtils;
 import hotel.dao.FeatureDAO;
 import hotel.dao.HotelDAO;
 import hotel.dao.RoomDAO;
+import hotel.domain.Picture;
 import hotel.domain.Room;
 import hotel.domain.RoomStatus;
 import hotel.domain.RoomType;
@@ -41,9 +39,10 @@ public class RoomController {
 	private Integer floor;
 	private Integer maxNumberOfPeople;
 	private BigDecimal price;
-	
 	private String type = RoomType.ROOM.name();
 	private String message = "";
+	private Part file;
+	private String fileContent;
 	
 	
 	List<Long> features = new LinkedList<>();
@@ -53,9 +52,11 @@ public class RoomController {
 	@Inject
 	private MainMenuController mainMenuController;
 	
-	@Inject
-	private PhotoController photoController;
-
+	@EJB
+	private PhotoService photoService;
+//	@Inject
+//	private PhotoController photoController;
+	
 	@EJB
 	private RoomDAO roomDAO;
 	@EJB
@@ -101,7 +102,6 @@ public class RoomController {
 	public String saveRoom() {
 		try {
 			validate();
-
 			Room room = new Room();
 			room.setName(name);
 			room.setPrice(price);
@@ -113,9 +113,9 @@ public class RoomController {
 			room.setMaxNumberOfPeople(maxNumberOfPeople);
 			room.setHotel(mainMenuController.getChosenHotel());
 			room.setFeatures(features.stream().map(id -> featureDAO.findOne(id)).collect(Collectors.toList()));
-			//room.setThumbnail(photoController.upload());
+			Picture picture = photoService.upload(file);
+			room.setThumbnail(picture);
 			
-
 			roomDAO.save(room);
 		} catch (Exception e) {
 			message = e.getMessage();

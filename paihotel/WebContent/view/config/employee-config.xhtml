@@ -17,6 +17,7 @@
 	</div>
 	<div class="main-content">
 
+		#{createNewEmployeeAcountController.errorMessage}
 		<h2>Pracownicy</h2>
 		<h3>Dodawanie:</h3>
 		<div class="booking-person-data-form">
@@ -73,7 +74,7 @@
 					action="#{createNewEmployeeAcountController.saveNewEmployee}"
 					value="Zarejestruj" />
 			</h:form>
-			#{createNewEmployeeAcountController.errorMessage}
+			
 		</div>
 
 

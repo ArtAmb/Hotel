@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:include src="#{componentController.getHead()}" />
+
+<h:body bgcolor="white">
+	<ui:include src="#{componentController.getMainMenu()}" />
+
+	<div class="side-bar">
+		<ui:include src="#{componentController.getConfigurationMenu()}" />
+
+	</div>
+	<div class="main-content">
+	
+	<h2>Hotel</h2>
+		<h3>Edytuj hotel:</h3>
+		<h:form>
+						
+			Nazwa: <h:inputText id="nazwaHotelu" name="nazwaHotelu" styleClass="input-text"
+				value="#{hotelUpdateController.hotel.name}" required="true" requiredMessage="Nazwa hotelu jest wymagana" />
+			<br /> 
+			Adres: <h:inputText id="adresHotelu" name="adresHotelu" styleClass="input-text"
+				value="#{hotelUpdateController.hotel.address}"  required="true" requiredMessage="Adres hotelu jest wymagany"/>
+			<br />
+			<h:message for="nazwaHotelu" errorStyle="color:red; display:block"/>
+			<h:message for="adresHotelu" errorStyle="color:red; display:block"/>
+			<h:commandButton value="Zapisz" action="#{hotelUpdateController.saveHotel()}" />
+
+		</h:form>
+		
+	</div>
+
+</h:body>
+</html>

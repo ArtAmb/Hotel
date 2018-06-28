@@ -9,4 +9,8 @@ public class EmailDTO {
 	private String to;
 	private String subject;
 	private String content;
+	
+	public String toUrlParams() {
+		return String.format("to=%s&subject=%s&content=%s", to, subject, content);
+	}
 }
