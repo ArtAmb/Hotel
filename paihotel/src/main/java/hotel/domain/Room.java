@@ -46,6 +46,10 @@ public class Room implements Domain {
 	private Gallery gallery;
 	
 	@ManyToOne
+	private Picture thumbnail;
+	
+		
+	@ManyToOne
 	private Hotel hotel;
 	
 	@OneToMany

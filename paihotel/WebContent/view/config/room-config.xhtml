@@ -21,7 +21,7 @@
 
 		<h2>Pokój</h2>
 		<h3>Dodawanie:</h3>
-		<h:form>
+		<h:form enctype="multipart/form-data">
 			
 			<h:selectOneRadio value="#{roomController.type}" >
 				<f:selectItem itemValue="ROOM" itemLabel="Pokój" />
@@ -50,6 +50,9 @@
 			<h:selectManyCheckbox value="#{roomController.features}"> 
 				<f:selectItems value="#{featureController.findByQuery()}" var="feature" itemLabel="#{feature.name}" itemValue="#{feature.id}" />
 			</h:selectManyCheckbox><br />
+			
+			<!--  <h:inputFile id="file" value="#{roomController.photoController.file}" validator="#{roomController.photoController.validateFile}"/>
+			-->
 			<h:commandButton value="Dodaj" action="#{roomController.saveRoom()}" />
 
 		</h:form>

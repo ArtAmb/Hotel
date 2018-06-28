@@ -110,6 +110,7 @@ public class CreateNewEmployeeAcountController {
 		}
 		
 		user.setRole(UserRole.valueOf(user.getRole().name()));
+		user.setActive(true);
 		employee.setHotel(mainMenuController.getChosenHotel());
 		
 		User newUser = userDAO.save(user);

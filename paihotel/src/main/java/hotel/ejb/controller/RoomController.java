@@ -13,6 +13,7 @@ import javax.ejb.Stateless;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.Part;
 
 import com.mysql.jdbc.StringUtils;
 
@@ -43,14 +44,17 @@ public class RoomController {
 	
 	private String type = RoomType.ROOM.name();
 	private String message = "";
-
-
+	
+	
 	List<Long> features = new LinkedList<>();
 
 	private Room query = new Room();
 
 	@Inject
 	private MainMenuController mainMenuController;
+	
+	@Inject
+	private PhotoController photoController;
 
 	@EJB
 	private RoomDAO roomDAO;
@@ -109,6 +113,8 @@ public class RoomController {
 			room.setMaxNumberOfPeople(maxNumberOfPeople);
 			room.setHotel(mainMenuController.getChosenHotel());
 			room.setFeatures(features.stream().map(id -> featureDAO.findOne(id)).collect(Collectors.toList()));
+			//room.setThumbnail(photoController.upload());
+			
 
 			roomDAO.save(room);
 		} catch (Exception e) {
