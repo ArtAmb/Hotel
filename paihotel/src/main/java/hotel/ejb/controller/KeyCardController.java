@@ -2,14 +2,13 @@ package hotel.ejb.controller;
 
 import java.util.List;
 
+import javax.annotation.ManagedBean;
 import javax.ejb.EJB;
-import javax.ejb.LocalBean;
-import javax.ejb.Stateless;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 
 import hotel.Utils;
 import hotel.dao.KeyCardDAO;
-import hotel.domain.Booking;
 import hotel.domain.KeyCard;
 import lombok.Data;
 import lombok.Getter;
@@ -17,32 +16,28 @@ import lombok.Setter;
 /**
  * @author Karolina B¹tkowska
  */
-@Stateless
+@RequestScoped
 @Named
 @Data
-@LocalBean
+@ManagedBean
 public class KeyCardController {
 
 	private KeyCard query = new KeyCard();
+	private KeyCard queryResponse = null;
 	
 	private Long id;
 
+	public String findByCodeNumber() {
+		queryResponse = keyCardDAO.findByQuery(query).stream().findFirst().orElse(null);
+		return null;
+	}
+	
 	@EJB
 	private KeyCardDAO keyCardDAO;
 	
 	@Getter
 	@Setter
 	private KeyCard choosenCard = new KeyCard();
-
-	public String saveKeyCard() {
-
-		KeyCard keyCard = new KeyCard();
-		
-
-		keyCardDAO.save(keyCard);
-
-		return "KeyCard";
-	}
 
 	public List<KeyCard> findAllKeyCards() {
 		return keyCardDAO.findAll();

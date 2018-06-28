@@ -15,11 +15,37 @@
 		<h2>Karty klientów</h2>
 		<h3>Wyszukiwarka:</h3>
 		<h:form>
-			Id <h:inputText value="#{keyCardDatatableController.query.id}" />
-
+			Id <h:inputText value="#{keyCardController.query.id}" />
+			Numer karty: <h:inputText value="#{keyCardController.query.codeNumber}" />
+			
 			<h:commandButton value='szukaj'
-				action='#{keyCardDatatableController.redirectToQueryResult()}' />
+				action='#{keyCardController.findByCodeNumber()}' />
 		</h:form>
+		
+		<h:panelGroup  rendered="#{keyCardController.queryResponse != null}">
+			<table class="tab">
+			<tr>
+				<th>Id</th>
+				<th>Numer</th>
+				<th>Aktywacja</th>
+				<th></th>
+			</tr>
+				<tr>
+					<td>#{keyCardController.queryResponse.id}</td>
+					<td>#{keyCardController.queryResponse.codeNumber}</td>
+					<td><h:form rendered="#{card.active == 'false'}">
+							<h:commandButton value='Aktywuj' type="submit"
+								action="#{keyCardController.activate(keyCardController.queryResponse.id)}" />
+						</h:form> <h:form rendered="#{card.active == 'true'}">
+							<h:commandButton value='Dezaktywuj' type="submit"
+								action="#{keyCardController.deactivate(keyCardController.queryResponse.id)}" />
+						</h:form></td>
+
+				</tr>
+		</table>
+						
+		</h:panelGroup>
+		
 		<h3>Sprawdz użycia dla karty o id:</h3>
 		<h:form>
 			Id <h:inputText value="#{keyCardUsageDatatableController.query.id}" />
@@ -28,25 +54,15 @@
 				action='#{keyCardUsageDatatableController.redirectToQueryResult()}' />
 		</h:form>
 		<h3>Wszystkie karty klientów:</h3>
-		<!--<ui:include src="#{componentController.getDatatable()}">
-			<ui:param name="tableData" value="#{keyCardDatatableController.fillDatatableAndGet()}"></ui:param>
-		</ui:include>-->
 		<table class="tab">
-
-
 			<tr>
-
 				<th>Id</th>
 				<th>Numer</th>
 				<th>Komentarz</th>
 				<th>Aktywacja</th>
 				<th></th>
-
-
-
 			</tr>
 			<ui:repeat var="card" value="#{keyCardController.findAllKeyCards()}">
-
 				<tr>
 					<td>#{card.id}</td>
 					<td>#{card.codeNumber}</td>
@@ -61,12 +77,8 @@
 
 				</tr>
 
-
-
 			</ui:repeat>
 		</table>
-
-
 
 	</div>
 </h:body>

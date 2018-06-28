@@ -26,6 +26,7 @@ import hotel.domain.BookingStatus;
 import hotel.domain.KeyCard;
 import hotel.domain.Room;
 import hotel.domain.Task;
+import hotel.domain.TaskStatus;
 import hotel.ejb.services.utils.RandomStringGenerator;
 import lombok.Getter;
 import lombok.Setter;
@@ -112,16 +113,32 @@ public class BookingDetailControler implements Serializable {
 
 	public String finishVisit() {
 		BigDecimal priceForRooms = choosenOne.getRooms().stream().map(Room::getPrice).reduce((r1, r2)->{r1= r1.add(r2); return r1;}).get();
-		BigDecimal priceForBills = findAllBills().stream().map(Bill::getPrice).reduce((b1, b2)->{b1= b1.add(b2); return b1;}).get();
+		BigDecimal priceForBills = findAllBills().stream().map(Bill::getPrice).reduce((b1, b2)->{b1= b1.add(b2); return b1;}).orElse(new BigDecimal(0));
 		
 		totalCost = priceForRooms.add(priceForBills);
 		
 		Bill finalBill = billDAO.save(Bill.builder().booking(choosenOne).price(totalCost).state(BillState.FINAL_TO_PAY).build());
-		taskDAO.save(Task.builder().description("Zakonczenie wizyty: Rachunek: " + finalBill.getPrice() + " PLN").booking(choosenOne).hotel(mainMenuController.getChosenHotel()).date(new Date(System.currentTimeMillis())).build());
+		taskDAO.save(
+				Task.builder()
+				.state(TaskStatus.TODO)
+				.description("Zakonczenie wizyty: Rachunek: " + finalBill.getPrice() + " PLN")
+				.booking(choosenOne)
+				.hotel(mainMenuController.getChosenHotel())
+				.date(new Date(System.currentTimeMillis()))
+				.build());
 		
 		for(Room room : choosenOne.getRooms()) {
-			taskDAO.save(Task.builder().description("Sprzatanie pokoju").booking(choosenOne).hotel(room.getHotel()).room(room).date(new Date(System.currentTimeMillis())).build());
+			taskDAO.save(Task.builder()
+					.state(TaskStatus.TODO)
+					.description("Sprzatanie pokoju")
+					.booking(choosenOne)
+					.hotel(room.getHotel())
+					.room(room)
+					.date(new Date(System.currentTimeMillis()))
+					.build());
 		}
+		choosenOne.setStatus(BookingStatus.FINISHED);
+		bookingDAO.save(choosenOne);
 		return null;
 	}
 }

@@ -179,9 +179,6 @@ public class BookingController implements Serializable {
 	}
 
 	public void makeRealBooking() throws IOException {
-		//Long roomID = (Long) sessionManagerService.getFromSession(SessionObject.ROOM_ID);
-		//Room bookingRoom = roomDAO.findOne(roomID);
-		//sessionManagerService.removeFromSession(SessionObject.ROOM_ID.getName());
 		Client client = (Client) sessionManagerService.getFromSession(SessionObject.BOOKING_CLIENT);
 		sessionManagerService.removeFromSession(SessionObject.BOOKING_CLIENT.getName());
 
@@ -194,14 +191,13 @@ public class BookingController implements Serializable {
 			userDAO.save(user);
 		}
 
-		Date startDate = (Date) sessionManagerService.getFromSession(SessionObject.BOOKING_START_DATE);
-		Date endDate = (Date) sessionManagerService.getFromSession(SessionObject.BOOKING_END_DATE);
-
-		sessionManagerService.removeFromSession(SessionObject.BOOKING_START_DATE.getName());
-		sessionManagerService.removeFromSession(SessionObject.BOOKING_END_DATE.getName());
-
-		Booking booking = Booking.builder().client(clientData).startDate(startDate).endDate(endDate)
-				.status(BookingStatus.BOOKED).build();
+		Booking booking = Booking.builder()
+				.client(clientData)
+				.startDate(startDate)
+				.endDate(endDate)
+				.status(BookingStatus.BOOKED)
+				.build();
+		
 		if (booking.getRooms() == null) {
 			booking.setRooms(new LinkedList<>());
 		}
@@ -215,8 +211,6 @@ public class BookingController implements Serializable {
 
 	public String chooseRoomToBook(Long roomId) {
 		sessionManagerService.saveInSession(SessionObject.ROOM_ID, roomId);
-		sessionManagerService.saveInSession(SessionObject.BOOKING_START_DATE, startDate);
-		sessionManagerService.saveInSession(SessionObject.BOOKING_END_DATE, endDate);
 
 		return Utils.getTemplateUriRedirect("booking/booking-person-data");
 	}
@@ -245,10 +239,6 @@ public class BookingController implements Serializable {
 			} else
 				newClient = clientDAO.save(clientData);
 
-			//Long roomID = (Long) sessionManagerService.getFromSession(SessionObject.ROOM_ID);
-			//Room bookingRoom = roomDAO.findOne(roomID);
-			//sessionManagerService.removeFromSession(SessionObject.ROOM_ID.getName());
-
 			String pass = new RandomStringGenerator(8).rand();
 
 			if (newClient.getUser() == null) {
@@ -257,11 +247,6 @@ public class BookingController implements Serializable {
 
 				userDAO.save(newUser);
 			}
-			Date startDate = (Date) sessionManagerService.getFromSession(SessionObject.BOOKING_START_DATE);
-			Date endDate = (Date) sessionManagerService.getFromSession(SessionObject.BOOKING_END_DATE);
-
-			sessionManagerService.removeFromSession(SessionObject.BOOKING_START_DATE.getName());
-			sessionManagerService.removeFromSession(SessionObject.BOOKING_END_DATE.getName());
 
 			Booking booking = Booking.builder()
 					.client(newClient)
@@ -299,5 +284,10 @@ public class BookingController implements Serializable {
 		return null;
 	}
 	
+	public String restartForm() {
+		rooms = null;
+		message = null;
+		return toDefaultValue();
+	}
 
 }

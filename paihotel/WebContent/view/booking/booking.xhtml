@@ -101,7 +101,7 @@
 				<th>Id</th>
 				<th>Nazwa</th>
 			</tr>
-			<ui:repeat var="room" value="#{bookingControler.rooms}">
+			<ui:repeat var="room" value="#{bookingController.rooms}">
 				<tr>
 					<td>#{room.id}</td>
 					<td>Pokoj #{room.number}</td>
@@ -112,6 +112,11 @@
 		<h:form>
 			<h:commandButton value="Zarezerwuj i zaplac" type="submit"
 				action="#{bookingController.submitBookingAndPay}" />
+		</h:form>
+		
+		<h:form>
+			<h:commandButton value="Wyczyść" type="submit"
+				action="#{bookingController.restartForm}" />
 		</h:form>
 
 	</div>
