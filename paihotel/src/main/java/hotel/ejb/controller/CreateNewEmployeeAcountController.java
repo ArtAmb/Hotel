@@ -5,6 +5,7 @@ import java.util.Optional;
 import javax.annotation.ManagedBean;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.mysql.jdbc.StringUtils;
@@ -13,6 +14,7 @@ import hotel.Utils;
 import hotel.dao.EmployeeDAO;
 import hotel.dao.UserDAO;
 import hotel.domain.Employee;
+import hotel.domain.RoomType;
 import hotel.domain.User;
 import hotel.domain.UserRole;
 import lombok.Getter;
@@ -42,6 +44,11 @@ public class CreateNewEmployeeAcountController {
 	@Getter
 	@Setter
 	private String errorMessage;
+	
+	@Inject
+	private MainMenuController mainMenuController;
+	
+	
 
 	public void setEmployeeDAO(EmployeeDAO employeeDAO) {
 		this.employeeDAO = employeeDAO;
@@ -73,6 +80,8 @@ public class CreateNewEmployeeAcountController {
 			throw new IllegalStateException("Login jest wymagane");
 		if (StringUtils.isNullOrEmpty(user.getPassword()))
 			throw new IllegalStateException("Haslo jest wymagane");
+		if (StringUtils.isNullOrEmpty(user.getRole().name()))
+			throw new IllegalStateException("Rola jest wymagana");
 		if (!user.getPassword().equals(repeatedPassword)) {
 			throw new IllegalStateException("Oba has³a musza byc takie same");
 		}
@@ -93,16 +102,19 @@ public class CreateNewEmployeeAcountController {
 			return null;
 		}
 
-		Optional<User> optUser = userDAO
-				.findByQuery(User.builder().login(user.getLogin()).active(true).build()).stream()
-				.findFirst();
+		Optional<User> optUser = userDAO.findByQuery(User.builder().login(user.getLogin()).active(true).build())
+				.stream().findFirst();
 		if (optUser.isPresent()) {
 			errorMessage = "Uzytkownik o takim loginie istnieje";
 			return null;
 		}
-user.setRole(UserRole.EMPLOYEE);
+		
+		user.setRole(UserRole.valueOf(user.getRole().name()));
+		employee.setHotel(mainMenuController.getChosenHotel());
+		
 		User newUser = userDAO.save(user);
 		employee.setUser(newUser);
+		
 
 		employeeDAO.save(employee);
 		return Utils.getViewUrl("authorization/create-account-success");
