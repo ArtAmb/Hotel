@@ -98,6 +98,7 @@ public class CreateNewClientAcountController {
 			return null;
 		}
 		user.setRole(UserRole.CLIENT);
+		user.setActive(true);
 
 		User newUser = userDAO.save(user);
 		client.setUser(newUser);
