@@ -36,6 +36,14 @@ public class HotelConfigController {
 	@EJB
 	private KeyCardDAO keyCardDAO;
 	
+	public void setKeyCardDAO(KeyCardDAO keyCardDAO) {
+		this.keyCardDAO = keyCardDAO;
+	}
+	
+	public void setBookingDAO(BookingDAO bookingDAO) {
+		this.bookingDAO = bookingDAO;
+	}
+	
 	public String startHotelDayThread() {
 		new Thread(new Runnable() {
 
