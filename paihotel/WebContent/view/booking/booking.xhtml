@@ -19,18 +19,24 @@
 			<div class="filters">
 				<div class="booking-general">
 					Przyjazd:
-					<h:inputText styleClass="input-text"
-						value="#{bookingController.startDate}" />
+					<h:inputText id="startDate" styleClass="input-text"
+						value="#{bookingController.startDate}">
+					</h:inputText>
+					<h:message for="startDate" />
 					Wyjazd:
-					<h:inputText styleClass="input-text"
-						value="#{bookingController.endDate}" />
+					<h:inputText id="endDate" styleClass="input-text"
+						value="#{bookingController.endDate}">
+					</h:inputText>
+					<h:message for="endDate" />
 					Ilość osób:
-					<h:inputText styleClass="input-text"
-						value="#{roomController.maxNumberOfPeople}" />
-					Ilość pokoi:
+					<h:inputText id="numberOfGuests" styleClass="input-text"
+						value="#{roomController.maxNumberOfPeople}"
+						converterMessage="Tylko cyfry" />
+					<h:message for="numberOfGuests" />
+					<!-- Ilość pokoi:
 					<h:inputText styleClass="input-text" />
 					Cena max:
-					<h:inputText styleClass="input-text" />
+					<h:inputText styleClass="input-text" />  -->
 				</div>
 				<div class="booking-options">
 					<div class="filter">
@@ -63,8 +69,8 @@
 				<h:form>
 					<h3>#{room.room.name}</h3>
 					<h:panelGroup rendered="#{room.room.thumbnail != null}">
-					<h:graphicImage
-						value="#{photoService.getPictureUrl(room.room.thumbnail.name)}" />
+						<h:graphicImage
+							value="#{photoService.getPictureUrl(room.room.thumbnail.name)}" />
 					</h:panelGroup>
 					<div class="description-room">
 						<p style="margin-bottom: 15px; font-size: 1.3em;">#{room.room.description}</p>
@@ -116,7 +122,7 @@
 			<h:commandButton value="Zarezerwuj i zaplac" type="submit"
 				action="#{bookingController.submitBookingAndPay}" />
 		</h:form>
-		
+
 		<h:form>
 			<h:commandButton value="Wyczyść" type="submit"
 				action="#{bookingController.restartForm}" />

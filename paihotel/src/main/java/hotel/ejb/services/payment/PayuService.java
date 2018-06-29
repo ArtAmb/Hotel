@@ -1,11 +1,14 @@
 package hotel.ejb.services.payment;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.regex.Pattern;
 
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.apache.http.HttpResponse;
@@ -22,6 +25,7 @@ import com.google.gson.JsonSyntaxException;
 import hotel.dao.ClientDAO;
 import hotel.domain.Client;
 import hotel.domain.User;
+import hotel.ejb.controller.BookingController;
 import hotel.ejb.services.SessionManagerService;
 import hotel.ejb.services.SessionObject;
 import hotel.ejb.services.payment.dto.PayuBuyer;
@@ -47,6 +51,9 @@ public class PayuService {
 	
 	@EJB
 	private ClientDAO clientDAO;
+	
+	@Inject
+	private BookingController bookingControler;
 	
 	private String selfUrl = "http://localhost:8080/paihotel";
 	
@@ -107,6 +114,10 @@ public class PayuService {
 		//Client client = clientDAO.findByUser(user);
 		
 		Client client = (Client) sessionManagerService.getFromSession(SessionObject.BOOKING_CLIENT);
+		BigDecimal totalConstPLN =  bookingControler.getTotalCost();
+		
+		BigDecimal totalCostInGR = new BigDecimal(totalConstPLN.toString()).multiply(new BigDecimal(100));
+		String[] parts =  totalCostInGR.toString().split(Pattern.quote("."));
 		
 		return PayuRequest.builder()
 				.continueUrl(selfUrl + "/view/booking/make-booking.xhtml") //?" + SessionObject.CONTROL_BOOKING_PARAM + "=" + controlParam)
@@ -114,7 +125,7 @@ public class PayuService {
 				.merchantPosId("332246")
 				.description("Room booking")
 				.currencyCode("PLN")
-				.totalAmount("500")
+				.totalAmount(parts[0])
 				.buyer(PayuBuyer.builder()
 						.emial(client.getEmail())
 						.phone(client.getPhone())
@@ -125,7 +136,7 @@ public class PayuService {
 				.settings(PayuSettings.builder().invoiceDisabled(true).build())
 				.products(Arrays.asList(PayuProduct.builder()
 						.name("Producer account activation")
-						.unitPrice("500")
+						.unitPrice(parts[0])
 						.quantity("1")
 						.virtual(true)
 						.build()))

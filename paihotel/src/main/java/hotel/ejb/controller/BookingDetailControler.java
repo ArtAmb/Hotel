@@ -2,6 +2,7 @@ package hotel.ejb.controller;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -113,9 +114,18 @@ public class BookingDetailControler implements Serializable {
 
 	public String finishVisit() {
 		BigDecimal priceForRooms = choosenOne.getRooms().stream().map(Room::getPrice).reduce((r1, r2)->{r1= r1.add(r2); return r1;}).get();
+//		BigDecimal priceForRooms = new BigDecimal(0);
+//		for(Room room : choosenOne.getRooms())
+//			priceForRooms.add(room.getPrice());
+//		
+//		BigDecimal priceForBills = new BigDecimal(0);
+//		for(Bill bill : findAllBills())
+//			priceForBills.add(bill.getPrice());
+//		
 		BigDecimal priceForBills = findAllBills().stream().map(Bill::getPrice).reduce((b1, b2)->{b1= b1.add(b2); return b1;}).orElse(new BigDecimal(0));
 		
 		totalCost = priceForRooms.add(priceForBills);
+		totalCost = totalCost.setScale(2, RoundingMode.CEILING);
 		
 		Bill finalBill = billDAO.save(Bill.builder().booking(choosenOne).price(totalCost).state(BillState.FINAL_TO_PAY).build());
 		taskDAO.save(

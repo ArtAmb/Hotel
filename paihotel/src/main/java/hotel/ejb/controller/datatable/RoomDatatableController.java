@@ -7,10 +7,12 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import hotel.dao.RoomDAO;
 import hotel.domain.Room;
+import hotel.ejb.controller.MainMenuController;
 import hotel.ejb.services.DatatableService.Row;
 import hotel.ejb.services.DatatableService.Value;
 import lombok.Getter;
@@ -24,6 +26,9 @@ public class RoomDatatableController extends BaseDataTableController<Long, Room>
 	@EJB
 	private RoomDAO RoomDAO;
 	
+	@Inject
+	private MainMenuController mainMenuController;
+	
 	@Getter
 	@Setter
 	public Room query = new Room();
@@ -31,13 +36,14 @@ public class RoomDatatableController extends BaseDataTableController<Long, Room>
 	
 	public void beforeQueryAction() {
 		this.crudDAO = RoomDAO;
+		query.setHotel(mainMenuController.getChosenHotel());
 		this.queryDTO = query;
 		
 	}
 	
 	@Override
 	protected List<String> getHeader() {
-		return Arrays.asList("ID", "Nazwa", "Hotel", "Numer");
+		return Arrays.asList("ID", "Nazwa", "Numer");
 	}
 
 	@Override
@@ -47,7 +53,6 @@ public class RoomDatatableController extends BaseDataTableController<Long, Room>
 
 		values.add(prepareValue(Room.getId()));
 		values.add(prepareValue(Room.getName()));
-		values.add(prepareValue(Room.getHotel()));
 		values.add(prepareValue(Room.getNumber()));
 		
 		

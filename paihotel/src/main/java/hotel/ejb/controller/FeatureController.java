@@ -2,9 +2,9 @@ package hotel.ejb.controller;
 
 import java.util.List;
 
+import javax.annotation.ManagedBean;
 import javax.ejb.EJB;
-import javax.ejb.LocalBean;
-import javax.ejb.Stateless;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 
 import hotel.dao.FeatureDAO;
@@ -13,10 +13,10 @@ import lombok.Data;
 /**
  * @author Karolina B¹tkowska
  */
-@Stateless
+@ManagedBean
 @Named
 @Data
-@LocalBean
+@RequestScoped
 public class FeatureController {
 
 	private Integer id;

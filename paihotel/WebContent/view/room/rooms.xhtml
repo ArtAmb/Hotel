@@ -16,18 +16,18 @@
 		<h2>Pokoje</h2>
 		<h3>Wyszukiwarka</h3>
 		<h:form>
-			<h:selectOneRadio>
-				<f:selectItem itemValue="room" itemLabel="Pokój" />
-				<f:selectItem itemValue="hall" itemLabel="Sala" />
+			<h:selectOneRadio value="#{roomDatatableController.query.type}">
+				<f:selectItem itemValue="ROOM" itemLabel="Pokój" />
+				<f:selectItem itemValue="HALL" itemLabel="Sala" />
 			</h:selectOneRadio>
 			Id: <h:inputText styleClass="input-text"
-				value="#{roomController.query.id}" />
+				value="#{roomDatatableController.query.id}" />
 			Nazwa: <h:inputText styleClass="input-text"
-				value="#{roomController.query.name}" />
+				value="#{roomDatatableController.query.name}" />
 			Numer: <h:inputText styleClass="input-text"
-				value="#{roomController.query.number}" />
+				value="#{roomDatatableController.query.number}" />
 			Piętro: <h:inputText styleClass="input-text"
-				value="#{roomController.query.floor}" />
+				value="#{roomDatatableController.query.floor}" />
 
 			<h:commandButton value='szukaj' action='#{roomController.findRoom()}' />
 		</h:form>

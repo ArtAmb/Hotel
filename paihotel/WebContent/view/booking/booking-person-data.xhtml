@@ -32,7 +32,7 @@
 				Miasto: <h:inputText styleClass="input-text" name="city" value="#{bookingController.clientData.city}"/>
 				<br />
 				<div class="booking-prices">
-					Suma: 500zł <br />Zadatek: 200zł
+					Suma: #{bookingController.totalCost} <br />Zadatek: #{bookingController.fee}zł
 				</div>
 				<h:commandButton style="margin:0 20px;" value='Wstecz' action="room" />
 				<h:commandButton value='Zarezerwuj' action="#{bookingController.makeBooking()}"/>

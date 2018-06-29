@@ -2,7 +2,11 @@ package hotel.ejb.controller;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -47,19 +51,28 @@ import lombok.Setter;
 @SessionScoped
 @Named
 @Data
-@ManagedBean
 public class BookingController implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	private Date startDate = new Date(System.currentTimeMillis());
-	private Date endDate = Utils.addDays(startDate, 5);
+	private Date startDateDATE = new Date(System.currentTimeMillis());
+	private Date endDateDATE = Utils.addDays(startDateDATE, 5);
+	
+	private String startDate = startDateDATE.toString();
+	private String endDate = endDateDATE.toString();
+	
 	private List<Long> features = new LinkedList<>();
 
+	
+	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");  
+	
 	private Booking query = new Booking();
 	private Client clientData = new Client();
 	private String errorMessage = "";
 	private String message = "";
+	
+	private BigDecimal totalCost = new BigDecimal(0);
+	private BigDecimal fee = new BigDecimal(totalCost.toString()).multiply(new BigDecimal(0.10));
 	
 	@EJB
 	private UserDAO userDAO;
@@ -88,8 +101,8 @@ public class BookingController implements Serializable {
 
 	public String saveBooking() {
 		Booking booking = new Booking();
-		booking.setStartDate(startDate);
-		booking.setEndDate(endDate);
+		booking.setStartDate(startDateDATE);
+		booking.setEndDate(endDateDATE);
 
 		bookingDAO.save(booking);
 
@@ -97,8 +110,10 @@ public class BookingController implements Serializable {
 	}
 
 	public String toDefaultValue() {
-		startDate = new Date(System.currentTimeMillis());
-		endDate = Utils.addDays(startDate, 5);
+		startDateDATE = new Date(System.currentTimeMillis());
+		endDateDATE = Utils.addDays(startDateDATE, 5);
+		startDate = startDateDATE.toString();
+		endDate = endDateDATE.toString(); 
 		
 		return null;
 	}
@@ -117,7 +132,7 @@ public class BookingController implements Serializable {
 
 		List<RoomDTO> avaliableRooms = rooms.stream().filter(
 				r -> r.getFeatures().stream().map(Feature::getId).collect(Collectors.toList()).containsAll(features))
-				.map(r -> roomService.findRoomBookings(r, startDate, endDate)).filter(dto->dto!=null).collect(Collectors.toList());
+				.map(r -> roomService.findRoomBookings(r, startDateDATE, endDateDATE)).filter(dto->dto!=null).collect(Collectors.toList());
 
 		return avaliableRooms;
 	}
@@ -127,7 +142,18 @@ public class BookingController implements Serializable {
 	}
 
 	public String refreshView() {
-		return null;
+		try {
+			startDateDATE = StringUtils.isNullOrEmpty(startDate) ? null : new Date(sdf.parse(startDate).getTime());
+			endDateDATE = StringUtils.isNullOrEmpty(endDate) ? null : new Date(sdf.parse(endDate).getTime());
+			
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		startDate = startDateDATE.toString();
+		endDate = endDateDATE.toString(); 
+		
+		return "booking";
 	}
 
 	void validate() {
@@ -193,8 +219,8 @@ public class BookingController implements Serializable {
 
 		Booking booking = Booking.builder()
 				.client(clientData)
-				.startDate(startDate)
-				.endDate(endDate)
+				.startDate(startDateDATE)
+				.endDate(endDateDATE)
 				.status(BookingStatus.BOOKED)
 				.build();
 		
@@ -250,8 +276,8 @@ public class BookingController implements Serializable {
 
 			Booking booking = Booking.builder()
 					.client(newClient)
-					.startDate(startDate)
-					.endDate(endDate)
+					.startDate(startDateDATE)
+					.endDate(endDateDATE)
 					.status(BookingStatus.BOOKED)
 					.build();
 			if (booking.getRooms() == null) {
@@ -280,7 +306,13 @@ public class BookingController implements Serializable {
 		}
 		
 		rooms.add(roomDAO.findOne(roomId));
+		totalCost = new BigDecimal(0);
+		for(Room room : rooms)
+			totalCost = totalCost.add(room.getPrice());
 		
+		totalCost = totalCost.setScale(2, RoundingMode.CEILING);
+		fee = new BigDecimal(totalCost.toString()).multiply(new BigDecimal(0.10));
+		fee = fee.setScale(2, RoundingMode.CEILING);
 		return null;
 	}
 	
